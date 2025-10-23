@@ -1,121 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOHH Hero Section</title>
-    <style>
-        :root {
-            --brand-blue: #4B8DDE;
-            --text-dark: #333333;
-            --off-white: #F5F5F5;
-            --pure-white: #FFFFFF;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOHH Hero Section</title>
+  <style>
+    :root {
+      --primary-blue: #7BA7E9;
+      --navy-blue: #2D3748;
+      --bg-beige: #F5F0E8;
+      --white: #FFFFFF;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+    body {
+      font-family: 'Inter', 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
 
-        .hero {
-            background: var(--off-white);
-            min-height: 600px;
-            position: relative;
-            overflow: hidden;
-        }
+    .hero {
+      background-color: var(--bg-beige);
+      min-height: 500px;
+      padding: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 40px;
-            display: flex;
-            align-items: center;
-        }
+    .hero-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
 
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--navy-blue);
+      margin-bottom: 24px;
+    }
 
-        .hero-title {
-            font-size: 40px;
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--text-dark);
-            margin-bottom: 24px;
-        }
+    .hero-copy {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--navy-blue);
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
 
-        .hero-description {
-            font-size: 16px;
-            line-height: 1.5;
-            color: var(--text-dark);
-            margin-bottom: 32px;
-        }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      background: var(--primary-blue);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      gap: 8px;
+      transition: background-color 0.3s;
+    }
 
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 16px 32px;
-            background: var(--brand-blue);
-            color: var(--pure-white);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            gap: 8px;
-            transition: background-color 0.3s;
-        }
+    .cta-button:hover {
+      background-color: #6990d1;
+    }
 
-        .carousel-dots {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-        }
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+      margin-top: 32px;
+    }
 
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.2);
-            cursor: pointer;
-        }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--navy-blue);
+      opacity: 0.3;
+      cursor: pointer;
+    }
 
-        .dot.active {
-            background: var(--brand-blue);
-        }
+    .dot.active {
+      opacity: 1;
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 60px 24px;
-            }
+    @media (max-width: 768px) {
+      .hero-container {
+        padding: 0 24px;
+      }
 
-            .hero-title {
-                font-size: 32px;
-            }
-        }
-    </style>
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Making Our Healthcare Happen</h1>
-                <p class="hero-description">Join us in shaping the future of healthcare delivery in Singapore. Together, we make a difference in people's lives.</p>
-                <a href="#" class="cta-button">Explore what we do →</a>
-            </div>
-        </div>
-        <div class="carousel-dots">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-    </section>
+  <section class="hero">
+    <div class="hero-container">
+      <h1>Healthcare Excellence Starts Here</h1>
+      <p class="hero-copy">Shaping Singapore's healthcare landscape through innovation, excellence, and compassionate care.</p>
+      <a href="#" class="cta-button">Explore what we do →</a>
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

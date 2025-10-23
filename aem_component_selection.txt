@@ -1,0 +1,30 @@
+Available HTML Components in ./output/:
+
+1. navbar.html
+- Component Name: Navigation Bar
+- Description: Primary navigation component
+- Key Features:
+  * 80px height
+  * White background
+  * 64px horizontal padding
+  * 32px margins between nav items
+  * Inter font, 16px, medium weight (500)
+  * Interactive hover states
+  * Responsive layout
+  * Brand logo integration
+
+2. hero-section.html
+- Component Name: Hero Section
+- Description: Main landing section component
+- Key Features:
+  * Gradient background (F5F0E6 to FFFFFF)
+  * 80px vertical padding
+  * 40/55 split layout
+  * Primary blue CTA button
+  * 36px H1 heading
+  * Responsive design
+  * Split content/image layout
+
+User Selection: navbar.html
+
+This component will be converted to an AEM component in the next step. The navigation component is a critical element that requires careful consideration for authoring capabilities and responsive behavior in AEM.

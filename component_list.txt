@@ -1,51 +1,20 @@
-HIGH-PRIORITY COMPONENTS LIST:
+1. navbar - Fixed navigation component with white background (#FFFFFF), box shadow, and 80px height. Features include:
+   - MOHH wordmark in primary blue (#7BA7E9)
+   - Horizontal menu items with 32px spacing
+   - Main nav items: "Who We Are", "What We Do", "Media Centre", "Careers"
+   - Dropdown indicators
+   - Box shadow: 0 2px 4px rgba(0,0,0,0.05)
+   - Fixed positioning at top
+   - Responsive design considerations
 
-1. navbar.html - Main navigation bar component
-- Type: Navigation
-- Features: Fixed position, white background, 70px height, logo, nav items with dropdowns, box shadow
-- Priority: HIGH
-- Usage: Site-wide main navigation
+2. hero-section - Full-width hero banner with beige background (#F5F0E8) and healthcare professionals image. Features include:
+   - Minimum height: 500px
+   - Padding: 64px 0
+   - H1 headline in Inter font (36px, 600 weight)
+   - Supporting body copy
+   - CTA button ("Explore what we do →")
+   - Background image with professionals
+   - Carousel navigation dots
+   - Responsive layout adjustments
 
-2. hero-section.html - Full-width hero banner
-- Type: Section
-- Features: Medical staff imagery, left-aligned content, CTA button, carousel functionality
-- Priority: HIGH
-- Usage: Homepage main banner
-
-3. feature-card-grid.html - Three-column feature grid container
-- Type: Section Grid
-- Features: 3-column layout, 32px grid gap, responsive behavior
-- Priority: HIGH
-- Usage: Main content section
-
-4. feature-card.html - Individual feature card
-- Type: Card Component
-- Features: Background image, dark overlay, white text, bottom CTA, 8px border radius
-- Priority: HIGH
-- Usage: Reusable card component
-
-5. button-primary.html - Primary CTA button
-- Type: Button
-- Features: Brand Blue (#4B8DDE) background, white text, hover states
-- Priority: HIGH
-- Usage: Main call-to-action buttons
-
-6. button-secondary.html - Secondary action button
-- Type: Button
-- Features: Outlined style, Healthcare Blue (#7BA4E6) color, hover states
-- Priority: HIGH
-- Usage: Secondary actions
-
-7. pagination.html - Carousel pagination component
-- Type: Navigation
-- Features: Dot indicators, active states, clickable navigation
-- Priority: HIGH
-- Usage: Hero section carousel
-
-8. footer.html - Main footer component
-- Type: Section
-- Features: Full-width, multiple columns, navigation links, brand information
-- Priority: HIGH
-- Usage: Site-wide footer
-
-Each component will be built as a self-contained unit with embedded styles, following the color scheme, typography, and spacing specifications from the design analysis. Components will be responsive and follow the breakpoint specifications defined in the implementation recommendations.
+These two components represent the highest-priority, most visible elements of the MOHH website design system. They are essential for establishing the site's navigation structure and creating immediate visual impact for users.

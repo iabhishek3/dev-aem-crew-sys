@@ -15,16 +15,47 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
 def run():
     """
-    Run the crew.
+    Run the crew to create HTML components and convert them to AEM components.
     """
     inputs = {
-        'design_path': './design.png'
+        'design_path': './design.png',
+        'output_folder': './output',
+        'aem_project_path': r'C:\Dev\AEM-projects\dev-aem-crew\hackaempoc',
+        'aem_app_id': 'hackaempoc',
+        'aem_component_group': 'Hack AEM POC',
+        'aem_namespace': 'hack/aem/poc',
+        # Default selected component and component name are empty; the AEM agent will prompt the user
+        'selected_component': '',
+        'component_name': ''
     }
+
+    # If output folder already contains HTML components, auto-fill selected_component
+    try:
+        import os
+        out_dir = inputs.get('output_folder', './output')
+        if os.path.isdir(out_dir):
+            files = [f for f in os.listdir(out_dir) if f.lower().endswith('.html')]
+            if files:
+                # pick the first HTML file found
+                inputs['selected_component'] = files[0]
+                inputs['component_name'] = os.path.splitext(files[0])[0]
+            else:
+                # explicit placeholder to satisfy interpolation
+                inputs['selected_component'] = ''
+                inputs['component_name'] = 'component'
+        else:
+            inputs['selected_component'] = ''
+            inputs['component_name'] = 'component'
+    except Exception:
+        inputs['selected_component'] = ''
+        inputs['component_name'] = 'component'
 
     try:
         DevAemCrewSys().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
+
+# Removed run_aem as it's now integrated into the main run function
 
 
 def train():
@@ -82,6 +113,15 @@ def run_with_trigger():
         "crewai_trigger_payload": trigger_payload,
         "design_path": "./design.png"
     }
+
+    # Provide defaults so task templates that reference these variables don't fail
+    inputs.setdefault('output_folder', './output')
+    inputs.setdefault('aem_project_path', r'C:\Dev\AEM-projects\dev-aem-crew\hackaempoc')
+    inputs.setdefault('aem_app_id', 'hackaempoc')
+    inputs.setdefault('aem_component_group', 'Hack AEM POC')
+    inputs.setdefault('aem_namespace', 'hack/aem/poc')
+    inputs.setdefault('selected_component', '')
+    inputs.setdefault('component_name', '')
 
     try:
         result = DevAemCrewSys().crew().kickoff(inputs=inputs)

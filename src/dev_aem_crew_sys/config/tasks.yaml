@@ -63,8 +63,12 @@ component_listing_task:
     - Footer
     - Any other major visible sections
 
-    LIMIT: Create a maximum of 6-8 HIGH-PRIORITY components.
-    Skip smaller elements like individual icons, text blocks, or utility components.
+    CRITICAL LIMITS:
+    - Maximum 2 components ONLY - EXACTLY 2, NO MORE
+    - Choose ONLY the 2 most important top-level components
+    - Typically: navbar + one other major component (hero or footer)
+    - Skip smaller elements like individual icons, text blocks, or utility components
+    - Quality over quantity - fewer components done well is better
 
     For each component, specify:
     1. Component Name (e.g., "navbar", "hero-section", "cta-button-primary", "footer")
@@ -92,9 +96,22 @@ component_listing_task:
 
 component_creation_task:
   description: >
-    Create pixel-perfect HTML/CSS components ONE BY ONE for each component in the list.
+    Create pixel-perfect HTML/CSS components for each component in the list EXACTLY ONCE.
 
-    STEP 1: READ THE DESIGN ANALYSIS CAREFULLY
+    CRITICAL RULES:
+    1. Read component_list.txt to get the EXACT list of components to create
+    2. There should be EXACTLY 2 components in the list
+    3. Create each component EXACTLY ONCE - no duplicates
+    4. After writing a file, NEVER create it again
+    5. After BOTH components are created, you are DONE - provide summary and STOP
+    6. Do NOT loop back to create more components
+
+    STEP 1: READ component_list.txt FILE
+    - Open and read the component_list.txt file
+    - Count the total number: Should be exactly 2 components
+    - Write down the 2 component names from the list
+
+    STEP 2: READ THE DESIGN ANALYSIS
     Before creating ANY component, review the design analysis report and extract:
     - EXACT color codes (e.g., Purple: #4B3C99, Orange: #E85C23)
     - EXACT font sizes, weights, and line heights
@@ -191,38 +208,273 @@ component_creation_task:
     - content: Complete HTML document
     - folder: "output"
 
-    STEP 5: VERIFY ACCURACY
-    Before moving to the next component, mentally verify:
-    - Are the colors EXACTLY from the design analysis?
-    - Is the content text EXACTLY from the design?
-    - Are spacing and sizes EXACTLY from the design?
-    - Is the POSITIONING correct (left/center/right alignment)?
-    - Do dropdowns have indicators (▼)?
-    - Do carousels have dots and arrows?
-    - Does it look 90%+ like the actual design would?
+    STEP 5: CREATE EXACTLY 2 COMPONENTS - TRACK YOUR PROGRESS
 
-    Work through ALL components from the list systematically, ONE AT A TIME.
+    Component 1 (from list):
+    - Use File Writer tool to create output/[component-1-name].html
+    - Mark: ✓ DONE with component 1
 
-    IMPORTANT: If you encounter ANY errors or feel unable to continue:
-    - Save a summary of what was completed
-    - List which components were successfully created
-    - List which components still need to be created
-    - The user can re-run the task to continue from where you left off
+    Component 2 (from list):
+    - Use File Writer tool to create output/[component-2-name].html
+    - Mark: ✓ DONE with component 2
+
+    STEP 6: FINAL CHECK - BOTH 2 COMPONENTS CREATED? YES → STOP NOW!
+    After creating the 2nd component, you have completed ALL components.
+
+    Final checklist:
+    ✓ Component 1 created?
+    ✓ Component 2 created?
+
+    If BOTH are YES: YOU ARE DONE. Provide final summary and STOP IMMEDIATELY.
+
+    DO NOT:
+    - Create any component twice
+    - Create more than 2 components
+    - Create additional components not in the list
+    - Loop back to create more files
+    - Continue after both components are created
 
   expected_output: >
-    Multiple HTML files saved to output/ folder, one for each component:
-    - output/navbar.html
-    - output/hero-section.html
-    - output/cta-button-primary.html
-    - output/cta-button-secondary.html
-    - output/footer.html
-    ... (one file per component)
+    FINAL SUMMARY - 2 components created:
 
-    Each file should be a complete, self-contained HTML document that can be
-    opened directly in a browser to view the component in isolation.
+    ✓ output/[component-1].html - Created successfully
+    ✓ output/[component-2].html - Created successfully
 
-    Final summary listing all created files and their purposes.
+    TOTAL: 2 files created in output/ folder
+    STATUS: COMPLETE - All components from the list have been created
+    NEXT STEP: Task is finished, no further action needed
   agent: component_developer
   context:
     - design_analysis_task
     - component_listing_task
+
+aem_component_list_task:
+  description: >
+    List all available HTML components from the output/ folder and present them
+    to the user for selection.
+
+    STEP 1: Scan the {output_folder} directory for .html files
+    STEP 2: Create a list of all HTML components found
+    STEP 3: For each component, extract:
+       - Component filename (e.g., navbar.html)
+       - Component name (e.g., navbar)
+       - Brief description if available from the file
+
+    STEP 4: Present the list to the user in a clear format:
+
+    Available HTML Components:
+    1. navbar.html - Navigation component
+    2. hero-section.html - Hero section component
+    3. button-primary.html - Primary button component
+    ... etc
+
+    STEP 5: Ask user which component to convert to AEM
+    Use the AskUserQuestion tool to let the user select ONE component
+
+  expected_output: >
+    A clear list of available HTML components and the user's selection
+    for which component to convert to AEM next.
+  agent: aem_developer
+
+aem_component_conversion_task:
+  description: >
+    Convert the selected HTML component into a fully editable AEM component.
+
+    INPUT: Selected component name from previous task (e.g., "navbar")
+
+    STEP 1: READ THE HTML COMPONENT
+    - Read the HTML file from {output_folder}/{selected_component}.html
+    - Analyze the structure, styles, content, and interactive elements
+    - Identify all elements that should be editable by authors
+
+    STEP 2: CREATE AEM COMPONENT STRUCTURE
+    Create the following files in {aem_project_path}:
+
+    A. Component Definition (.content.xml):
+       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/{component_name}/.content.xml
+       - Set componentGroup to "{aem_component_group}"
+       - Set jcr:title to readable name
+       - Set jcr:description
+
+    B. HTL Template ({component_name}.html):
+       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/{component_name}/{component_name}.html
+       - Use data-sly-use to reference Sling Model
+       - Convert HTML to HTL syntax
+       - Replace hardcoded text with ${model.propertyName}
+       - Add data-sly-test for conditional rendering
+       - Use data-sly-list for repeating elements (nav items, etc.)
+
+    C. Sling Model (Java):
+       Location: core/src/main/java/com/{aem_namespace}/core/models/{component_name}Model.java
+       - Create @Model annotation with adaptables = Resource.class
+       - Add @ValueMapValue for each editable property
+       - Add @ChildResource for multifields
+       - Implement getters for all properties
+       - Add @PostConstruct for initialization if needed
+
+    D. Dialog (_cq_dialog.xml):
+       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/{component_name}/_cq_dialog.xml
+       - Create tabs for organization (Content, Styling, Advanced)
+       - Add TextField for text properties
+       - Add PathField for links and images
+       - Add ColorField for color properties
+       - Add NumberField for spacing/sizing
+       - Add Multifield for repeating elements (nav links, etc.)
+       - Use proper fieldDescription for author guidance
+
+    E. ClientLib (CSS/JS):
+       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/clientlibs/clientlib-{component_name}/
+       - Extract CSS from HTML into separate .css file
+       - Extract JS from HTML into separate .js file
+       - Create .content.xml with categories
+       - Create css.txt and js.txt for file references
+
+    STEP 3: MAKE EVERYTHING EDITABLE
+    Ensure these are editable in the dialog:
+    - All text content (headings, paragraphs, labels, button text)
+    - All links and URLs
+    - All images (use PathField with image picker)
+    - Colors (background, text, borders)
+    - Spacing (padding, margins)
+    - Repeating elements (use Multifield for nav items, cards, etc.)
+
+    STEP 4: USE THE FILE WRITER TOOLS
+    - Use "AEM File Writer" tool to write each file to correct location
+    - Ensure proper folder structure is created
+    - Write all 5 types of files (definition, HTL, Java, dialog, clientlib)
+
+    STEP 5: VERIFY COMPLETENESS
+    Before finishing, confirm:
+    - All files created successfully
+    - Sling Model has all necessary properties
+    - Dialog has all editable fields
+    - HTL template references model correctly
+    - ClientLib is properly configured
+
+  expected_output: >
+    Complete AEM component created with all necessary files:
+    - Component definition (.content.xml)
+    - HTL template
+    - Sling Model (Java)
+    - Component dialog
+    - ClientLib (CSS/JS)
+
+    Summary of all files created with their paths.
+  agent: aem_developer
+  context:
+    - aem_component_list_task
+
+aem_build_deploy_task:
+  description: >
+    Build the AEM project and deploy the newly created component to the
+    local AEM instance.
+
+    STEP 1: NAVIGATE TO AEM PROJECT
+    - Change directory to {aem_project_path}
+
+    STEP 2: RUN MAVEN BUILD
+    - Execute: mvn clean install -PautoInstallPackage
+    - This will:
+      * Compile the Java Sling Model
+      * Package the component files
+      * Deploy to AEM at http://localhost:4502
+
+    STEP 3: MONITOR BUILD OUTPUT
+    - Check for compilation errors in Java code
+    - Check for packaging errors
+    - Check for deployment success
+    - Look for "BUILD SUCCESS" message
+
+    STEP 4: VERIFY DEPLOYMENT
+    - Confirm packages were installed
+    - Check for any deployment warnings or errors
+
+    STEP 5: REPORT STATUS
+    If BUILD SUCCESS:
+      - Report successful deployment
+      - Provide component path: /apps/{aem_app_id}/components/{component_name}
+      - Provide CRXDE link to component
+
+    If BUILD FAILED:
+      - Report the error details
+      - Suggest fixes based on error type
+      - Ask if user wants to retry after fixing
+
+  expected_output: >
+    Build and deployment status report:
+    - Maven build result (SUCCESS or FAILED)
+    - Any errors or warnings encountered
+    - Component location in AEM
+    - CRXDE link for verification
+    - Next steps for testing
+  agent: aem_developer
+  context:
+    - aem_component_conversion_task
+
+aem_testing_task:
+  description: >
+    Guide the user through testing the AEM component and gather feedback.
+
+    STEP 1: PROVIDE TESTING INSTRUCTIONS
+    Give the user clear instructions:
+
+    "Please test the {component_name} component in AEM:
+
+    1. Open AEM Sites Editor:
+       http://localhost:4502/editor.html/content/{aem_app_id}/us/en.html
+
+    2. Add the component to a page:
+       - Click '+' to add component
+       - Find '{component_name}' in component browser
+       - Drag it onto the page
+
+    3. Test the component dialog:
+       - Click the component to select it
+       - Click the wrench icon to open dialog
+       - Verify all fields are present and editable
+       - Fill in some test values
+       - Click 'Done'
+
+    4. Verify component rendering:
+       - Check if component displays correctly
+       - Verify styles are applied
+       - Check responsive behavior
+       - Test any interactive elements
+
+    5. Preview the page:
+       - Click 'Preview' mode
+       - Verify component works in preview
+    "
+
+    STEP 2: ASK FOR USER CONFIRMATION
+    Use AskUserQuestion tool to ask:
+    "Did the {component_name} component work correctly?"
+
+    Options:
+    - "Yes, it works perfectly"
+    - "No, there are issues"
+    - "Partially works, needs fixes"
+
+    STEP 3: IF ISSUES FOUND
+    If user reports issues:
+    - Ask: "What issues did you encounter?"
+    - Get detailed description of problems
+    - Analyze the issues
+    - Suggest fixes or offer to fix automatically
+
+    STEP 4: IF WORKING CORRECTLY
+    If component works:
+    - Mark component as completed
+    - Ask if user wants to convert another component
+    - Return to component selection
+
+  expected_output: >
+    Testing report with:
+    - Testing instructions provided to user
+    - User's feedback on component functionality
+    - Status: Working / Has Issues / Needs Fixes
+    - If issues: List of problems encountered
+    - Next action: Fix issues or move to next component
+  agent: aem_developer
+  context:
+    - aem_build_deploy_task
