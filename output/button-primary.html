@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primary Button</title>
+    <style>
+        :root {
+            --brand-blue: #4B8DDE;
+            --pure-white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            padding: 24px;
+        }
+        
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background-color: var(--brand-blue);
+            color: var(--pure-white);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3A7AC7;
+        }
+        
+        .btn-primary .arrow {
+            font-size: 20px;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="btn-primary">
+        Explore what we do
+        <span class="arrow">→</span>
+    </a>
+</body>
+</html>

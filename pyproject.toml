@@ -1,0 +1,24 @@
+[project]
+name = "dev_aem_crew_sys"
+version = "0.1.0"
+description = "dev-aem-crew-sys using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[anthropic,tools]==1.1.0",
+]
+
+[project.scripts]
+dev_aem_crew_sys = "dev_aem_crew_sys.main:run"
+run_crew = "dev_aem_crew_sys.main:run"
+train = "dev_aem_crew_sys.main:train"
+replay = "dev_aem_crew_sys.main:replay"
+test = "dev_aem_crew_sys.main:test"
+run_with_trigger = "dev_aem_crew_sys.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

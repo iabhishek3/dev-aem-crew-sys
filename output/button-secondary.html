@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secondary Button</title>
+    <style>
+        :root {
+            --healthcare-blue: #7BA4E6;
+            --pure-white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            padding: 24px;
+        }
+        
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background-color: transparent;
+            color: var(--healthcare-blue);
+            border: 2px solid var(--healthcare-blue);
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.4;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--healthcare-blue);
+            color: var(--pure-white);
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="btn-secondary">Learn More</a>
+</body>
+</html>

@@ -1,0 +1,228 @@
+design_analysis_task:
+  description: >
+    CRITICAL: You MUST use the "Design Image Analyzer" tool FIRST to load the image at {design_path}.
+    Then perform a comprehensive professional design analysis of the ACTUAL IMAGE covering:
+
+    1. OVERALL LAYOUT ANALYSIS:
+       - Page structure and grid system
+       - Content sections and their arrangement
+       - Responsive design considerations
+       - Whitespace and spacing patterns
+
+    2. COLOR SCHEME:
+       - Primary, secondary, and accent colors
+       - Color palette with hex codes
+       - Color usage patterns and hierarchy
+       - Contrast ratios and accessibility
+
+    3. TYPOGRAPHY:
+       - Font families used
+       - Heading hierarchy (H1, H2, H3, etc.)
+       - Font sizes, weights, and styles
+       - Line heights and letter spacing
+
+    4. VISUAL COMPONENTS IDENTIFICATION:
+       List and describe ALL components found including:
+       - Navigation/Navbar elements
+       - Hero sections
+       - Buttons (primary, secondary, tertiary)
+       - Cards and containers
+       - Forms and input fields
+       - Icons and imagery
+       - Footer elements
+       - Any other UI components
+
+    5. SPACING AND HIERARCHY:
+       - Padding and margin patterns
+       - Visual weight and emphasis
+       - Information architecture
+
+    Print your findings to the console in a clear, structured format.
+
+  expected_output: >
+    A comprehensive design analysis report printed to console containing:
+    - Complete layout breakdown
+    - Full color palette with hex codes
+    - Typography specifications
+    - Detailed list of ALL visual components (Navbar, Hero, Buttons, Cards, Forms, Footer, etc.)
+    - Spacing and hierarchy analysis
+    - Professional recommendations for implementation
+
+    Format as clear, structured text output suitable for developer handoff.
+  agent: webdesigner
+
+component_listing_task:
+  description: >
+    Based on the design analysis, create a list of HIGH-PRIORITY components that need to be built.
+    Review the design analysis report and identify the MOST IMPORTANT, VISIBLE components.
+
+    FOCUS ON TOP-LEVEL COMPONENTS ONLY:
+    - Navigation/Navbar
+    - Hero Section
+    - Primary Buttons (2-3 types max)
+    - Footer
+    - Any other major visible sections
+
+    LIMIT: Create a maximum of 6-8 HIGH-PRIORITY components.
+    Skip smaller elements like individual icons, text blocks, or utility components.
+
+    For each component, specify:
+    1. Component Name (e.g., "navbar", "hero-section", "cta-button-primary", "footer")
+    2. Component Type (e.g., navigation, button, section)
+    3. Key Features (colors, text, icons, interactions)
+    4. Priority (must be HIGH)
+
+    List components from top to bottom as they appear in the design.
+    Use clear, descriptive names that will become filenames (lowercase, hyphens).
+
+  expected_output: >
+    A numbered list of ALL components to be created, formatted as:
+
+    1. navbar - Navigation bar with purple background and orange CTA
+    2. hero-section - Full-width hero with background image and text
+    3. cta-button-primary - Orange button for primary actions
+    4. cta-button-secondary - Outlined button for secondary actions
+    5. footer - Four-column footer layout
+    ... (continue for all components)
+
+    Each component should be listed with its filename and brief description.
+  agent: component_developer
+  context:
+    - design_analysis_task
+
+component_creation_task:
+  description: >
+    Create pixel-perfect HTML/CSS components ONE BY ONE for each component in the list.
+
+    STEP 1: READ THE DESIGN ANALYSIS CAREFULLY
+    Before creating ANY component, review the design analysis report and extract:
+    - EXACT color codes (e.g., Purple: #4B3C99, Orange: #E85C23)
+    - EXACT font sizes, weights, and line heights
+    - EXACT spacing values (padding, margins, gaps)
+    - ACTUAL content text from the design (e.g., "IMPACTO JUVENTUD", "Sobre", "Nuestro Trabajo", "DONAR")
+    - Layout structure and positioning
+
+    STEP 2: CREATE COMPONENTS WITH 90%+ ACCURACY
+    For EACH component, you MUST:
+
+    1. USE EXACT COLORS - No guessing or approximation:
+       - Look up the exact hex codes from the design analysis
+       - Primary Purple: Use the EXACT value from analysis
+       - Primary Orange: Use the EXACT value from analysis
+       - All other colors: Use EXACT values from analysis
+
+    2. USE EXACT CONTENT - Match what's actually in the design:
+       - If the navbar shows "IMPACTO JUVENTUD", use that exact text
+       - If buttons say "DONAR", use that exact text
+       - If links say "Sobre", "Nuestro Trabajo", "Recursos", use those exact texts
+       - Match the language (Spanish, English, etc.) from the design
+
+    3. USE EXACT TYPOGRAPHY:
+       - Font sizes from the analysis (e.g., 14px, 16px, 48px)
+       - Font weights from the analysis (e.g., 400, 500, 700)
+       - Line heights from the analysis
+       - Text transforms (uppercase, etc.) as shown in design
+
+    4. USE EXACT SPACING:
+       - Padding values from the analysis
+       - Margin values from the analysis
+       - Gap values between elements
+       - Component heights and widths
+
+    5. MATCH VISUAL STRUCTURE:
+       - Element positioning (left, center, right) - USE EXACT ALIGNMENT from analysis
+       - Flexbox/Grid layouts as described
+       - Background colors/images
+       - Shadows, borders, border-radius
+
+    6. IMPLEMENT INTERACTIVE ELEMENTS:
+       - If component has DROPDOWNS: Add dropdown indicators (▼) and positioning
+       - If component is a CAROUSEL: Add carousel dots, arrows, and basic JS
+       - If component has HOVER states: Add CSS :hover effects
+       - Use vanilla JavaScript for interactions (no external libraries)
+
+    SPECIAL: NAVBAR/HEADER 100% ACCURACY REQUIREMENTS
+    The navbar is THE MOST CRITICAL component. For navbar.html, you MUST achieve 100% accuracy:
+
+    1. EXACT LAYOUT STRUCTURE:
+       - Measure the design: Is it 3-section layout (logo | nav | button)?
+       - Logo container: justify-content: flex-start
+       - Nav links container: justify-content: center OR flex-start (check design!)
+       - CTA/Right section: justify-content: flex-end
+       - Use display: flex with space-between for main container
+
+    2. EXACT SPACING (CRITICAL):
+       - Logo-to-nav gap: Measure and match exactly (e.g., 40px, 60px)
+       - Gap between nav items: Match exactly (e.g., 32px, 40px)
+       - Navbar height: Match exactly (e.g., 70px, 80px, 90px)
+       - Horizontal padding: Match exactly (e.g., 24px, 40px, 60px)
+
+    3. EXACT ALIGNMENT:
+       - Logo: LEFT side, vertically centered
+       - Nav links: CENTER or LEFT (check design!), vertically centered
+       - If nav is CENTER: Use separate flex container with justify-content: center
+       - If nav is LEFT with logo: Put both in same flex-start container
+       - Buttons/Icons: RIGHT side, vertically centered
+
+    4. EXACT CONTENT:
+       - Logo text/image: EXACT text from design
+       - Each nav link: EXACT text from design (case-sensitive)
+       - Dropdown indicators: Add ▼ only to items that have it in design
+       - Button text: EXACT text from design
+
+    5. PERFECT VERTICAL CENTERING:
+       - All elements: align-items: center
+       - Logo, nav items, buttons: all perfectly aligned vertically
+
+    STEP 3: TECHNICAL REQUIREMENTS
+    - Each component must be self-contained (no external CSS files)
+    - Include <!DOCTYPE html>, <html>, <head>, and <body>
+    - Embed all CSS in <style> tags in the <head>
+    - Use CSS variables for colors for consistency
+    - Use semantic HTML5 elements
+    - Make components responsive
+    - Add clear comments
+    - Include <script> tags for interactive components (carousels, dropdowns, etc.)
+    - Ensure exact alignment matches the design (justify-content: flex-start/center/flex-end)
+
+    STEP 4: USE THE FILE WRITER TOOL
+    For each component, use the "File Writer" tool with:
+    - filename: Component name with .html extension (e.g., "navbar.html")
+    - content: Complete HTML document
+    - folder: "output"
+
+    STEP 5: VERIFY ACCURACY
+    Before moving to the next component, mentally verify:
+    - Are the colors EXACTLY from the design analysis?
+    - Is the content text EXACTLY from the design?
+    - Are spacing and sizes EXACTLY from the design?
+    - Is the POSITIONING correct (left/center/right alignment)?
+    - Do dropdowns have indicators (▼)?
+    - Do carousels have dots and arrows?
+    - Does it look 90%+ like the actual design would?
+
+    Work through ALL components from the list systematically, ONE AT A TIME.
+
+    IMPORTANT: If you encounter ANY errors or feel unable to continue:
+    - Save a summary of what was completed
+    - List which components were successfully created
+    - List which components still need to be created
+    - The user can re-run the task to continue from where you left off
+
+  expected_output: >
+    Multiple HTML files saved to output/ folder, one for each component:
+    - output/navbar.html
+    - output/hero-section.html
+    - output/cta-button-primary.html
+    - output/cta-button-secondary.html
+    - output/footer.html
+    ... (one file per component)
+
+    Each file should be a complete, self-contained HTML document that can be
+    opened directly in a browser to view the component in isolation.
+
+    Final summary listing all created files and their purposes.
+  agent: component_developer
+  context:
+    - design_analysis_task
+    - component_listing_task

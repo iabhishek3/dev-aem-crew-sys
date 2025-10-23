@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <style>
+        :root {
+            --brand-blue: #4B8DDE;
+            --text-dark: #333333;
+            --pure-white: #FFFFFF;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        .navbar {
+            height: 70px;
+            background-color: var(--pure-white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            color: var(--brand-blue);
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-item {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.4;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .nav-item:hover {
+            color: var(--brand-blue);
+        }
+        
+        .dropdown-indicator::after {
+            content: '▼';
+            font-size: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-container {
+                padding: 0 24px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">MOHH</a>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-item">About</a>
+                <a href="#" class="nav-item dropdown-indicator">Services</a>
+                <a href="#" class="nav-item dropdown-indicator">Careers</a>
+                <a href="#" class="nav-item">Contact</a>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
