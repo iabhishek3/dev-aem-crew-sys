@@ -1,67 +1,326 @@
 design_analysis_task:
   description: >
     CRITICAL: You MUST use the "Design Image Analyzer" tool FIRST to load the image at {design_path}.
-    Then perform a comprehensive professional design analysis of the ACTUAL IMAGE covering:
+    Then perform a comprehensive professional design analysis of the ACTUAL IMAGE.
 
-    1. OVERALL LAYOUT ANALYSIS:
-       - Page structure and grid system
-       - Content sections and their arrangement
-       - Responsive design considerations
-       - Whitespace and spacing patterns
+    OUTPUT FORMAT: You MUST create a beautifully formatted Markdown document with professional structure,
+    using headers, tables, code blocks, emojis, and visual separators for maximum readability.
 
-    2. COLOR SCHEME:
-       - Primary, secondary, and accent colors
-       - Color palette with hex codes
-       - Color usage patterns and hierarchy
-       - Contrast ratios and accessibility
+    REQUIRED MARKDOWN STRUCTURE:
 
-    3. TYPOGRAPHY:
-       - Font families used
-       - Heading hierarchy (H1, H2, H3, etc.)
-       - Font sizes, weights, and styles
-       - Line heights and letter spacing
+    # 🎨 Design Analysis Report
 
-    4. VISUAL COMPONENTS IDENTIFICATION:
-       List and describe ALL components found including:
-       - Navigation/Navbar elements
-       - Hero sections
-       - Buttons (primary, secondary, tertiary)
-       - Cards and containers
-       - Forms and input fields
-       - Icons and imagery
-       - Footer elements
-       - Any other UI components
+    > **Project:** [Detected from image]
+    > **Date:** [Current date]
+    > **Analyzed by:** Visual Strategist AI
 
-    5. SPACING AND HIERARCHY:
-       - Padding and margin patterns
-       - Visual weight and emphasis
-       - Information architecture
+    ---
 
-    Print your findings to the console in a clear, structured format.
+    ## 📐 1. Layout Architecture
+
+    ### Overall Structure
+    - **Grid System:** [e.g., 12-column grid, flexbox, CSS Grid]
+    - **Layout Pattern:** [e.g., Header + Hero + Content + Footer]
+    - **Breakpoints:** Desktop (1920px), Tablet (768px), Mobile (375px)
+    - **Container Width:** [e.g., 1200px max-width, centered]
+
+    ### Content Sections
+    | Section | Position | Height | Purpose |
+    |---------|----------|--------|---------|
+    | Header/Nav | Top | 80px | Navigation |
+    | Hero | Below header | 600px | Primary CTA |
+    | ... | ... | ... | ... |
+
+    ---
+
+    ## 🎨 2. Color Palette
+
+    ### Primary Colors
+    ```css
+    --primary: #HEX;     /* Main brand color */
+    --secondary: #HEX;   /* Secondary accent */
+    --accent: #HEX;      /* Call-to-action */
+    ```
+
+    ### Color Swatches
+    | Color | Hex Code | RGB | Usage |
+    |-------|----------|-----|-------|
+    | 🟣 Primary | #4B3C99 | rgb(75, 60, 153) | Headers, buttons |
+    | 🟠 Accent | #E85C23 | rgb(232, 92, 35) | CTAs, highlights |
+    | ... | ... | ... | ... |
+
+    ### Color Applications
+    - **Background:** [colors used]
+    - **Text:** [colors used with contrast ratios]
+    - **Borders:** [colors used]
+    - **Shadows:** [colors used]
+
+    ---
+
+    ## ✍️ 3. Typography System
+
+    ### Font Families
+    ```css
+    --font-primary: 'Font Name', sans-serif;
+    --font-secondary: 'Font Name', serif;
+    --font-mono: 'Monospace Font', monospace;
+    ```
+
+    ### Type Scale
+    | Element | Size | Weight | Line Height | Letter Spacing |
+    |---------|------|--------|-------------|----------------|
+    | H1 | 48px | 700 | 1.2 | -0.02em |
+    | H2 | 36px | 600 | 1.3 | -0.01em |
+    | H3 | 24px | 600 | 1.4 | 0 |
+    | Body | 16px | 400 | 1.6 | 0 |
+    | Small | 14px | 400 | 1.5 | 0 |
+
+    ---
+
+    ## 🧩 4. Component Inventory
+
+    ### Navigation Components
+    - **🔹 Navbar**
+      - Type: Horizontal navigation bar
+      - Position: Fixed top
+      - Height: 80px
+      - Background: Primary color
+      - Elements: Logo (left), Nav links (center), CTA button (right)
+      - Features: Sticky, dropdown menus
+
+    ### Hero Components
+    - **🔹 Hero Section**
+      - Type: Full-width banner
+      - Layout: Image background + centered content
+      - Elements: H1 headline, subtitle, CTA button
+      - Height: 600px
+
+    ### Interactive Components
+    - **🔹 Primary Button**
+      - Style: Solid fill, accent color
+      - Size: 48px height, 24px padding
+      - Border radius: 8px
+      - Hover: Darker shade + lift effect
+
+    - **🔹 Secondary Button**
+      - Style: Outlined, transparent background
+      - Border: 2px solid primary
+      - Hover: Filled background
+
+    ### Content Components
+    [List all cards, forms, icons, images, etc.]
+
+    ### Footer Components
+    [Describe footer layout and elements]
+
+    ---
+
+    ## 📏 5. Spacing System
+
+    ### Spacing Scale
+    ```css
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    ```
+
+    ### Component Spacing
+    | Component | Padding | Margin | Gap |
+    |-----------|---------|--------|-----|
+    | Navbar | 24px 40px | 0 | 32px |
+    | Hero | 80px 40px | 0 | 24px |
+    | ... | ... | ... | ... |
+
+    ---
+
+    ## 🎯 6. Visual Hierarchy
+
+    ### Primary Focus Areas
+    1. **Hero CTA Button** - Largest, brightest, centered
+    2. **Navigation Logo** - Top-left, brand identity
+    3. **Main Headline** - Large typography, high contrast
+
+    ### Visual Weight Distribution
+    - Top: 30% (Header + Hero)
+    - Middle: 50% (Content sections)
+    - Bottom: 20% (Footer)
+
+    ---
+
+    ## 💡 7. Implementation Recommendations
+
+    ### Technical Approach
+    - ✅ Use CSS Grid for main layout
+    - ✅ Implement CSS custom properties for theming
+    - ✅ Use semantic HTML5 elements
+    - ✅ Mobile-first responsive design
+    - ✅ Accessibility: WCAG 2.1 AA compliance
+
+    ### Component Priority
+    1. **High Priority:** Navbar, Hero, Primary CTA
+    2. **Medium Priority:** Content cards, Forms
+    3. **Low Priority:** Footer, Decorative elements
+
+    ### Design Patterns Identified
+    - Pattern 1: [Description]
+    - Pattern 2: [Description]
+
+    ---
+
+    ## 📊 8. Summary
+
+    ### Key Metrics
+    - **Total Components:** [Count]
+    - **Color Palette:** [Count] colors
+    - **Font Families:** [Count] fonts
+    - **Breakpoints:** [Count] responsive breakpoints
+
+    ### Complexity Level
+    **Rating:** ⭐⭐⭐⭐☆ (4/5)
+
+    **Notes:** [Summary of design complexity and special considerations]
+
+    ---
+
+    *📝 This analysis was generated by Visual Strategist AI to guide component creation and AEM implementation.*
 
   expected_output: >
-    A comprehensive design analysis report printed to console containing:
-    - Complete layout breakdown
-    - Full color palette with hex codes
-    - Typography specifications
-    - Detailed list of ALL visual components (Navbar, Hero, Buttons, Cards, Forms, Footer, etc.)
-    - Spacing and hierarchy analysis
-    - Professional recommendations for implementation
+    A professional, beautifully formatted Markdown document (.md file) with:
+    - Clear hierarchical structure with headers (H1, H2, H3)
+    - Tables for structured data (colors, typography, spacing)
+    - Code blocks for CSS values
+    - Emojis for visual markers
+    - Horizontal rules (---) for section separation
+    - Blockquotes for important notes
+    - Bullet points and numbered lists
+    - Professional typography and spacing
+    - Developer-friendly format suitable for handoff and documentation
 
-    Format as clear, structured text output suitable for developer handoff.
-  agent: webdesigner
+    The document should be presentation-ready and could be shared with stakeholders.
+  agent: visual_strategist
 
 component_listing_task:
   description: >
-    Based on the design analysis, create a list of HIGH-PRIORITY components that need to be built.
+    Based on the design analysis, create a professional component specification document in Markdown format.
     Review the design analysis report and identify the MOST IMPORTANT, VISIBLE components.
 
-    FOCUS ON TOP-LEVEL COMPONENTS ONLY:
-    - Navigation/Navbar
-    - Hero Section
-    - Primary Buttons (2-3 types max)
-    - Footer
-    - Any other major visible sections
+    OUTPUT FORMAT: Create a beautifully formatted Markdown document with professional structure.
+
+    REQUIRED MARKDOWN STRUCTURE:
+
+    # 🧩 Component Specification
+
+    > **Project:** [From design analysis]
+    > **Date:** [Current date]
+    > **Total Components:** 2
+    > **Created by:** UI Architect
+
+    ---
+
+    ## 📋 Component Selection Strategy
+
+    Based on the design analysis, the following components have been prioritized for implementation:
+
+    ### Selection Criteria
+    - ✅ **Visibility:** High-impact, immediately visible components
+    - ✅ **Functionality:** Core user interaction elements
+    - ✅ **Priority:** Essential for MVP/initial launch
+    - ✅ **Complexity:** Manageable scope for quality implementation
+
+    ---
+
+    ## 🎯 Selected Components
+
+    ### Component 1: [component-name]
+
+    **📦 Component Details**
+    | Property | Value |
+    |----------|-------|
+    | **Filename** | `component-name.html` |
+    | **Type** | Navigation / Section / Button / etc. |
+    | **Priority** | HIGH |
+    | **Complexity** | Low / Medium / High |
+
+    **🎨 Design Specifications**
+    - **Colors:**
+      - Background: `#HEX` (from design analysis)
+      - Text: `#HEX`
+      - Accent: `#HEX`
+    - **Typography:**
+      - Font: [Font name from analysis]
+      - Size: [Size from analysis]
+      - Weight: [Weight from analysis]
+    - **Spacing:**
+      - Padding: [Values from analysis]
+      - Margin: [Values from analysis]
+      - Height: [Height from analysis]
+
+    **🔧 Key Features**
+    - Feature 1: [Description]
+    - Feature 2: [Description]
+    - Feature 3: [Description]
+
+    **📐 Layout Structure**
+    ```
+    [Describe layout: e.g., "Logo (left) | Nav Links (center) | CTA Button (right)"]
+    ```
+
+    **🎭 Interactive Elements**
+    - Hover states: [Description]
+    - Click actions: [Description]
+    - Responsive behavior: [Description]
+
+    **📝 Content Requirements**
+    - Text content: [Exact text from design]
+    - Images: [Image requirements]
+    - Icons: [Icon requirements]
+
+    ---
+
+    ### Component 2: [component-name]
+
+    [Same structure as Component 1]
+
+    ---
+
+    ## 📊 Implementation Summary
+
+    ### Build Order
+    1. **[Component 1 name]** - Foundation component
+    2. **[Component 2 name]** - Secondary component
+
+    ### Technical Requirements
+    - ✅ Self-contained HTML files
+    - ✅ Embedded CSS (no external stylesheets)
+    - ✅ Vanilla JavaScript (if needed)
+    - ✅ Responsive design
+    - ✅ Semantic HTML5
+    - ✅ Accessibility compliant
+
+    ### Quality Standards
+    - **Accuracy:** 90%+ match to design
+    - **Performance:** Lightweight, optimized
+    - **Compatibility:** Modern browsers (Chrome, Firefox, Safari, Edge)
+    - **Maintainability:** Clean, commented code
+
+    ---
+
+    ## 🎯 Success Metrics
+
+    | Metric | Target |
+    |--------|--------|
+    | Design Accuracy | 90%+ |
+    | Code Quality | Production-ready |
+    | Load Time | < 1s |
+    | Accessibility | WCAG 2.1 AA |
+
+    ---
+
+    *📝 This specification guides the component creation phase to ensure pixel-perfect implementation.*
 
     CRITICAL LIMITS:
     - Maximum 2 components ONLY - EXACTLY 2, NO MORE
@@ -70,27 +329,28 @@ component_listing_task:
     - Skip smaller elements like individual icons, text blocks, or utility components
     - Quality over quantity - fewer components done well is better
 
-    For each component, specify:
-    1. Component Name (e.g., "navbar", "hero-section", "cta-button-primary", "footer")
-    2. Component Type (e.g., navigation, button, section)
-    3. Key Features (colors, text, icons, interactions)
-    4. Priority (must be HIGH)
-
     List components from top to bottom as they appear in the design.
     Use clear, descriptive names that will become filenames (lowercase, hyphens).
 
   expected_output: >
-    A numbered list of ALL components to be created, formatted as:
+    IMPORTANT: Output ONLY the component specification content as described in the template.
+    Do NOT create additional explanatory text or meta-descriptions.
 
-    1. navbar - Navigation bar with purple background and orange CTA
-    2. hero-section - Full-width hero with background image and text
-    3. cta-button-primary - Orange button for primary actions
-    4. cta-button-secondary - Outlined button for secondary actions
-    5. footer - Four-column footer layout
-    ... (continue for all components)
+    A professional, production-ready Markdown document that will be saved as component_list.md with:
+    - Clear hierarchical structure with headers starting with "# 🧩 Component Specification"
+    - Tables for structured specifications
+    - Code blocks for layout descriptions
+    - Emojis for visual organization
+    - Detailed specifications for each component including colors, typography, spacing, features
+    - Implementation guidelines and quality standards
+    - Easy for developers to reference during coding
 
-    Each component should be listed with its filename and brief description.
-  agent: component_developer
+    The document should be comprehensive enough that a developer can build the components
+    without referring back to the design analysis.
+
+    OUTPUT FORMAT: Start directly with "# 🧩 Component Specification" header.
+    Do not include any meta-commentary about the file creation.
+  agent: ui_architect
   context:
     - design_analysis_task
 
@@ -99,17 +359,18 @@ component_creation_task:
     Create pixel-perfect HTML/CSS components for each component in the list EXACTLY ONCE.
 
     CRITICAL RULES:
-    1. Read component_list.txt to get the EXACT list of components to create
+    1. Read component_list.md to get the EXACT list of components to create
     2. There should be EXACTLY 2 components in the list
     3. Create each component EXACTLY ONCE - no duplicates
     4. After writing a file, NEVER create it again
     5. After BOTH components are created, you are DONE - provide summary and STOP
     6. Do NOT loop back to create more components
 
-    STEP 1: READ component_list.txt FILE
-    - Open and read the component_list.txt file
+    STEP 1: READ component_list.md FILE
+    - Open and read the output-ui_architect/component_list.md file
+    - Extract the 2 component names from the markdown (look in "Selected Components" section)
     - Count the total number: Should be exactly 2 components
-    - Write down the 2 component names from the list
+    - Write down the 2 component names and their specifications
 
     STEP 2: READ THE DESIGN ANALYSIS
     Before creating ANY component, review the design analysis report and extract:
@@ -206,16 +467,16 @@ component_creation_task:
     For each component, use the "File Writer" tool with:
     - filename: Component name with .html extension (e.g., "navbar.html")
     - content: Complete HTML document
-    - folder: "output"
+    - folder: "output-ui_architect" (default, can be omitted)
 
     STEP 5: CREATE EXACTLY 2 COMPONENTS - TRACK YOUR PROGRESS
 
     Component 1 (from list):
-    - Use File Writer tool to create output/[component-1-name].html
+    - Use File Writer tool to create output-ui_architect/[component-1-name].html
     - Mark: ✓ DONE with component 1
 
     Component 2 (from list):
-    - Use File Writer tool to create output/[component-2-name].html
+    - Use File Writer tool to create output-ui_architect/[component-2-name].html
     - Mark: ✓ DONE with component 2
 
     STEP 6: FINAL CHECK - BOTH 2 COMPONENTS CREATED? YES → STOP NOW!
@@ -237,23 +498,23 @@ component_creation_task:
   expected_output: >
     FINAL SUMMARY - 2 components created:
 
-    ✓ output/[component-1].html - Created successfully
-    ✓ output/[component-2].html - Created successfully
+    ✓ output-ui_architect/[component-1].html - Created successfully
+    ✓ output-ui_architect/[component-2].html - Created successfully
 
-    TOTAL: 2 files created in output/ folder
+    TOTAL: 2 files created in output-ui_architect/ folder
     STATUS: COMPLETE - All components from the list have been created
     NEXT STEP: Task is finished, no further action needed
-  agent: component_developer
+  agent: ui_architect
   context:
     - design_analysis_task
     - component_listing_task
 
 aem_component_list_task:
   description: >
-    List all available HTML components from the output/ folder and present them
+    List all available HTML components from the output-ui_architect/ folder and present them
     to the user for selection.
 
-    STEP 1: Scan the {output_folder} directory for .html files
+    STEP 1: Scan the output-ui_architect directory for .html files
     STEP 2: Create a list of all HTML components found
     STEP 3: For each component, extract:
        - Component filename (e.g., navbar.html)
@@ -274,7 +535,7 @@ aem_component_list_task:
   expected_output: >
     A clear list of available HTML components and the user's selection
     for which component to convert to AEM next.
-  agent: aem_developer
+  agent: aem_alchemist
 
 aem_component_conversion_task:
   description: >
@@ -283,7 +544,7 @@ aem_component_conversion_task:
     INPUT: Selected component name from previous task (e.g., "navbar")
 
     STEP 1: READ THE HTML COMPONENT
-    - Read the HTML file from {output_folder}/{selected_component}.html
+    - Read the HTML file from output-ui_architect/{selected_component}.html
     - Analyze the structure, styles, content, and interactive elements
     - Identify all elements that should be editable by authors
 
@@ -360,7 +621,7 @@ aem_component_conversion_task:
     - ClientLib (CSS/JS)
 
     Summary of all files created with their paths.
-  agent: aem_developer
+  agent: aem_alchemist
   context:
     - aem_component_list_task
 
@@ -407,7 +668,7 @@ aem_build_deploy_task:
     - Component location in AEM
     - CRXDE link for verification
     - Next steps for testing
-  agent: aem_developer
+  agent: aem_alchemist
   context:
     - aem_component_conversion_task
 
@@ -475,6 +736,6 @@ aem_testing_task:
     - Status: Working / Has Issues / Needs Fixes
     - If issues: List of problems encountered
     - Next action: Fix issues or move to next component
-  agent: aem_developer
+  agent: aem_alchemist
   context:
     - aem_build_deploy_task

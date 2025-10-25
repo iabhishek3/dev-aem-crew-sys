@@ -1,63 +1,62 @@
 # MOHH Website Design Analysis Report
-Version 1.0 | For Development Handoff
+## For Developer Implementation
 
-## 1. LAYOUT STRUCTURE
-### Main Container
-- Max-width: 1200-1280px
+### 1. LAYOUT STRUCTURE
+#### Page Architecture
 - Full-width responsive layout
-- Standard 12-column grid system
+- Max-width container: 1200px
+- Centered content alignment
+- Side padding: 80px (desktop), 24px (mobile)
 
-### Page Sections (Top to Bottom)
-1. Navigation Bar (Fixed)
-2. Hero Banner
-3. Card Grid Section
-
-### Responsive Considerations
-- Breakpoints recommended:
+#### Grid System
+- 12-column grid
+- Gutters: 24px
+- Breakpoints:
   * Desktop: 1200px+
   * Tablet: 768px-1199px
   * Mobile: <768px
-- Fluid grid with relative units
-- Mobile-first approach recommended
 
-## 2. COLOR PALETTE
-### Primary Colors
+#### Section Arrangement
+1. Fixed Navigation Header (80px height)
+2. Hero Banner (600px height)
+3. Three-Column Card Grid (400px per card)
+4. Footer (not visible in current view)
+
+### 2. COLOR PALETTE
+#### Primary Colors
 ```css
---primary-blue: #7BA7E9;    /* Logo, CTAs */
---navy-blue: #2D3748;       /* Primary text */
---accent-red: #E53E3E;      /* Logo accent */
+--mohh-blue: #4B89DC;    /* Primary buttons, logo */
+--healthcare-blue: #7BA5E6;    /* Secondary elements */
+--navy: #2C3E50;    /* Text color */
+--white: #FFFFFF;    /* Backgrounds */
 ```
 
-### Secondary Colors
+#### Secondary Colors
 ```css
---bg-beige: #F5F0E8;        /* Hero background */
---white: #FFFFFF;           /* Nav background */
---text-gray: #4A5568;       /* Body text */
+--scrub-blue: #A5C5F7;    /* Medical uniforms */
+--warm-beige: #F5E6D3;    /* Hero background */
+--rose: #E8747C;    /* Accent uniform */
 ```
 
-### Accessibility
-- Contrast ratios meet WCAG 2.1 AA standards
-- Text maintains 4.5:1 minimum contrast ratio
-- Interactive elements use sufficient color contrast
+#### Accessibility
+- Text contrast ratio meets WCAG 2.1 AA standards
+- Interactive elements maintain 3:1 contrast ratio
 
-## 3. TYPOGRAPHY
-### Font Stack
+### 3. TYPOGRAPHY SYSTEM
 ```css
-font-family: 'Inter', 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-```
+/* Font Family */
+font-family: 'Inter', 'SF Pro Display', sans-serif;
 
-### Type Scale
-```css
-/* Headings */
+/* Heading Sizes */
 h1 {
-  font-size: 36px;
-  font-weight: 600;
+  font-size: 32px;
+  font-weight: 700;
   line-height: 1.2;
 }
 
 h2 {
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 600;
   line-height: 1.3;
 }
 
@@ -67,128 +66,140 @@ h3 {
   line-height: 1.4;
 }
 
-/* Body */
+/* Body Text */
 body {
   font-size: 16px;
-  line-height: 1.6;
   font-weight: 400;
-}
-
-/* Navigation */
-.nav-item {
-  font-size: 16px;
-  font-weight: 500;
+  line-height: 1.5;
 }
 ```
 
-## 4. COMPONENT INVENTORY
+### 4. COMPONENT SPECIFICATIONS
 
-### Navigation Bar
+#### Navigation Header
 ```css
 .navbar {
   height: 80px;
-  background: #FFFFFF;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background: var(--white);
   position: fixed;
   width: 100%;
-  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-item {
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 40px;
+  color: var(--navy);
 }
 ```
 
-#### Logo
-- MOHH wordmark in primary blue
-- Tagline in smaller text
-- Left-aligned position
-
-#### Navigation Menu
-- Horizontal layout
-- 32px spacing between items
-- Dropdown indicators (chevrons)
-- Items: "Who We Are", "What We Do", "Media Centre", "Careers"
-
-### Hero Section
+#### Hero Section
 ```css
 .hero {
-  background-color: var(--bg-beige);
-  min-height: 500px;
-  padding: 64px 0;
+  min-height: 600px;
+  background: var(--warm-beige);
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 40px;
+  padding: 80px;
+}
+
+.hero-cta {
+  background: var(--mohh-blue);
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: var(--white);
 }
 ```
 
-Components:
-- H1 headline
-- Supporting copy
-- CTA button ("Explore what we do →")
-- Background image with healthcare professionals
-- Carousel navigation dots
-
-### Card Grid
+#### Card Grid
 ```css
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  padding: 64px 0;
+  margin: 80px 0;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-content {
+  padding: 24px;
 }
 ```
 
-Individual Cards:
-- Image background
-- Dark gradient overlay
-- White text
-- 24px internal padding
-- Hover state transitions
-
-## 5. SPACING SYSTEM
+### 5. SPACING SYSTEM
 ```css
 :root {
   --spacing-xs: 8px;
-  --spacing-sm: 12px;
+  --spacing-sm: 16px;
   --spacing-md: 24px;
-  --spacing-lg: 32px;
-  --spacing-xl: 64px;
+  --spacing-lg: 40px;
+  --spacing-xl: 80px;
 }
 ```
 
-### Common Patterns
-- Section padding: 64px (top/bottom)
-- Container horizontal margins: 64px
-- Card grid gap: 24px
-- Navigation item spacing: 32px
-- Button padding: 12px 24px
+### 6. RESPONSIVE BEHAVIOR
+```css
+/* Tablet */
+@media (max-width: 1199px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 40px;
+  }
+  
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-## 6. IMPLEMENTATION RECOMMENDATIONS
+/* Mobile */
+@media (max-width: 767px) {
+  :root {
+    --container-padding: 24px;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+}
+```
 
-1. Build System
-- Use CSS Custom Properties for color system
-- Implement CSS Grid for main layouts
-- Utilize Flexbox for component-level layouts
+### 7. IMPLEMENTATION RECOMMENDATIONS
 
-2. Component Architecture
-- Create reusable components for cards, buttons, navigation
-- Implement dropdown system for nav items
-- Build carousel component for hero section
+1. Component Architecture
+   - Build reusable components for cards, buttons, and navigation
+   - Implement CSS custom properties for colors and spacing
+   - Use CSS Grid for main layouts with Flexbox for component internals
 
-3. Responsive Strategy
-- Mobile-first CSS
-- Breakpoint system using modern container queries
-- Fluid typography with clamp()
+2. Performance Considerations
+   - Optimize hero image for different viewports
+   - Implement lazy loading for card images
+   - Consider using Next.js Image component for optimal loading
 
-4. Performance Considerations
-- Optimize hero images
-- Lazy load card images
-- Implement responsive images using srcset
+3. Accessibility Implementation
+   - Ensure proper ARIA labels on interactive elements
+   - Maintain keyboard navigation support
+   - Implement focus states for all interactive elements
 
-5. Accessibility
-- Semantic HTML structure
-- ARIA labels for interactive elements
-- Keyboard navigation support
-- Focus states for interactive elements
+4. Animation Guidelines
+   - Use subtle transitions (0.3s ease)
+   - Implement reduced motion media query
+   - Keep hover effects minimal and purposeful
 
-## 7. ADDITIONAL NOTES
-- Implement smooth transitions for interactive states
-- Ensure cross-browser compatibility
-- Consider implementing dark mode variables
-- Document component variants and states
-
-This analysis provides a comprehensive foundation for development. All measurements and values should be confirmed with final design assets and adjusted according to specific implementation requirements.
+This implementation guide provides a comprehensive foundation for development while maintaining design fidelity and modern web standards.

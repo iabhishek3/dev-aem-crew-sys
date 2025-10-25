@@ -23,17 +23,11 @@ class UserInteractionTool(BaseTool):
         Ask the user a question and get their response.
         If options are provided, user must select from the list.
         """
-        # Print the question for logging/debugging
-        print("\n" + "-"*50)
-        print("\n" + question + "\n")
-
         if options:
             # Auto-select the first option to allow non-interactive runs
-            print("Available options:")
-            for i, option in enumerate(options, 1):
-                print(f"{i}. {option}")
+            options_str = ", ".join([f"'{opt}'" for opt in options])
             selected = options[0]
-            print(f"Auto-selected option 1: {selected}")
+            print(f"[Tool: User Interaction] {question} → Auto-selected: '{selected}' from [{options_str}]")
             return selected
         # No options provided: return empty string (non-interactive)
         return ""

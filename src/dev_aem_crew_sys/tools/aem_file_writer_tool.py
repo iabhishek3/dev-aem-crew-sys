@@ -36,7 +36,6 @@ class AEMFileWriterTool(BaseTool):
             # Create all parent directories if they don't exist
             if not os.path.exists(directory):
                 os.makedirs(directory)
-                print(f"Created directories: {directory}")
 
             # Write the content to the file
             with open(full_path, 'w', encoding='utf-8') as f:

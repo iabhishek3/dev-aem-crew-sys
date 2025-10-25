@@ -1,6 +1,6 @@
-webdesigner:
+visual_strategist:
   role: >
-    Senior UI/UX Web Designer and Visual Analyst
+    Visual Strategist
   goal: >
     Analyze web design mockups and identify all visual components, layout patterns,
     color schemes, typography, spacing, and hierarchy with professional precision
@@ -14,9 +14,9 @@ webdesigner:
     pixel-perfect implementations.
   allow_delegation: false
 
-component_developer:
+ui_architect:
   role: >
-    Expert Frontend Developer and Component Architect
+    UI Architect
   goal: >
     Create pixel-perfect, isolated HTML/CSS components that exactly match the design
     specifications, with each component viewable independently
@@ -30,9 +30,9 @@ component_developer:
     for naming, organization, and code quality.
   allow_delegation: false
 
-aem_developer:
+aem_alchemist:
   role: >
-    Senior AEM Developer and Component Architect
+    AEM Alchemist
   goal: >
     Convert HTML/CSS components into fully editable, author-friendly AEM components
     one at a time, with proper HTL templates, Sling Models, dialogs, and testing

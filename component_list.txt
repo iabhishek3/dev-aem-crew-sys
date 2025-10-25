@@ -1,20 +1,23 @@
-1. navbar - Fixed navigation component with white background (#FFFFFF), box shadow, and 80px height. Features include:
-   - MOHH wordmark in primary blue (#7BA7E9)
-   - Horizontal menu items with 32px spacing
-   - Main nav items: "Who We Are", "What We Do", "Media Centre", "Careers"
-   - Dropdown indicators
-   - Box shadow: 0 2px 4px rgba(0,0,0,0.05)
-   - Fixed positioning at top
-   - Responsive design considerations
+1. navbar - Primary navigation component (80px height, white background, blue/navy text)
+Key Features:
+- White background
+- 80px height with 24px horizontal padding
+- Primary blue/navy text colors
+- Medium weight (500) navigation items
+- 32px spacing between nav items
+- 16px font size
+- Fully responsive
+Priority: HIGH
 
-2. hero-section - Full-width hero banner with beige background (#F5F0E8) and healthcare professionals image. Features include:
-   - Minimum height: 500px
-   - Padding: 64px 0
-   - H1 headline in Inter font (36px, 600 weight)
-   - Supporting body copy
-   - CTA button ("Explore what we do →")
-   - Background image with professionals
-   - Carousel navigation dots
-   - Responsive layout adjustments
+2. hero-section - Full-width gradient hero with content and CTA
+Key Features:
+- Linear gradient background (F5F0E8 to FFF5EA)
+- 80px vertical padding
+- 50% max-width for content area
+- Primary blue CTA button
+- 32px H1 headline
+- 8px border radius on CTA
+- Responsive layout
+Priority: HIGH
 
-These two components represent the highest-priority, most visible elements of the MOHH website design system. They are essential for establishing the site's navigation structure and creating immediate visual impact for users.
+These components represent the most important structural elements of the site, appearing at the top of every page and providing critical navigation and conversion functionality. They should be developed first to establish the core visual framework of the site.

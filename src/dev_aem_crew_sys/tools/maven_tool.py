@@ -42,8 +42,7 @@ class MavenTool(BaseTool):
             # Prepare the Maven command
             full_command = f"mvn {maven_command}"
 
-            print(f"Executing Maven build in: {aem_project_path}")
-            print(f"Command: {full_command}")
+            print(f"[Tool: Maven] Executing build → Command: '{full_command}' in {os.path.basename(aem_project_path)}")
 
             # Execute the Maven command
             process = subprocess.Popen(

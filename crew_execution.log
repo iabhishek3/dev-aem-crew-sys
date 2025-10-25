@@ -1,0 +1,120 @@
+[36m╭─[0m[36m──────────────────────────────────────────────[0m[36m Crew Execution Started [0m[36m──────────────────────────────────────────────[0m[36m─╮[0m
+[36m│[0m                                                                                                                      [36m│[0m
+[36m│[0m  [1;36mCrew Execution Started[0m                                                                                              [36m│[0m
+[36m│[0m  [37mName: [0m[36mcrew[0m                                                                                                          [36m│[0m
+[36m│[0m  [37mID: [0m[36m463471a2-7b2a-4a1c-bdcb-8a42b2cb9dea[0m                                                                            [36m│[0m
+[36m│[0m  [37mTool Args: [0m                                                                                                         [36m│[0m
+[36m│[0m                                                                                                                      [36m│[0m
+[36m│[0m                                                                                                                      [36m│[0m
+[36m╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+[1;36m🚀 Crew: [0m[1;36mcrew[0m
+└── [1;33m📋 Task: [0m[1;33mdesign_analysis_task[0m[2;33m (ID: 55ad9d08-2ca2-4139-9675-53bd9913459f)[0m
+    [37mStatus: [0m[2;33mExecuting Task...[0m[35m╭─[0m[35m─────────────────────────────────────────────────[0m[35m 🤖 Agent Started [0m[35m─────────────────────────────────────────────────[0m[35m─╮[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m│[0m  [37mAgent: [0m[1;92mVisual Strategist[0m                                                                                            [35m│[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m│[0m  [37mTask: [0m[92mCRITICAL: You MUST use the "Design Image Analyzer" tool FIRST to load the image at design.png. Then perform [0m  [35m│[0m
+[35m│[0m  [92ma comprehensive professional design analysis of the ACTUAL IMAGE.[0m                                                   [35m│[0m
+[35m│[0m  [92mOUTPUT FORMAT: You MUST create a beautifully formatted Markdown document with professional structure, using [0m        [35m│[0m
+[35m│[0m  [92mheaders, tables, code blocks, emojis, and visual separators for maximum readability.[0m                                [35m│[0m
+[35m│[0m  [92mREQUIRED MARKDOWN STRUCTURE:[0m                                                                                        [35m│[0m
+[35m│[0m  [92m# 🎨 Design Analysis Report[0m                                                                                         [35m│[0m
+[35m│[0m  [92m> **Project:** [Detected from image] > **Date:** [Current date] > **Analyzed by:** Visual Strategist AI[0m             [35m│[0m
+[35m│[0m  [92m---[0m                                                                                                                 [35m│[0m
+[35m│[0m  [92m## 📐 1. Layout Architecture[0m                                                                                        [35m│[0m
+[35m│[0m  [92m### Overall Structure - **Grid System:** [e.g., 12-column grid, flexbox, CSS Grid] - **Layout Pattern:** [e.g., [0m    [35m│[0m
+[35m│[0m  [92mHeader + Hero + Content + Footer] - **Breakpoints:** Desktop (1920px), Tablet (768px), Mobile (375px) - [0m            [35m│[0m
+[35m│[0m  [92m**Container Width:** [e.g., 1200px max-width, centered][0m                                                             [35m│[0m
+[35m│[0m  [92m### Content Sections | Section | Position | Height | Purpose | |---------|----------|--------|---------| | [0m         [35m│[0m
+[35m│[0m  [92mHeader/Nav | Top | 80px | Navigation | | Hero | Below header | 600px | Primary CTA | | ... | ... | ... | ... |[0m      [35m│[0m
+[35m│[0m  [92m---[0m                                                                                                                 [35m│[0m
+[35m│[0m  [92m## 🎨 2. Color Palette[0m                                                                                              [35m│[0m
+[35m│[0m  [92m### Primary Colors ```css --primary: #HEX;     /* Main brand color */ --secondary: #HEX;   /* Secondary accent */ [0m  [35m│[0m
+[35m│[0m  [92m--accent: #HEX;      /* Call-to-action */ ```[0m                                                                       [35m│[0m
+[35m│[0m  [92m### Color Swatches | Color | Hex Code | RGB | Usage | |-------|----------|-----|-------| | 🟣 Primary | #4B3C99 | [0m  [35m│[0m
+[35m│[0m  [92mrgb(75, 60, 153) | Headers, buttons | | 🟠 Accent | #E85C23 | rgb(232, 92, 35) | CTAs, highlights | | ... | ... | [0m  [35m│[0m
+[35m│[0m  [92m... | ... |[0m                                                                                                         [35m│[0m
+[35m│[0m  [92m### Color Applications - **Background:** [colors used] - **Text:** [colors used with contrast ratios] - [0m            [35m│[0m
+[35m│[0m  [92m**Borders:** [colors used] - **Shadows:** [colors used][0m                                                             [35m│[0m
+[35m│[0m  [92m---[0m                                                                                                                 [35m│[0m
+[35m│[0m  [92m## ✍️ 3. Typography System[0m                                                                                           [35m│[0m
+[35m│[0m  [92m### Font Families ```css --font-primary: 'Font Name', sans-serif; --font-secondary: 'Font Name', serif; [0m            [35m│[0m
+[35m│[0m  [92m--font-mono: 'Monospace Font', monospace; ```[0m                                                                       [35m│[0m
+[35m│[0m  [92m### Type Scale | Element | Size | Weight | Line Height | Letter Spacing | [0m                                          [35m│[0m
+[35m│[0m  [92m|---------|------|--------|-------------|----------------| | H1 | 48px | 700 | 1.2 | -0.02em | | H2 | 36px | 600 |[0m  [35m│[0m
+[35m│[0m  [92m1.3 | -0.01em | | H3 | 24px | 600 | 1.4 | 0 | | Body | 16px | 400 | 1.6 | 0 | | Small | 14px | 400 | 1.5 | 0 |[0m      [35m│[0m
+[35m│[0m  [92m---[0m                                                                                                                 [35m│[0m
+[35m│[0m  [92m## 🧩 4. Component Inventory[0m                                                                                        [35m│[0m
+[35m│[0m  [92m### Navigation Components - **🔹 Navbar**[0m                                                                           [35m│[0m
+[35m│[0m  [92m  - Type: Horizontal navigation bar[0m                                                                                 [35m│[0m
+[35m│[0m  [92m  - Position: Fixed top[0m                                                                                             [35m│[0m
+[35m│[0m  [92m  - Height: 80px[0m                                                                                                    [35m│[0m
+[35m│[0m  [92m  - Background: Primary color[0m                                                                                       [35m│[0m
+[35m│[0m  [92m  - Elements: Logo (left), Nav links (center), CTA button (right)[0m                                                   [35m│[0m
+[35m│[0m  [92m  - Features: Sticky, dropdown menus[0m                                                                                [35m│[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m│[0m  [92m### Hero Components - **🔹 Hero Section**[0m                                                                           [35m│[0m
+[35m│[0m  [92m  - Type: Full-width banner[0m                                                                                         [35m│[0m
+[35m│[0m  [92m  - Layout: Image background + centered content[0m                                                                     [35m│[0m
+[35m│[0m  [92m  - Elements: H1 headline, subtitle, CTA button[0m                                                                     [35m│[0m
+[35m│[0m  [92m  - Height: 600px[0m                                                                                                   [35m│[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m│[0m  [92m### Interactive Components - **🔹 Primary Button**[0m                                                                  [35m│[0m
+[35m│[0m  [92m  - Style: Solid fill, accent color[0m                                                                                 [35m│[0m
+[35m│[0m  [92m  - Size: 48px height, 24px padding[0m                                                                                 [35m│[0m
+[35m│[0m  [92m  - Border radius: 8px[0m                                                                                              [35m│[0m
+[35m│[0m  [92m  - Hover: Darker shade + lift effect[0m                                                                               [35m│[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m│[0m  [92m- **🔹 Secondary Button**[0m                                                                                           [35m│[0m
+[35m│[0m  [92m  - Style: Outlined, transparent background[0m                                                                         [35m│[0m
+[35m│[0m  [92m  - Border: 2px solid primary[0m                                                                                       [35m│[0m
+[35m│[0m  [92m  - Hover: Filled background[0m                                                                                        [35m│[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m│[0m  [92m### Content Components [List all cards, forms, icons, images, etc.][0m                                                 [35m│[0m
+[35m│[0m  [92m### Footer Components [Describe footer layout and elements][0m                                                         [35m│[0m
+[35m│[0m  [92m---[0m                                                                                                                 [35m│[0m
+[35m│[0m  [92m## 📏 5. Spacing System[0m                                                                                             [35m│[0m
+[35m│[0m  [92m### Spacing Scale ```css --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 32px; [0m   [35m│[0m
+[35m│[0m  [92m--space-2xl: 48px; --space-3xl: 64px; ```[0m                                                                           [35m│[0m
+[35m│[0m  [92m### Component Spacing | Component | Padding | Margin | Gap | |-----------|---------|--------|-----| | Navbar | [0m     [35m│[0m
+[35m│[0m  [92m24px 40px | 0 | 32px | | Hero | 80px 40px | 0 | 24px | | ... | ... | ... | ... |[0m                                    [35m│[0m
+[35m│[0m  [92m---[0m                                                                                                                 [35m│[0m
+[35m│[0m  [92m## 🎯 6. Visual Hierarchy[0m                                                                                           [35m│[0m
+[35m│[0m  [92m### Primary Focus Areas 1. **Hero CTA Button** - Largest, brightest, centered 2. **Navigation Logo** - Top-left, [0m   [35m│[0m
+[35m│[0m  [92mbrand identity 3. **Main Headline** - Large typography, high contrast[0m                                               [35m│[0m
+[35m│[0m  [92m### Visual Weight Distribution - Top: 30% (Header + Hero) - Middle: 50% (Content sections) - Bottom: 20% (Footer)[0m   [35m│[0m
+[35m│[0m  [92m---[0m                                                                                                                 [35m│[0m
+[35m│[0m  [92m## 💡 7. Implementation Recommendations[0m                                                                             [35m│[0m
+[35m│[0m  [92m### Technical Approach - ✅ Use CSS Grid for main layout - ✅ Implement CSS custom properties for theming - ✅ Use[0m  [35m│[0m
+[35m│[0m  [92msemantic HTML5 elements - ✅ Mobile-first responsive design - ✅ Accessibility: WCAG 2.1 AA compliance[0m              [35m│[0m
+[35m│[0m  [92m### Component Priority 1. **High Prior2025-10-26 03:00:36,459 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-10-26 03:00:36,460 - INFO - Retrying request to /chat/completions in 7.196938 seconds
+2025-10-26 03:00:44,022 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-10-26 03:00:44,023 - ERROR - OpenAI API call failed: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2025-10-26 03:00:44,023 - ERROR - OpenAI API call failed: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+2025-10-26 03:00:44,260 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-10-26 03:00:44,262 - INFO - Anthropic API usage: {'input_tokens': 2075, 'output_tokens': 319, 'total_tokens': 2394}
+2025-10-26 03:01:02,818 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+                                     [35m│[0m
+[35m│[0m  [92m*📝 This analysis was generated by Visual Strategist AI to guide component creation and AEM implementation.*[0m        [35m│[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m│[0m                                                                                                                      [35m│[0m
+[35m╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+[STATUS] Visual Strategist activated
+[91mAn unknown error occurred. Please check the details below.[0m
+[91mError details: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}[0m
+[1;36m🚀 Crew: [0m[1;36mcrew[0m
+└── [1;33m📋 Task: [0m[1;33mdesign_analysis_task[0m[2;33m (ID: 55ad9d08-2ca2-4139-9675-53bd9913459f)[0m
+    [37mStatus: [0m[2;33mExecuting Task...[0m[91mAn unknown error occurred. Please check the details below.[0m
+[31m╭─[0m[31m────────────────────────────────────────────────────[0m[31m LLM Error [0m[31m─────────────────────────────────────────────────────[0m[31m─╮[0m
+[31m│[0m                                                                                                                      [31m│[0m
+[31m│[0m  [1;31m❌ LLM Call Failed[0m                                                                                                  [31m│[0m
+[31m│[0m  [37mError: [0m[31mOpenAI API call failed: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please [0m    [31m│[0m
+[31m│[0m  [31mcheck your plan and billing details. For more information on this error, read the docs: [0m                            [31m│[0m
+[31m│[0m  [31mhttps://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, [0m     [31m│[0m
+[31m│[0m  [31m'code': 'insufficient_quota'}}[0m                                                                                      [31m│[0m
+[31m│[0m                                                                                                                      [31m│[0m
+[31m╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+[91mError details: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}[0m

@@ -1,121 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOHH Hero Section</title>
-  <style>
-    :root {
-      --primary-blue: #7BA7E9;
-      --navy-blue: #2D3748;
-      --bg-beige: #F5F0E8;
-      --white: #FFFFFF;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section</title>
+    <style>
+        :root {
+            --color-primary-blue: #6B9CD3;
+            --color-navy: #2D4B8E;
+            --color-white: #FFFFFF;
+            --font-regular: 400;
+            --font-medium: 500;
+            --font-bold: 700;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+        body {
+            font-family: Inter, 'SF Pro Display', -apple-system, sans-serif;
+        }
 
-    .hero {
-      background-color: var(--bg-beige);
-      min-height: 500px;
-      padding: 64px 0;
-      position: relative;
-      overflow: hidden;
-    }
+        .hero {
+            background: linear-gradient(to right, #F5F0E8, #FFF5EA);
+            padding: 80px 0;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+        }
 
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 64px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-    h1 {
-      font-size: 36px;
-      font-weight: 600;
-      line-height: 1.2;
-      color: var(--navy-blue);
-      margin-bottom: 24px;
-    }
+        .hero-content {
+            max-width: 50%;
+        }
 
-    .hero-copy {
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--navy-blue);
-      margin-bottom: 32px;
-      max-width: 600px;
-    }
+        .hero-title {
+            font-size: 32px;
+            color: var(--color-navy);
+            margin-bottom: 24px;
+            font-weight: var(--font-bold);
+            line-height: 1.2;
+        }
 
-    .cta-button {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 24px;
-      background: var(--primary-blue);
-      color: var(--white);
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 500;
-      gap: 8px;
-      transition: background-color 0.3s;
-    }
+        .hero-description {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
 
-    .cta-button:hover {
-      background-color: #6990d1;
-    }
+        .hero-cta {
+            background: var(--color-primary-blue);
+            color: var(--color-white);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: var(--font-medium);
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
 
-    .carousel-dots {
-      display: flex;
-      gap: 8px;
-      margin-top: 32px;
-    }
+        .hero-cta:hover {
+            background: var(--color-navy);
+        }
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--navy-blue);
-      opacity: 0.3;
-      cursor: pointer;
-    }
-
-    .dot.active {
-      opacity: 1;
-    }
-
-    @media (max-width: 768px) {
-      .hero-container {
-        padding: 0 24px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-    }
-  </style>
+        @media (max-width: 768px) {
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <section class="hero">
-    <div class="hero-container">
-      <h1>Healthcare Excellence Starts Here</h1>
-      <p class="hero-copy">Shaping Singapore's healthcare landscape through innovation, excellence, and compassionate care.</p>
-      <a href="#" class="cta-button">Explore what we do →</a>
-      <div class="carousel-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-  </section>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to Ministry of Health Holdings</h1>
+                <p class="hero-description">Delivering excellence in healthcare through innovation and dedication. Join us in shaping the future of healthcare in Singapore.</p>
+                <a href="#" class="hero-cta">Learn More</a>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
