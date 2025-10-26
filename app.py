@@ -472,12 +472,6 @@ with st.sidebar:
         help="Component group name in AEM"
     )
 
-    st.markdown("---")
-    st.markdown("### &#128101; Active Agents")
-    st.markdown('<div class="agent-badge agent-designer">&#127912; Visual Strategist</div>', unsafe_allow_html=True)
-    st.markdown('<div class="agent-badge agent-developer">&#128296; UI Architect</div>', unsafe_allow_html=True)
-    st.markdown('<div class="agent-badge agent-aem">&#9889; AEM Alchemist</div>', unsafe_allow_html=True)
-
 # Main content
 col1, col2 = st.columns([1, 1])
 
@@ -741,17 +735,17 @@ def render_agent_timeline():
                     st.markdown("---")
                     st.markdown("### 📄 HTML Components")
 
-                    # Initialize view mode state if not exists
-                    if 'html_view_modes' not in st.session_state:
-                        st.session_state.html_view_modes = {}
-
+                    # Use absolute file path as base for unique key to avoid any conflicts
                     for idx, file in enumerate(files):
                         # Get component name without extension for title
                         component_name = file.replace('.html', '').replace('-', ' ').title()
-                        # Create truly unique key with hash to prevent collisions
+
+                        # Create absolutely unique key using full path + position + filename
+                        # This guarantees uniqueness even if same filename exists elsewhere
                         import hashlib
-                        file_hash = hashlib.md5(file.encode()).hexdigest()[:8]
-                        file_key = f"{idx}_{file_hash}"
+                        absolute_path = os.path.abspath(os.path.join(html_folder, file))
+                        unique_seed = f"{absolute_path}_{idx}_{id(file)}"
+                        file_unique_id = hashlib.sha256(unique_seed.encode()).hexdigest()[:16]
 
                         with st.expander(f"📄 {component_name} ({file})", expanded=False):
                             file_path = os.path.join(html_folder, file)
@@ -768,7 +762,7 @@ def render_agent_timeline():
                                             "View Mode:",
                                             ["🖼️ Preview", "💻 Source"],
                                             horizontal=True,
-                                            key=f"view_mode_{file_key}",
+                                            key=f"vm_{file_unique_id}",
                                             label_visibility="collapsed",
                                             index=0
                                         )
@@ -779,7 +773,7 @@ def render_agent_timeline():
                                             data=code_content,
                                             file_name=file,
                                             mime='text/html',
-                                            key=f"download_btn_{file_key}",
+                                            key=f"dl_{file_unique_id}",
                                             use_container_width=True
                                         )
 
@@ -812,11 +806,15 @@ def render_agent_timeline():
             st.info("AEM files created in your project directory. Check the logs for file paths.")
 
 # ========================================
-# TIMELINE SECTION (Shows above logs)
+# TIMELINE SECTION (Shows above logs) - Dynamic placeholder
 # ========================================
+st.markdown("---")
+timeline_placeholder = st.empty()
+
+# Render timeline if crew has started
 if st.session_state.crew_started:
-    st.markdown("---")
-    render_agent_timeline()
+    with timeline_placeholder.container():
+        render_agent_timeline()
 
 # ========================================
 # LOGS SECTION
@@ -1252,9 +1250,6 @@ if st.session_state.crew_running:
         log_check_interval = 0.5  # Check for new logs every 0.5 seconds
         max_wait_time = 600  # Maximum 10 minutes
         elapsed_time = 0
-
-        # Add placeholder for dynamic timeline updates
-        timeline_placeholder = st.empty()
 
         while not crew_result["completed"] and elapsed_time < max_wait_time:
             # Read new logs

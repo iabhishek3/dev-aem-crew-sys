@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOHH Navbar</title>
+    <style>
+        :root {
+            --primary: #4B89DC;
+            --text-dark: #2C3E50;
+            --white: #FFFFFF;
+            --font-primary: 'Inter', 'SF Pro Display', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+        }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--white);
+            padding: 0 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .dropdown-indicator::after {
+            content: '▼';
+            font-size: 12px;
+        }
+        
+        .cta-button {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">MOHH</a>
+        
+        <div class="nav-links">
+            <a href="#" class="nav-link dropdown-indicator">About Us</a>
+            <a href="#" class="nav-link dropdown-indicator">Our Services</a>
+            <a href="#" class="nav-link dropdown-indicator">Healthcare Professionals</a>
+            <a href="#" class="nav-link">News</a>
+            <a href="#" class="nav-link">Contact</a>
+        </div>
+        
+        <a href="#" class="cta-button">Careers</a>
+    </nav>
+</body>
+</html>
