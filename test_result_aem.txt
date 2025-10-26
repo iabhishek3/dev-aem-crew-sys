@@ -1,0 +1,638 @@
+DOCUMENTATION SEARCH RESULTS
+Library: aem (ID: /websites/aemcomponents_dev)
+Topic: HTL data-sly-use syntax
+
+### Drafts and Submissions Component v1 HTL Markup (Submissions)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/forms-and-communications-portal/draftsandsubmissions
+
+Example HTL markup for the Drafts and Submissions component displaying submissions. Includes placeholders for loading more content.
+
+```htl
+<div class="cmp-draftsandsubmissions">
+    <div class="cmp-draftsandsubmissions__header">
+        <h2 class="cmp-draftsandsubmissions__title">Submissions</h2>
+        <button class="cmp-draftsandsubmissions__loadmore">Load more</button>
+    </div>
+    <div class="cmp-draftsandsubmissions__content">
+        <!-- Submission items will be rendered here -->
+    </div>
+</div>
+```
+
+--------------------------------
+
+### Drafts and Submissions Component v1 HTL Markup (Drafts)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/forms-and-communications-portal/draftsandsubmissions
+
+Example HTL markup for the Drafts and Submissions component displaying drafts. Includes placeholders for loading more content.
+
+```htl
+<div class="cmp-draftsandsubmissions">
+    <div class="cmp-draftsandsubmissions__header">
+        <h2 class="cmp-draftsandsubmissions__title">Drafts</h2>
+        <button class="cmp-draftsandsubmissions__loadmore">Load more</button>
+    </div>
+    <div class="cmp-draftsandsubmissions__content">
+        <!-- Draft items will be rendered here -->
+    </div>
+</div>
+```
+
+--------------------------------
+
+### Searchv1 Component Properties and Markup
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/search
+
+Defines the properties and HTL markup for the Searchv1 component. The component is server-side, written in HTL, and displays a search input. It redirects to a search results page upon submission, passing the search term as a query parameter.
+
+```JCR
+1. placeholder: Product Search
+2. sling:resourceType: cif-components-examples/components/searchbar
+```
+
+--------------------------------
+
+### Searchresults v1 HTL Markup
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/search
+
+Example HTL markup for the Searchresults v1 component, typically used to render the product gallery view. This snippet shows a placeholder message when no products are available.
+
+```HTL
+No products to display.
+```
+
+--------------------------------
+
+### AEM Product Component (HTL & GraphQL)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/product/sample-product.html/set-of-sprite-yoga-straps
+
+Demonstrates a server-side HTL component for displaying product details. It fetches data from Adobe Commerce using GraphQL, driven by a product identifier in the URL suffix. Includes examples for various product types and a React application for bundle customization.
+
+```HTL
+<!-- Example HTL usage for Product Component -->
+<div data-sly-use="com.adobe.commerce.core.models.ProductViewModel">
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <img src="${product.imageUrl}" alt="${product.name}">
+    <!-- Additional product details and bundle customization logic -->
+</div>
+```
+
+```GraphQL
+# Example GraphQL query for product details
+query GetProductDetails($sku: String!) {
+  products(filter: { sku: { eq: $sku } }) {
+    items {
+      name
+      sku
+      description
+      image {
+        url
+        label
+      }
+      price {
+        regularPrice {
+          amount
+          currency
+        }
+      }
+      # ... other product attributes
+    }
+  }
+}
+```
+
+```React
+// Example React component for bundle customization
+import React, { useState, useEffect } from 'react';
+
+function BundleCustomizer({ productId }) {
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  useEffect(() => {
+    // Fetch bundle options via client-side GraphQL
+    fetchBundleOptions(productId).then(data => setOptions(data.options));
+  }, [productId]);
+
+  const handleOptionChange = (optionId, value) => {
+    setSelectedOptions({ ...selectedOptions, [optionId]: value });
+    // Recalculate price or update cart data
+  };
+
+  return (
+    <div>
+      <h3>Customize Your Bundle</h3>
+      {options.map(option => (
+        <div key={option.id}>
+          <label>{option.label}:</label>
+          <select onChange={(e) => handleOptionChange(option.id, e.target.value)}>
+            {option.values.map(value => (
+              <option key={value.id} value={value.id}>{value.label}</option>
+            ))}
+          </select>
+        </div>
+      ))}
+      <button onClick={() => addToCart(productId, selectedOptions)}>Add to Cart</button>
+    </div>
+  );
+}
+
+export default BundleCustomizer;
+```
+
+--------------------------------
+
+### AEM Product Component (HTL & GraphQL)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/product/sample-product.html/sprite-yoga-companion-kit
+
+Demonstrates a server-side HTL component for displaying product details. It fetches data from Adobe Commerce using GraphQL, driven by a product identifier in the URL suffix. Includes examples for various product types and a React application for bundle customization.
+
+```HTL
+<!-- Example HTL usage for Product Component -->
+<div data-sly-use="com.adobe.commerce.core.models.ProductViewModel">
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <img src="${product.imageUrl}" alt="${product.name}">
+    <!-- Additional product details and bundle customization logic -->
+</div>
+```
+
+```GraphQL
+# Example GraphQL query for product details
+query GetProductDetails($sku: String!) {
+  products(filter: { sku: { eq: $sku } }) {
+    items {
+      name
+      sku
+      description
+      image {
+        url
+        label
+      }
+      price {
+        regularPrice {
+          amount
+          currency
+        }
+      }
+      # ... other product attributes
+    }
+  }
+}
+```
+
+```React
+// Example React component for bundle customization
+import React, { useState, useEffect } from 'react';
+
+function BundleCustomizer({ productId }) {
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  useEffect(() => {
+    // Fetch bundle options via client-side GraphQL
+    fetchBundleOptions(productId).then(data => setOptions(data.options));
+  }, [productId]);
+
+  const handleOptionChange = (optionId, value) => {
+    setSelectedOptions({ ...selectedOptions, [optionId]: value });
+    // Recalculate price or update cart data
+  };
+
+  return (
+    <div>
+      <h3>Customize Your Bundle</h3>
+      {options.map(option => (
+        <div key={option.id}>
+          <label>{option.label}:</label>
+          <select onChange={(e) => handleOptionChange(option.id, e.target.value)}>
+            {option.values.map(value => (
+              <option key={value.id} value={value.id}>{value.label}</option>
+            ))}
+          </select>
+        </div>
+      ))}
+      <button onClick={() => addToCart(productId, selectedOptions)}>Add to Cart</button>
+    </div>
+  );
+}
+
+export default BundleCustomizer;
+```
+
+--------------------------------
+
+### Product Teaser Component Properties and Markup
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/productteaser
+
+Demonstrates the configuration properties and HTL markup for the Product Teaser component. It highlights the resource type and the structure used to display product information, including images, titles, and prices.
+
+```JSON
+{
+  "sling:resourceType": "cif-components-examples/components/productteaser"
+}
+```
+
+```HTL
+<img src="/content/dam/core-components-examples/library/cif-sample-assets/catalog/product/summit-watch/mg03-br-0.jpg" alt="Summit Watch">
+
+Summit Watch
+
+$54.00
+```
+
+--------------------------------
+
+### AEM Product Component (HTL & GraphQL)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/product/sample-product.html/summit-watch
+
+Demonstrates a server-side HTL component for displaying product details. It fetches data from Adobe Commerce using GraphQL, driven by a product identifier in the URL suffix. Includes examples for various product types and a React application for bundle customization.
+
+```HTL
+<!-- Example HTL usage for Product Component -->
+<div data-sly-use="com.adobe.commerce.core.models.ProductViewModel">
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <img src="${product.imageUrl}" alt="${product.name}">
+    <!-- Additional product details and bundle customization logic -->
+</div>
+```
+
+```GraphQL
+# Example GraphQL query for product details
+query GetProductDetails($sku: String!) {
+  products(filter: { sku: { eq: $sku } }) {
+    items {
+      name
+      sku
+      description
+      image {
+        url
+        label
+      }
+      price {
+        regularPrice {
+          amount
+          currency
+        }
+      }
+      # ... other product attributes
+    }
+  }
+}
+```
+
+```React
+// Example React component for bundle customization
+import React, { useState, useEffect } from 'react';
+
+function BundleCustomizer({ productId }) {
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  useEffect(() => {
+    // Fetch bundle options via client-side GraphQL
+    fetchBundleOptions(productId).then(data => setOptions(data.options));
+  }, [productId]);
+
+  const handleOptionChange = (optionId, value) => {
+    setSelectedOptions({ ...selectedOptions, [optionId]: value });
+    // Recalculate price or update cart data
+  };
+
+  return (
+    <div>
+      <h3>Customize Your Bundle</h3>
+      {options.map(option => (
+        <div key={option.id}>
+          <label>{option.label}:</label>
+          <select onChange={(e) => handleOptionChange(option.id, e.target.value)}>
+            {option.values.map(value => (
+              <option key={value.id} value={value.id}>{value.label}</option>
+            ))}
+          </select>
+        </div>
+      ))}
+      <button onClick={() => addToCart(productId, selectedOptions)}>Add to Cart</button>
+    </div>
+  );
+}
+
+export default BundleCustomizer;
+```
+
+--------------------------------
+
+### Search and Lister Component Structure Example
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/forms-and-communications-portal/searchlister
+
+Provides a basic structural example of the Search and Lister component's markup, likely written in HTL, showing elements for sorting and loading more assets.
+
+```HTL
+# Forms Portal
+
+Sort By
+Ascending
+Descending
+
+Load more
+```
+
+--------------------------------
+
+### Commerce Teaserv2 Component Markup
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/teaser
+
+Example HTML Template (HTL) markup for the Commerce Teaserv2 component, showcasing how it renders an image, title, and call-to-action link.
+
+```HTL
+<img src="/content/core-components-examples/library/commerce/teaser/_jcr_content/root/responsivegrid/demo/component/teaser.coreimg.jpeg/1591091947889/snowy-mountain-glacier.jpeg" alt="Snowy mountain glacier">
+
+<h2>Get ready for the cold !</h2>
+
+Find out more
+```
+
+--------------------------------
+
+### AEM Product Component (HTL & GraphQL)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/product/sample-product.html/bolo-sport-watch
+
+Demonstrates a server-side HTL component for displaying product details. It fetches data from Adobe Commerce using GraphQL, driven by a product identifier in the URL suffix. Includes examples for various product types and a React application for bundle customization.
+
+```HTL
+<!-- Example HTL usage for Product Component -->
+<div data-sly-use="com.adobe.commerce.core.models.ProductViewModel">
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <img src="${product.imageUrl}" alt="${product.name}">
+    <!-- Additional product details and bundle customization logic -->
+</div>
+```
+
+```GraphQL
+# Example GraphQL query for product details
+query GetProductDetails($sku: String!) {
+  products(filter: { sku: { eq: $sku } }) {
+    items {
+      name
+      sku
+      description
+      image {
+        url
+        label
+      }
+      price {
+        regularPrice {
+          amount
+          currency
+        }
+      }
+      # ... other product attributes
+    }
+  }
+}
+```
+
+```React
+// Example React component for bundle customization
+import React, { useState, useEffect } from 'react';
+
+function BundleCustomizer({ productId }) {
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  useEffect(() => {
+    // Fetch bundle options via client-side GraphQL
+    fetchBundleOptions(productId).then(data => setOptions(data.options));
+  }, [productId]);
+
+  const handleOptionChange = (optionId, value) => {
+    setSelectedOptions({ ...selectedOptions, [optionId]: value });
+    // Recalculate price or update cart data
+  };
+
+  return (
+    <div>
+      <h3>Customize Your Bundle</h3>
+      {options.map(option => (
+        <div key={option.id}>
+          <label>{option.label}:</label>
+          <select onChange={(e) => handleOptionChange(option.id, e.target.value)}>
+            {option.values.map(value => (
+              <option key={value.id} value={value.id}>{value.label}</option>
+            ))}
+          </select>
+        </div>
+      ))}
+      <button onClick={() => addToCart(productId, selectedOptions)}>Add to Cart</button>
+    </div>
+  );
+}
+
+export default BundleCustomizer;
+```
+
+--------------------------------
+
+### AEM Product Component (HTL & GraphQL)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/product/sample-product.html/chaz-kangeroo-hoodie
+
+Demonstrates a server-side HTL component for displaying product details. It fetches data from Adobe Commerce using GraphQL, driven by a product identifier in the URL suffix. Includes examples for various product types and a React application for bundle customization.
+
+```HTL
+<!-- Example HTL usage for Product Component -->
+<div data-sly-use="com.adobe.commerce.core.models.ProductViewModel">
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <img src="${product.imageUrl}" alt="${product.name}">
+    <!-- Additional product details and bundle customization logic -->
+</div>
+```
+
+```GraphQL
+# Example GraphQL query for product details
+query GetProductDetails($sku: String!) {
+  products(filter: { sku: { eq: $sku } }) {
+    items {
+      name
+      sku
+      description
+      image {
+        url
+        label
+      }
+      price {
+        regularPrice {
+          amount
+          currency
+        }
+      }
+      # ... other product attributes
+    }
+  }
+}
+```
+
+```React
+// Example React component for bundle customization
+import React, { useState, useEffect } from 'react';
+
+function BundleCustomizer({ productId }) {
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  useEffect(() => {
+    // Fetch bundle options via client-side GraphQL
+    fetchBundleOptions(productId).then(data => setOptions(data.options));
+  }, [productId]);
+
+  const handleOptionChange = (optionId, value) => {
+    setSelectedOptions({ ...selectedOptions, [optionId]: value });
+    // Recalculate price or update cart data
+  };
+
+  return (
+    <div>
+      <h3>Customize Your Bundle</h3>
+      {options.map(option => (
+        <div key={option.id}>
+          <label>{option.label}:</label>
+          <select onChange={(e) => handleOptionChange(option.id, e.target.value)}>
+            {option.values.map(value => (
+              <option key={value.id} value={value.id}>{value.label}</option>
+            ))}
+          </select>
+        </div>
+      ))}
+      <button onClick={() => addToCart(productId, selectedOptions)}>Add to Cart</button>
+    </div>
+  );
+}
+
+export default BundleCustomizer;
+```
+
+--------------------------------
+
+### AEM Product Component (HTL & GraphQL)
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/product/sample-product.html/bruno-compete-hoodie
+
+Demonstrates a server-side HTL component for displaying product details. It fetches data from Adobe Commerce using GraphQL, driven by a product identifier in the URL suffix. Includes examples for various product types and a React application for bundle customization.
+
+```HTL
+<!-- Example HTL usage for Product Component -->
+<div data-sly-use="com.adobe.commerce.core.models.ProductViewModel">
+    <h2>${product.name}</h2>
+    <p>${product.description}</p>
+    <img src="${product.imageUrl}" alt="${product.name}">
+    <!-- Additional product details and bundle customization logic -->
+</div>
+```
+
+```GraphQL
+# Example GraphQL query for product details
+query GetProductDetails($sku: String!) {
+  products(filter: { sku: { eq: $sku } }) {
+    items {
+      name
+      sku
+      description
+      image {
+        url
+        label
+      }
+      price {
+        regularPrice {
+          amount
+          currency
+        }
+      }
+      # ... other product attributes
+    }
+  }
+}
+```
+
+```React
+// Example React component for bundle customization
+import React, { useState, useEffect } from 'react';
+
+function BundleCustomizer({ productId }) {
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
+
+  useEffect(() => {
+    // Fetch bundle options via client-side GraphQL
+    fetchBundleOptions(productId).then(data => setOptions(data.options));
+  }, [productId]);
+
+  const handleOptionChange = (optionId, value) => {
+    setSelectedOptions({ ...selectedOptions, [optionId]: value });
+    // Recalculate price or update cart data
+  };
+
+  return (
+    <div>
+      <h3>Customize Your Bundle</h3>
+      {options.map(option => (
+        <div key={option.id}>
+          <label>{option.label}:</label>
+          <select onChange={(e) => handleOptionChange(option.id, e.target.value)}>
+            {option.values.map(value => (
+              <option key={value.id} value={value.id}>{value.label}</option>
+            ))}
+          </select>
+        </div>
+      ))}
+      <button onClick={() => addToCart(productId, selectedOptions)}>Add to Cart</button>
+    </div>
+  );
+}
+
+export default BundleCustomizer;
+```
+
+--------------------------------
+
+### Product Teaser Component Data Retrieval and Configuration
+
+Source: https://www.aemcomponents.dev/content/core-components-examples/library/commerce/productteaser
+
+Explains the Product Teaser component's server-side nature, written in HTL, which retrieves product data from Magento using GraphQL. It is configurable by authors via component dialogs or drag & drop.
+
+```APIDOC
+ProductTeaserComponent:
+  Description: Server-side component to display product teasers linking to product details pages.
+  Technology: HTL
+  Data Source: Magento via GraphQL
+  Configuration: Component dialog or drag & drop.
+  Dependencies: AEM Core Components, Magento Integration
+  Limitations:
+    - Due to limited sample data, product links always point to the same demo product.
+  GitHub Repository: https://github.com/adobe/aem-core-cif-components/tree/master/ui.apps/src/main/content/jcr_root/apps/core/cif/components/commerce/productteaser/v1/productteaser
+
+Example Usage:
+  - Displays product image, name, and price.
+  - Links to a product details page.
+
+Component Properties:
+  - resourceType: cif-components-examples/components/productteaser
+  - image: Path to the product image.
+  - title: Name of the product.
+  - price: Price of the product.
+```

@@ -1,0 +1,193 @@
+Available Libraries (top matches):
+
+Each result includes:
+- Library ID: Context7-compatible identifier (format: /org/project)
+- Name: Library or package name
+- Description: Short summary
+- Code Snippets: Number of available code examples
+- Trust Score: Authority indicator
+- Versions: List of versions if available. Use one of those versions if the user provides a version in their query. The format of the version is /org/project/version.
+
+For best results, select libraries based on name match, trust score, snippet coverage, and relevance to your use case.
+
+----------
+
+- Title: Next.js
+- Context7-compatible library ID: /websites/nextjs
+- Description: Next.js is a React framework for building full-stack web applications. It provides additional features and optimizations, automatically configuring lower-level tools to help developers focus on building products quickly.
+- Code Snippets: 5622
+- Trust Score: 7.5
+----------
+- Title: Next.js
+- Context7-compatible library ID: /llmstxt/nextjs_llms_txt
+- Description: Next.js is a React framework for building full-stack web applications, offering features like server-side rendering, static site generation, and API routes.
+- Code Snippets: 2500
+- Trust Score: 8
+----------
+- Title: Next.js
+- Context7-compatible library ID: /vercel/next.js
+- Description: Next.js enables you to create full-stack web applications by extending the latest React features and integrating powerful Rust-based JavaScript tooling for the fastest builds.
+- Code Snippets: 3306
+- Trust Score: 10
+- Versions: v14.3.0-canary.87, v13.5.11, v15.1.8, v15.4.0-canary.82, v12.3.7, v11.1.3
+----------
+- Title: Next.js
+- Context7-compatible library ID: /llmstxt/nextjs_llms-full_txt
+- Description: Next.js is a React framework for building full-stack web applications, featuring file-system routing, API routes, and optimized rendering with the App Router.
+- Code Snippets: 28036
+- Trust Score: 8
+----------
+- Title: Next Intl
+- Context7-compatible library ID: /amannn/next-intl
+- Description: next-intl provides comprehensive internationalization (i18n) features for Next.js, including ICU message syntax, date/time/number formatting, type safety, hooks-based API, and internationalized routing.
+- Code Snippets: 243
+- Trust Score: 10
+----------
+- Title: Next.js Starter for WordPress Headless CMS
+- Context7-compatible library ID: /9d8dev/next-wp
+- Description: A Next.js starter template for building high-performance applications that fetch and render data from a WordPress headless CMS via its REST API, featuring type-safe data, server-side pagination, dynamic routes, and robust caching.
+- Code Snippets: 31
+- Trust Score: 8
+----------
+- Title: Next.js HCaptcha
+- Context7-compatible library ID: /neg4n/next-hcaptcha
+- Description: A Next.js library that provides a higher-order function to guard Next.js API routes by integrating server-side hCaptcha verification.
+- Code Snippets: 24
+- Trust Score: 9
+----------
+- Title: Next Intl
+- Context7-compatible library ID: /websites/next-intl_dev
+- Description: next-intl is a library for internationalization (i18n) in Next.js applications, enabling translation management, date/number formatting, and internationalized routing.
+- Code Snippets: 185
+- Trust Score: 7.5
+----------
+- Title: Next.js i18n Template
+- Context7-compatible library ID: /nakamura196/nextjs-i18n-themes-ssg-template
+- Description: A Next.js template for static site generation with multi-language support using next-intl and dark mode capabilities via next-themes.
+- Code Snippets: 22
+- Trust Score: 8.4
+----------
+- Title: Next Nexus
+- Context7-compatible library ID: /next-nexus-org/next-nexus
+- Description: Next-nexus is an intelligent data layer for Next.js that simplifies applications with automatic caching, seamless hydration, and built-in cost-saving logic.
+- Code Snippets: 44
+- Trust Score: 4.5
+----------
+- Title: Next.js
+- Context7-compatible library ID: /nextjsargentina/next.js-docs
+- Description: This is an open-source documentation project for Next.js v14, compiled in Markdown format, aimed at AI training with LLMs and serving as a comprehensive reference for developers.
+- Code Snippets: 1516
+- Trust Score: 4.4
+----------
+- Title: Next.js Starter
+- Context7-compatible library ID: /skolaczk/next-starter
+- Description: A Next.js 15 starter template with React 19, TypeScript, Tailwind CSS, Shadcn/ui, Stripe, Next-auth, Drizzle ORM, and Jest for a robust and modern web application.
+- Code Snippets: 19
+- Trust Score: 8.8
+----------
+- Title: OpenNext.js Docs
+- Context7-compatible library ID: /opennextjs/docs
+- Description: 
+- Code Snippets: 377
+- Trust Score: 7.4
+----------
+- Title: Next Video
+- Context7-compatible library ID: /muxinc/next-video
+- Description: Next Video is a React component for Next.js applications that provides automatic video optimization, smart storage, customizable UI, and built-in analytics for enhanced video playback.
+- Code Snippets: 29
+- Trust Score: 9.3
+----------
+- Title: Next ReCaptcha v3
+- Context7-compatible library ID: /snelsi/next-recaptcha-v3
+- Description: A straightforward, tiny, and customizable solution for integrating Google's ReCaptcha V3 into your Next.js applications using TypeScript and next/script.
+- Code Snippets: 10
+----------
+- Title: Next-Sitemap
+- Context7-compatible library ID: /iamvishnusankar/next-sitemap
+- Description: Sitemap generator for next.js. Generate sitemap(s) and robots.txt for all static/pre-rendered/dynamic/server-side pages.
+- Code Snippets: 80
+- Trust Score: 7.9
+----------
+- Title: Nemo
+- Context7-compatible library ID: /z4nr34l/nemo
+- Description: Missing polyfill for multiple next.js middlewares
+- Code Snippets: 153
+- Trust Score: 8.9
+----------
+- Title: Next.js Boilerplate
+- Context7-compatible library ID: /ixartz/next-js-boilerplate.git
+- Description: A boilerplate and starter for Next.js 15+ with App Router, Tailwind CSS, and TypeScript, prioritizing developer experience with tools like ESLint, Prettier, Vitest, and Clerk authentication.
+- Code Snippets: 24
+- Trust Score: 9.4
+----------
+- Title: NextStep
+- Context7-compatible library ID: /enszrlu/nextstep
+- Description: Lightweight onboarding library for Next.js
+- Code Snippets: 19
+- Trust Score: 8.2
+----------
+- Title: OpenNext
+- Context7-compatible library ID: /websites/opennext_js
+- Description: OpenNext converts Next.js build output into deployable packages for various environments like AWS Lambda and Cloudflare, supporting features such as SSG, SSR, ISR, and image optimization.
+- Code Snippets: 278
+- Trust Score: 7.5
+----------
+- Title: Next.js Starter Template
+- Context7-compatible library ID: /lmaksym/next-starter
+- Description: A production-ready Next.js starter template with modern tooling, featuring Next.js 15, React 19, TypeScript, Tailwind CSS 4, shadcn/ui, NextAuth.js, Drizzle ORM, Stripe integration, and comprehensive testing.
+- Code Snippets: 65
+- Trust Score: 5
+----------
+- Title: NextJS Template
+- Context7-compatible library ID: /nishkohli96/nextjs-template
+- Description: A Next.js v15 project template with preconfigured Typescript, ESLint, Material-UI v7, Tailwind CSS v4, and Docker for containerization.
+- Code Snippets: 3
+- Trust Score: 7.5
+----------
+- Title: Next.js Billing
+- Context7-compatible library ID: /lmsqueezy/nextjs-billing
+- Description: A Next.js 14 demo app serving as a foundation for subscription-based SaaS applications, featuring integrated authentication and billing with Lemon Squeezy.
+- Code Snippets: 8
+- Trust Score: 7.3
+----------
+- Title: Next SEO
+- Context7-compatible library ID: /garmeeh/next-seo
+- Description: Next SEO is a plugin that simplifies managing SEO in Next.js projects, offering features for meta tags, Open Graph, and JSON-LD.
+- Code Snippets: 89
+- Trust Score: 9.2
+----------
+- Title: Next Sanity
+- Context7-compatible library ID: /sanity-io/next-sanity
+- Description: Sanity toolkit for Next.js
+- Code Snippets: 141
+- Trust Score: 10
+----------
+- Title: Next.js
+- Context7-compatible library ID: /vercel/next-learn
+- Description: This repository provides starter templates and final code for Learn Next.js courses, covering App Router, data fetching, databases, auth, basics, TypeScript, and SEO.
+- Code Snippets: 2
+- Trust Score: 10
+----------
+- Title: AuthKit Next.js
+- Context7-compatible library ID: /workos/authkit-nextjs
+- Description: AuthKit Next.js provides helpers for authentication and session management with WorkOS & AuthKit in Next.js applications, specifically for the App Router.
+- Code Snippets: 57
+- Trust Score: 9.9
+----------
+- Title: OpenNextJS AWS
+- Context7-compatible library ID: /opennextjs/opennextjs-aws
+- Description: Open-source Next.js adapter for AWS
+- Code Snippets: 9
+- Trust Score: 7.4
+----------
+- Title: Cookies Next
+- Context7-compatible library ID: /andreizanik/cookies-next
+- Description: A versatile cookie management library for Next.js applications, supporting both client-side and server-side operations with features like App Router and Server Components compatibility.
+- Code Snippets: 27
+- Trust Score: 7.5
+----------
+- Title: Replicate Getting Started for Next.js
+- Context7-compatible library ID: /replicate/getting-started-nextjs-language
+- Description: A Next.js template preconfigured to interact with language models via Replicate's API, serving as a starting point for web applications.
+- Code Snippets: 6
+- Trust Score: 9.8

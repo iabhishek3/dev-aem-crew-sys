@@ -1,0 +1,193 @@
+Available Libraries (top matches):
+
+Each result includes:
+- Library ID: Context7-compatible identifier (format: /org/project)
+- Name: Library or package name
+- Description: Short summary
+- Code Snippets: Number of available code examples
+- Trust Score: Authority indicator
+- Versions: List of versions if available. Use one of those versions if the user provides a version in their query. The format of the version is /org/project/version.
+
+For best results, select libraries based on name match, trust score, snippet coverage, and relevance to your use case.
+
+----------
+
+- Title: AEM Core WCM Components
+- Context7-compatible library ID: /websites/aemcomponents_dev
+- Description: A collection of reusable AEM components for building web content, offering a wide range of functionalities from core structure and content display to forms and commerce features.
+- Code Snippets: 399
+- Trust Score: 7.5
+----------
+- Title: A-MEM
+- Context7-compatible library ID: /agiresearch/a-mem
+- Description: Agentic Memory is a novel system for LLM agents that dynamically organizes memories using Zettelkasten principles and ChromaDB for intelligent indexing and linking.
+- Code Snippets: 4
+- Trust Score: 8.7
+----------
+- Title: AEM Forms Core Components
+- Context7-compatible library ID: /adobe/aem-core-forms-components
+- Description: AEM Forms Core Components provide reusable server-side rendered AEM components for dynamic experiences and data, serving as an accelerator for AEM Forms projects.
+- Code Snippets: 181
+- Trust Score: 8.2
+----------
+- Title: Adobe Experience Manager
+- Context7-compatible library ID: /llmstxt/aem_live_llms_txt
+- Description: Adobe Experience Manager Edge Delivery Services enables content creators and developers to build blazingly fast websites using familiar tools for AEM Sites.
+- Code Snippets: 402
+- Trust Score: 8
+----------
+- Title: Viem
+- Context7-compatible library ID: /wevm/viem
+- Description: Viem is a TypeScript interface for Ethereum, offering abstractions over the JSON-RPC API, first-class smart contract interaction, and utilities for working with ABIs.
+- Code Snippets: 1952
+- Trust Score: 8.5
+----------
+- Title: Anemll
+- Context7-compatible library ID: /anemll/anemll
+- Description: ANEMLL accelerates the porting of Large Language Models (LLMs) to tensor processors, starting with the Apple Neural Engine (ANE), offering tools for model conversion, Swift inference, and on-device applications.
+- Code Snippets: 103
+- Trust Score: 7.4
+----------
+- Title: MFEM
+- Context7-compatible library ID: /mfem/mfem
+- Description: MFEM is a modular parallel C++ library for finite element methods, enabling high-performance scalable finite element discretization research and application development on various platforms.
+- Code Snippets: 502
+- Trust Score: 9
+----------
+- Title: LangMem
+- Context7-compatible library ID: /langchain-ai/langmem
+- Description: LangMem provides tooling to help AI agents learn and adapt from their interactions over time by extracting, managing, and maintaining long-term memory, enabling continuous improvement and personalized responses.
+- Code Snippets: 100
+- Trust Score: 9.2
+----------
+- Title: emlearn
+- Context7-compatible library ID: /emlearn/emlearn
+- Description: emlearn is a machine learning library designed for microcontrollers and embedded systems, enabling training in Python and inference on any device with a C99 compiler.
+- Code Snippets: 53
+- Trust Score: 6.2
+----------
+- Title: Workspace ONE UEM APIs
+- Context7-compatible library ID: /websites/as2465_awmdm_api_help
+- Description: This is the API Explorer for Workspace ONE Unified Endpoint Management (UEM), providing access to various REST APIs for managing mobile devices and applications.
+- Code Snippets: 48
+- Trust Score: 7.5
+----------
+- Title: Emel
+- Context7-compatible library ID: /mrdimosthenis/emel
+- Description: Emel is a functional machine learning library implemented in Gleam for the Erlang ecosystem, enabling the transformation of data into functions for various ML algorithms.
+- Code Snippets: 5
+- Trust Score: 8.9
+----------
+- Title: DeepGEMM
+- Context7-compatible library ID: /deepseek-ai/deepgemm
+- Description: DeepGEMM is a CUDA library for efficient General Matrix Multiplications (GEMMs) supporting FP8 and BF16, designed for simplicity and high performance in normal and MoE scenarios.
+- Code Snippets: 9
+- Trust Score: 6.8
+----------
+- Title: 3D-Mem
+- Context7-compatible library ID: /umass-embodied-agi/3d-mem
+- Description: 3D-Mem provides 3D scene memory for embodied exploration and reasoning, enabling agents to navigate and understand complex environments.
+- Code Snippets: 4
+- Trust Score: 8.3
+----------
+- Title: Viem
+- Context7-compatible library ID: /websites/viem_sh
+- Description: Viem is a TypeScript interface for Ethereum, providing low-level stateless primitives for interacting with the Ethereum blockchain. It focuses on developer experience, stability, bundle size, and performance, offering features like type safety, composable APIs, and optimized encoding.
+- Code Snippets: 1381
+- Trust Score: 7.5
+----------
+- Title: Forem
+- Context7-compatible library ID: /forem/forem
+- Description: Forem is open-source software designed for building and empowering online communities, serving as the platform that powers dev.to and similar collective spaces.
+- Code Snippets: 118
+- Trust Score: 8.5
+----------
+- Title: GoodMem
+- Context7-compatible library ID: /pair-systems-inc/goodmem
+- Description: GoodMem provides memory APIs with CLI and UI interfaces, offering a server, command-line client, and various client libraries for managing memory, spaces, and embeddings.
+- Code Snippets: 1616
+- Trust Score: 4.4
+----------
+- Title: Aembit
+- Context7-compatible library ID: /llmstxt/aembit_io_llms_txt
+- Description: Aembit is a platform providing comprehensive APIs for cloud and edge environments, with detailed documentation for developers and users.
+- Code Snippets: 1089
+- Trust Score: 8
+----------
+- Title: Viem
+- Context7-compatible library ID: /llmstxt/viem_sh-llms-full.txt
+- Description: Viem provides lightweight, composable, and type-safe modules for building reliable Ethereum applications and libraries.
+- Code Snippets: 5827
+- Trust Score: 8
+----------
+- Title: AASM
+- Context7-compatible library ID: /aasm/aasm
+- Description: AASM is a Ruby library for adding finite state machines to Ruby classes, supporting various ORMs and offering features like callbacks, guards, and automatic scopes.
+- Code Snippets: 93
+- Trust Score: 5.6
+----------
+- Title: Elastic APM Real User Monitoring (RUM) JavaScript Agent
+- Context7-compatible library ID: /elastic/apm-agent-rum-js
+- Description: An official Real User Monitoring (RUM) JavaScript agent for Elastic APM that collects performance and user interaction data from web applications.
+- Code Snippets: 118
+- Trust Score: 8.1
+----------
+- Title: EMI
+- Context7-compatible library ID: /emilyploszaj/emi
+- Description: EMI is a featureful and accessible item and recipe viewer for Minecraft, providing a comprehensive way to explore in-game content.
+- Code Snippets: 27
+- Trust Score: 8.8
+----------
+- Title: Acme
+- Context7-compatible library ID: /google-deepmind/acme
+- Description: Acme is a research framework for reinforcement learning, providing simple, efficient, and readable agents as reference implementations and baselines for algorithm performance.
+- Code Snippets: 55
+- Trust Score: 7.9
+----------
+- Title: EML Parser
+- Context7-compatible library ID: /ankit1329/eml-parser
+- Description: Eml-Parser is a Node.js library for parsing .eml and .msg files, converting them to PDF, HTML, or images, and extracting attachments and headers.
+- Code Snippets: 14
+- Trust Score: 6.9
+----------
+- Title: Elastic APM .NET Agent
+- Context7-compatible library ID: /elastic/apm-agent-dotnet
+- Description: The Elastic APM .NET Agent provides automatic instrumentation for .NET applications, enabling performance monitoring and error tracking by reporting data to the APM Server.
+- Code Snippets: 501
+- Trust Score: 8.1
+----------
+- Title: OpenEMR
+- Context7-compatible library ID: /openemr/openemr
+- Description: OpenEMR is a free and open-source electronic health records and medical practice management application that runs on various platforms and offers integrated features for patient care and practice operations.
+- Code Snippets: 1076
+- Trust Score: 9.7
+----------
+- Title: Elem Go
+- Context7-compatible library ID: /chasefleming/elem-go
+- Description: elem-go is a lightweight Go library for programmatically creating type-safe HTML elements, simplifying HTML view generation with intuitive element creation, attribute management, and advanced styling capabilities.
+- Code Snippets: 71
+- Trust Score: 7.8
+----------
+- Title: EM27 Retrieval Pipeline
+- Context7-compatible library ID: /tum-esm/em27-retrieval-pipeline
+- Description: Automates the processing of EM27/SUN data using Proffast 1 and 2.X retrieval algorithms and atmospheric profile models.
+- Code Snippets: 64
+- Trust Score: 5.9
+----------
+- Title: Elastic APM Node.js Agent
+- Context7-compatible library ID: /elastic/apm-agent-nodejs
+- Description: The official Node.js application performance monitoring (APM) agent for Elastic Observability, designed to automatically capture errors, tracing data, and performance metrics from Node.js applications.
+- Code Snippets: 316
+- Trust Score: 9.1
+----------
+- Title: Load ESM
+- Context7-compatible library ID: /borewit/load-esm
+- Description: A utility for dynamically importing pure ESM (ECMAScript Module) packages in CommonJS TypeScript projects, resolving common import errors.
+- Code Snippets: 4
+- Trust Score: 9.3
+----------
+- Title: Android Management API
+- Context7-compatible library ID: /websites/developers_google_com-android-management
+- Description: The Android Management API allows developers to build Enterprise Mobility Management (EMM) solutions to manage Android devices and apps. It provides a policy-driven model to control device and app settings for company-owned and employee-owned devices.
+- Code Snippets: 8327
+- Trust Score: 7.5

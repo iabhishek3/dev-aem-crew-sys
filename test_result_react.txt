@@ -1,0 +1,763 @@
+DOCUMENTATION SEARCH RESULTS
+Library: react (ID: /websites/react-window_vercel_app)
+Topic: useState hook
+
+### Dynamic Row Heights with ResizeObserver in React
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+Handles content that changes size dynamically by resetting cached measurements. This example uses `react-window`'s `VariableSizeList` and `ResizeObserver` (implicitly via `getBoundingClientRect`) to adapt row heights.
+
+```jsx
+import { useRef, useEffect } from 'react';
+import { VariableSizeList } from 'react-window';
+
+function DynamicList({ items }) {
+  const listRef = useRef(null);
+  const rowHeights = useRef({});
+
+  const getRowHeight = (index) => {
+    return rowHeights.current[index] || 50;
+  };
+
+  const setRowHeight = (index, height) => {
+    if (rowHeights.current[index] !== height) {
+      rowHeights.current[index] = height;
+      if (listRef.current) {
+        listRef.current.resetAfterIndex(index);
+      }
+    }
+  };
+
+  const Row = ({ index, style }) => {
+    const rowRef = useRef(null);
+
+    useEffect(() => {
+      if (rowRef.current) {
+        const height = rowRef.current.getBoundingClientRect().height;
+        setRowHeight(index, height);
+      }
+    }, [index]);
+
+    return (
+      <div style={style}>
+        <div ref={rowRef} style={{ padding: '10px' }}>
+          {items[index].content}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <VariableSizeList
+      ref={listRef}
+      height={600}
+      itemCount={items.length}
+      itemSize={getRowHeight}
+      width="100%"
+    >
+      {Row}
+    </VariableSizeList>
+  );
+}
+
+```
+
+--------------------------------
+
+### VariableSizeList: Render Lists with Dynamic Item Heights in React
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+The VariableSizeList component is designed for lists where items have varying heights. The `itemSize` prop accepts a function that calculates the height for each item dynamically. This is useful for content with different lengths or dynamic layouts.
+
+```jsx
+import { VariableSizeList } from 'react-window';
+
+// Define item sizes
+const itemSizes = [50, 100, 75, 120, 80, 90, 60];
+
+const getItemSize = (index) => itemSizes[index % itemSizes.length];
+
+const Row = ({ index, style }) => (
+  <div style={style}>
+    Item {index} (height: {getItemSize(index)}px)
+  </div>
+);
+
+function MyVariableList() {
+  return (
+    <VariableSizeList
+      height={500}
+      itemCount={1000}
+      itemSize={getItemSize}  // Function returning height for each index
+      width="100%"
+    >
+      {Row}
+    </VariableSizeList>
+  );
+}
+
+// With dynamic content
+const messages = [
+  { id: 1, text: "Short message" },
+  { id: 2, text: "This is a much longer message that takes up more space" },
+  { id: 3, text: "Medium length" }
+];
+
+const getMessageHeight = (index) => {
+  const textLength = messages[index].text.length;
+  return Math.max(40, textLength * 0.5 + 20); // Dynamic calculation
+};
+
+const MessageRow = ({ data, index, style }) => (
+  <div style={style} className="message">
+    {data[index].text}
+  </div>
+);
+
+function ChatList() {
+  return (
+    <VariableSizeList
+      height={600}
+      itemCount={messages.length}
+      itemData={messages}
+      itemSize={getMessageHeight}
+      width={400}
+    >
+      {MessageRow}
+    </VariableSizeList>
+  );
+}
+```
+
+--------------------------------
+
+### Imperative Scrolling with react-window Lists and Grids
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+Demonstrates how to programmatically control the scroll position of FixedSizeList and FixedSizeGrid components using refs. This allows for actions like scrolling to a specific item or back to the top. It requires importing `useRef` and the relevant component from `react-window`.
+
+```jsx
+import { useRef } from 'react';
+import { FixedSizeList } from 'react-window';
+
+function ScrollableList() {
+  const listRef = useRef(null);
+
+  const scrollToRow = (index) => {
+    listRef.current.scrollToItem(index, 'center');
+  };
+
+  const scrollToTop = () => {
+    listRef.current.scrollTo(0);
+  };
+
+  const Row = ({ index, style }) => (
+    <div style={style}>
+      Item {index}
+      <button onClick={() => scrollToRow(index + 10)}>
+        Jump +10
+      </button>
+    </div>
+  );
+
+  return (
+    <div>
+      <button onClick={() => scrollToRow(500)}>Go to item 500</button>
+      <button onClick={scrollToTop}>Back to top</button>
+
+      <FixedSizeList
+        ref={listRef}
+        height={400}
+        itemCount={1000}
+        itemSize={50}
+        width="100%"
+      >
+        {Row}
+      </FixedSizeList>
+    </div>
+  );
+}
+
+// Grid scrolling
+function ScrollableGrid() {
+  const gridRef = useRef(null);
+
+  const scrollToCell = (rowIndex, columnIndex) => {
+    gridRef.current.scrollToItem({
+      rowIndex,
+      columnIndex,
+      align: 'center'  // Options: 'auto', 'smart', 'center', 'end', 'start'
+    });
+  };
+
+  const Cell = ({ columnIndex, rowIndex, style }) => (
+    <div style={style}>
+      Cell ({rowIndex}, {columnIndex})
+    </div>
+  );
+
+  return (
+    <div>
+      <button onClick={() => scrollToCell(50, 50)}>
+        Go to cell (50, 50)
+      </button>
+
+      <FixedSizeGrid
+        ref={gridRef}
+        columnCount={100}
+        columnWidth={100}
+        height={600}
+        rowCount={100}
+        rowHeight={50}
+        width={800}
+      >
+        {Cell}
+      </FixedSizeGrid>
+    </div>
+  );
+}
+
+```
+
+--------------------------------
+
+### Window Scrolling Integration for Infinite Scroll in React
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+Synchronizes a `react-window` list with window scroll events to implement infinite scroll patterns. This example uses `FixedSizeList` and attaches a scroll handler to load more items as the user scrolls near the bottom.
+
+```jsx
+import { useEffect, useRef, useState } from 'react';
+import { FixedSizeList } from 'react-window';
+
+function InfiniteScrollList() {
+  const [items, setItems] = useState(Array.from({ length: 50 }, (_, i) => i));
+  const [isLoading, setIsLoading] = useState(false);
+  const listRef = useRef(null);
+
+  const loadMoreItems = async () => {
+    if (isLoading) return;
+
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    setItems(prev => [
+      ...prev,
+      ...Array.from({ length: 50 }, (_, i) => prev.length + i)
+    ]);
+    setIsLoading(false);
+  };
+
+  const handleScroll = ({ scrollOffset, scrollUpdateWasRequested }) => {
+    if (!scrollUpdateWasRequested) {
+      const list = listRef.current;
+      if (list) {
+        const maxScroll = list.props.itemSize * items.length - list.props.height;
+        if (scrollOffset > maxScroll * 0.9) {
+          loadMoreItems();
+        }
+      }
+    }
+  };
+
+  const Row = ({ index, style }) => (
+    <div style={style}>
+      {index === items.length - 1 && isLoading ? 'Loading...' : `Item ${items[index]}`}
+    </div>
+  );
+
+  return (
+    <FixedSizeList
+      ref={listRef}
+      height={600}
+      itemCount={items.length}
+      itemSize={50}
+      width="100%"
+      onScroll={handleScroll}
+    >
+      {Row}
+    </FixedSizeList>
+  );
+}
+
+```
+
+--------------------------------
+
+### VariableSizeGrid - React Component for Variable-Size 2D Grids
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+This component renders a 2D grid where cell dimensions (width and height) can vary based on their index. It's suitable for complex layouts or data where cells require different sizes. Key props include functions for `columnWidth` and `rowHeight` to dynamically determine cell dimensions.
+
+```jsx
+import { VariableSizeGrid } from 'react-window';
+
+// Define column widths and row heights
+const getColumnWidth = (index) => {
+  const widths = [150, 200, 100, 250];
+  return widths[index % widths.length];
+};
+
+const getRowHeight = (index) => {
+  if (index === 0) return 60;  // Header row
+  return index % 3 === 0 ? 80 : 50;  // Varying content rows
+};
+
+const Cell = ({ columnIndex, rowIndex, style }) => (
+  <div
+    style={{
+      ...style,
+      border: '1px solid #ccc',
+      padding: '8px'
+    }}
+  >
+    {rowIndex === 0 ? `Header ${columnIndex}` : `Data ${rowIndex},${columnIndex}`}
+  </div>
+);
+
+function MyVariableGrid() {
+  return (
+    <VariableSizeGrid
+      columnCount={20}
+      columnWidth={getColumnWidth}
+      height={600}
+      rowCount={50}
+      rowHeight={getRowHeight}
+      width={800}
+    >
+      {Cell}
+    </VariableSizeGrid>
+  );
+}
+
+// Complex table with different column types
+const tableData = {
+  columns: [
+    { name: 'ID', width: 60 },
+    { name: 'Name', width: 200 },
+    { name: 'Description', width: 400 },
+    { name: 'Status', width: 100 }
+  ]
+};
+
+const TableCell = ({ columnIndex, data, rowIndex, style }) => (
+  <div style={{ ...style, borderRight: '1px solid #ddd', padding: '10px' }}>
+    {data.columns[columnIndex].name} - R{rowIndex}
+  </div>
+);
+
+function ComplexTable() {
+  return (
+    <VariableSizeGrid
+      columnCount={tableData.columns.length}
+      columnWidth={(index) => tableData.columns[index].width}
+      height={500}
+      itemData={tableData}
+      rowCount={1000}
+      rowHeight={(index) => index === 0 ? 50 : 40}
+      width={760}
+    >
+      {TableCell}
+    </VariableSizeGrid>
+  );
+}
+```
+
+--------------------------------
+
+### Horizontal Lists with react-window
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+Shows how to create horizontally scrolling lists by setting the `layout` prop to 'horizontal' on `FixedSizeList`. This is useful for galleries or carousels. Requires `FixedSizeList` from `react-window`.
+
+```jsx
+import { FixedSizeList } from 'react-window';
+
+const Column = ({ index, style }) => (
+  <div style={style}>
+    Column {index}
+  </div>
+);
+
+function HorizontalList() {
+  return (
+    <FixedSizeList
+      height={150}           // Height of the container
+      itemCount={50}
+      itemSize={200}         // Width of each item
+      layout="horizontal"    // Horizontal scrolling
+      width={800}            // Width of visible area
+    >
+      {Column}
+    </FixedSizeList>
+  );
+}
+
+// Image gallery
+const ImageColumn = ({ data, index, style }) => (
+  <div style={{ ...style, padding: '10px' }}>
+    <img
+      src={data[index].url}
+      alt={data[index].title}
+      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+    />
+  </div>
+);
+
+function ImageGallery({ images }) {
+  return (
+    <FixedSizeList
+      height={300}
+      itemCount={images.length}
+      itemData={images}
+      itemSize={250}
+      layout="horizontal"
+      width="100%"
+    >
+      {ImageColumn}
+    </FixedSizeList>
+  );
+}
+
+```
+
+--------------------------------
+
+### Install react-window
+
+Source: https://react-window.vercel.app/index
+
+Installs the react-window library using npm. TypeScript definitions and documentation are included in the package.
+
+```bash
+npm install react-window
+```
+
+--------------------------------
+
+### Sticky Header and Footer Rows in React-Window
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+Demonstrates how to create sticky header and footer rows within a `react-window` list using custom CSS positioning. This is achieved by applying 'sticky' positioning to specific rows based on their index.
+
+```jsx
+import { FixedSizeList } from 'react-window';
+
+const Row = ({ index, style }) => {
+  const isSticky = index === 0;
+
+  return (
+    <div
+      style={{
+        ...style,
+        backgroundColor: isSticky ? '#f5f5f5' : 'white',
+        fontWeight: isSticky ? 'bold' : 'normal',
+        position: isSticky ? 'sticky' : 'relative',
+        top: isSticky ? 0 : undefined,
+        zIndex: isSticky ? 1 : 0,
+        borderBottom: '1px solid #ddd'
+      }}
+    >
+      {isSticky ? 'Header Row' : `Row ${index}`}
+    </div>
+  );
+};
+
+function ListWithStickyHeader() {
+  return (
+    <FixedSizeList
+      height={500}
+      itemCount={1000}
+      itemSize={50}
+      width={600}
+    >
+      {Row}
+    </FixedSizeList>
+  );
+}
+
+// Sticky header and footer
+const RowWithHeaderFooter = ({ index, data, style }) => {
+  const isHeader = index === 0;
+  const isFooter = index === data.itemCount - 1;
+  const isSticky = isHeader || isFooter;
+
+  return (
+    <div
+      style={{
+        ...style,
+        backgroundColor: isSticky ? '#e0e0e0' : 'white',
+        position: isSticky ? 'sticky' : 'relative',
+        top: isHeader ? 0 : undefined,
+        bottom: isFooter ? 0 : undefined,
+        zIndex: isSticky ? 1 : 0
+      }}
+    >
+      {isHeader && 'Header'}
+      {isFooter && 'Footer'}
+      {!isSticky && `Row ${index}`}
+    </div>
+  );
+};
+
+```
+
+--------------------------------
+
+### ARIA Accessibility Support in react-window
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+Configures ARIA roles and attributes for enhanced screen reader compatibility with `FixedSizeList` and `FixedSizeGrid`. This involves setting `role`, `aria-label`, `aria-rowindex`, `aria-colindex`, `aria-rowcount`, and `aria-colcount` props. Requires importing the relevant component from `react-window`.
+
+```jsx
+import { FixedSizeList } from 'react-window';
+
+// List with accessibility
+const Row = ({ index, style }) => (
+  <div
+    style={style}
+    role="listitem"
+    aria-rowindex={index + 1}
+  >
+    Item {index}
+  </div>
+);
+
+function AccessibleList() {
+  return (
+    <FixedSizeList
+      height={400}
+      itemCount={100}
+      itemSize={50}
+      width={600}
+      role="list"
+      aria-label="Items list"
+    >
+      {Row}
+    </FixedSizeList>
+  );
+}
+
+// Table grid with ARIA roles
+const TableCell = ({ columnIndex, rowIndex, style }) => (
+  <div
+    style={style}
+    role="gridcell"
+    aria-colindex={columnIndex + 1}
+    aria-rowindex={rowIndex + 1}
+  >
+    Cell {rowIndex},{columnIndex}
+  </div>
+);
+
+function AccessibleGrid() {
+  return (
+    <FixedSizeGrid
+      columnCount={10}
+      columnWidth={100}
+      height={400}
+      rowCount={20}
+      rowHeight={50}
+      width={800}
+      role="grid"
+      aria-label="Data table"
+      aria-rowcount={20}
+      aria-colcount={10}
+    >
+      {TableCell}
+    </FixedSizeGrid>
+  );
+}
+
+```
+
+--------------------------------
+
+### FixedSizeList: Render Vertical Lists with Fixed Item Heights in React
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+The FixedSizeList component renders large lists where all items share the same height. It's the most performant option for uniform item sizes. The `itemSize` prop defines the fixed height for each item, and `itemCount` specifies the total number of items.
+
+```jsx
+import { FixedSizeList } from 'react-window';
+
+// Row renderer component
+const Row = ({ index, style }) => (
+  <div style={style}>
+    Row {index}
+  </div>
+);
+
+// Basic fixed-size list
+function MyList() {
+  return (
+    <FixedSizeList
+      height={400}           // Container height
+      itemCount={1000}       // Total number of items
+      itemSize={35}          // Height of each item
+      width="100%"           // Container width
+    >
+      {Row}
+    </FixedSizeList>
+  );
+}
+
+// With custom data and styling
+const RowWithData = ({ data, index, style }) => (
+  <div style={style} className={index % 2 ? 'odd-row' : 'even-row'}>
+    {data[index].name} - {data[index].value}
+  </div>
+);
+
+function DataList({ items }) {
+  return (
+    <FixedSizeList
+      height={600}
+      itemCount={items.length}
+      itemData={items}       // Pass data to row renderer
+      itemSize={50}
+      width="100%"
+    >
+      {RowWithData}
+    </FixedSizeList>
+  );
+}
+```
+
+--------------------------------
+
+### FixedSizeGrid - React Component for Fixed-Size 2D Grids
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+This component renders a 2D grid where all rows and columns have a consistent, predefined size. It's ideal for large tables or data displays where performance is critical and cell dimensions are uniform. Props include columnCount, columnWidth, height, rowCount, rowHeight, and width.
+
+```jsx
+import { FixedSizeGrid } from 'react-window';
+
+const Cell = ({ columnIndex, rowIndex, style }) => (
+  <div style={style}>
+    Cell ({rowIndex}, {columnIndex})
+  </div>
+);
+
+function MyGrid() {
+  return (
+    <FixedSizeGrid
+      columnCount={100}      // Number of columns
+      columnWidth={100}      // Width of each column
+      height={600}           // Container height
+      rowCount={100}         // Number of rows
+      rowHeight={50}         // Height of each row
+      width={800}            // Container width
+    >
+      {Cell}
+    </FixedSizeGrid>
+  );
+}
+
+// Spreadsheet-like table
+const TableCell = ({ columnIndex, rowIndex, style }) => {
+  const isHeader = rowIndex === 0;
+  const content = isHeader
+    ? `Column ${columnIndex}`
+    : `R${rowIndex}C${columnIndex}`;
+
+  return (
+    <div
+      style={{
+        ...style,
+        backgroundColor: isHeader ? '#f0f0f0' : 'white',
+        border: '1px solid #ddd',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      {content}
+    </div>
+  );
+};
+
+function DataTable({ data }) {
+  return (
+    <FixedSizeGrid
+      columnCount={10}
+      columnWidth={120}
+      height={500}
+      rowCount={data.length + 1}  // +1 for header
+      rowHeight={40}
+      width={1000}
+      itemData={data}
+    >
+      {TableCell}
+    </FixedSizeGrid>
+  );
+}
+```
+
+--------------------------------
+
+### Right-to-Left (RTL) Layouts with react-window
+
+Source: https://context7.com/context7/react-window_vercel_app/llms.txt
+
+Enables right-to-left layout for internationalization by setting the `direction` prop to 'rtl' on `FixedSizeList` and `FixedSizeGrid`. This correctly aligns content for languages like Arabic or Hebrew. Requires importing the relevant component from `react-window`.
+
+```jsx
+import { FixedSizeList } from 'react-window';
+
+const Row = ({ index, style }) => (
+  <div style={style}>
+    العنصر {index}  {/* Arabic text */}
+  </div>
+);
+
+function RTLList() {
+  return (
+    <FixedSizeList
+      direction="rtl"        // Right-to-left layout
+      height={400}
+      itemCount={100}
+      itemSize={50}
+      width={600}
+    >
+      {Row}
+    </FixedSizeList>
+  );
+}
+
+// RTL grid
+function RTLGrid() {
+  const Cell = ({ columnIndex, rowIndex, style }) => (
+    <div style={style}>
+      {rowIndex},{columnIndex}
+    </div>
+  );
+
+  return (
+    <FixedSizeGrid
+      columnCount={20}
+      columnWidth={100}
+      direction="rtl"
+      height={500}
+      rowCount={30}
+      rowHeight={50}
+      width={800}
+    >
+      {Cell}
+    </FixedSizeGrid>
+  );
+}
+
+```

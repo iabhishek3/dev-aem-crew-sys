@@ -1,7 +1,9 @@
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
+from crewai.knowledge.source.string_knowledge_source import StringKnowledgeSource
 from typing import List
+import pathlib
 from dev_aem_crew_sys.tools.vision_tool import VisionTool
 from dev_aem_crew_sys.tools.file_writer_tool import FileWriterTool
 from dev_aem_crew_sys.tools.file_reader_tool import FileReaderTool
@@ -9,6 +11,8 @@ from dev_aem_crew_sys.tools.directory_list_tool import DirectoryListTool
 from dev_aem_crew_sys.tools.aem_file_writer_tool import AEMFileWriterTool
 from dev_aem_crew_sys.tools.maven_tool import MavenTool
 from dev_aem_crew_sys.tools.user_interaction_tool import UserInteractionTool
+from dev_aem_crew_sys.tools.context7_tool import Context7Tool
+from dev_aem_crew_sys.tools.htl_validator_tool import HTLValidatorTool
 import os
 # If you want to run a snippet of code before or after the crew starts,
 # you can use the @before_kickoff and @after_kickoff decorators
@@ -103,7 +107,7 @@ class DevAemCrewSys():
         return Agent(
             config=self.agents_config['aem_alchemist'], # type: ignore[index]
             verbose=True,
-            tools=[DirectoryListTool(), FileReaderTool(), AEMFileWriterTool(), MavenTool(), UserInteractionTool()],
+            tools=[DirectoryListTool(), FileReaderTool(), AEMFileWriterTool(), MavenTool(), UserInteractionTool(), Context7Tool(), HTLValidatorTool()],
             llm=llm
         )
 
@@ -162,8 +166,42 @@ class DevAemCrewSys():
     @crew
     def crew(self) -> Crew:
         """Creates the DevAemCrewSys crew for HTML component creation and AEM conversion"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
+        # Load AEM knowledge base
+        knowledge_dir = pathlib.Path(__file__).parent.parent.parent / "knowledge"
+
+        # Read knowledge files
+        aem_patterns_content = ""
+        htl_reference_content = ""
+
+        try:
+            patterns_file = knowledge_dir / "aem_component_patterns.md"
+            if patterns_file.exists():
+                with open(patterns_file, 'r', encoding='utf-8') as f:
+                    aem_patterns_content = f.read()
+
+            htl_file = knowledge_dir / "htl_reference.md"
+            if htl_file.exists():
+                with open(htl_file, 'r', encoding='utf-8') as f:
+                    htl_reference_content = f.read()
+        except Exception as e:
+            print(f"Warning: Could not load knowledge files: {e}")
+
+        # Create knowledge sources
+        knowledge_sources = []
+        if aem_patterns_content:
+            knowledge_sources.append(
+                StringKnowledgeSource(
+                    content=aem_patterns_content,
+                    metadata={"source": "aem_component_patterns", "type": "best_practices"}
+                )
+            )
+        if htl_reference_content:
+            knowledge_sources.append(
+                StringKnowledgeSource(
+                    content=htl_reference_content,
+                    metadata={"source": "htl_reference", "type": "syntax_reference"}
+                )
+            )
 
         return Crew(
             agents=[self.visual_strategist(), self.ui_architect(), self.aem_alchemist()],
@@ -180,6 +218,7 @@ class DevAemCrewSys():
             ],
             process=Process.sequential,
             verbose=True,
+            knowledge_sources=knowledge_sources if knowledge_sources else None,
         )
 
     
