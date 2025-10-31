@@ -12,12 +12,13 @@ class VisionToolInput(BaseModel):
 
 
 class VisionTool(BaseTool):
-    name: str = "Design Image Analyzer"
+    name: str = "Component Image Analyzer"
     description: str = (
-        "Analyzes design mockup images to identify visual components, layouts, colors, "
-        "typography, spacing, and hierarchy. Provide the path to a design image file "
-        "(PNG, JPG, etc.) and this tool will perform a complete visual analysis using "
-        "Claude's vision capabilities and return the full analysis."
+        "Analyzes SINGLE UI component images (not full page designs). Identifies component type, "
+        "extracts exact text content, colors, typography, spacing, layout structure, and all child "
+        "elements. Works with component images like: navbar, button, card, hero section, footer, "
+        "form, sidebar, modal, etc. Provide the path to a component image file (PNG, JPG, etc.) "
+        "and this tool will perform a complete component analysis using Claude's vision capabilities."
     )
     args_schema: Type[BaseModel] = VisionToolInput
 
@@ -54,137 +55,29 @@ class VisionTool(BaseTool):
 
             client = Anthropic(api_key=api_key)
 
-            # Create the analysis prompt
-            analysis_prompt = """Analyze this web design mockup in EXTREME DETAIL as a professional UI/UX designer.
-This analysis will be used to create pixel-perfect HTML/CSS components, so accuracy is CRITICAL.
+            # Get model from environment or use latest Sonnet 4.5 (September 2025)
+            model_name = os.getenv("MODEL", "claude-sonnet-4-5-20250929")
+            # Remove anthropic/ prefix if present (API expects just the model name)
+            if model_name.startswith("anthropic/"):
+                model_name = model_name.replace("anthropic/", "")
 
-1. OVERALL LAYOUT ANALYSIS:
-   - Page structure and grid system
-   - Content sections and their arrangement (top to bottom)
-   - Responsive design considerations
-   - Whitespace and spacing patterns (exact pixel values if possible)
+            # Create the analysis prompt for SINGLE COMPONENT (OPTIMIZED for speed)
+            analysis_prompt = """Analyze this UI component image with precision. Extract:
 
-2. COLOR SCHEME (CRITICAL - Extract EXACT colors):
-   - Primary colors with hex codes (estimate as accurately as possible)
-   - Secondary and accent colors with hex codes
-   - SPECIFIC usage: Which color is used WHERE
-   - Navbar background color (exact hex)
-   - Button background colors (exact hex for each button type)
-   - Text colors (exact hex for different text elements)
-   - Background colors for sections
-   - Be VERY specific about where each color appears
+1. COMPONENT: Type, dimensions, complexity
+2. COLORS: All hex codes (background, text, buttons, borders, shadows)
+3. TYPOGRAPHY: For each text element - exact content, size, weight, color, transform
+4. LAYOUT: Display type (flex/grid/block), justify-content, align-items, positioning
+5. CHILD ELEMENTS: List all (type, position, content, styles, hover states)
+6. SPACING: Padding, margin, gap, border-radius
+7. INTERACTIONS: Hover effects, dropdowns (▼), carousels, animations
 
-3. TYPOGRAPHY (EXACT SPECIFICATIONS):
-   - Font families used (sans-serif, serif, etc.)
-   - Heading hierarchy (H1, H2, H3, etc.) with EXACT font sizes
-   - Font weights for each element (400, 500, 600, 700)
-   - Text styles (uppercase, capitalize, normal)
-   - Line heights
-   - Letter spacing if noticeable
+Extract ONLY what you see. Be pixel-accurate with colors, text, and measurements."""
 
-4. VISUAL COMPONENTS (List ALL with EXACT DETAILS):
-
-   NAVBAR (ULTRA-CRITICAL - MAXIMUM DETAIL):
-   This is THE MOST IMPORTANT component. Provide EXTREME detail:
-
-   - Background color (hex) and any gradients
-   - Exact height in pixels (measure carefully: 60px? 70px? 80px? 90px?)
-   - Border or shadow: Describe exactly
-
-   LOGO SECTION:
-   - Position: LEFT side (measure distance from left edge)
-   - Logo text/image: Write EXACT text visible
-   - Logo size: width and height if visible
-   - Logo color(s)
-
-   NAVIGATION LINKS SECTION (CRITICAL):
-   - List EVERY navigation link visible, left to right
-   - EXACT text for each: "Who We Are", "What We Do", etc. (case-sensitive)
-   - Positioning of nav group: Is it CENTER of navbar? Or LEFT next to logo?
-   - If CENTER: Measure - is it truly centered or offset?
-   - Gap between links: Estimate in pixels (20px? 30px? 40px?)
-   - Font size: Estimate (14px? 16px? 18px?)
-   - Font weight: Light/Regular/Medium/Bold?
-   - Which links have dropdown indicators: Mark each with ▼
-   - Text color and hover color
-
-   RIGHT SECTION:
-   - CTA button text: EXACT text
-   - Button position: RIGHT edge (measure distance)
-   - Button colors: background and text
-   - Button size: padding and dimensions
-   - Any icons (search, profile, cart, etc.): Describe each
-
-   SPACING MEASUREMENTS (CRITICAL):
-   - Logo-to-nav distance: Small/Medium/Large (estimate: 40px? 60px? 80px?)
-   - Nav-to-button distance: Estimate
-   - Left/right page margins: Estimate (24px? 40px? 60px?)
-   - Gap between nav items: Consistent? (estimate each)
-
-   BUTTONS:
-   - List EACH button type separately
-   - Exact text on each button
-   - Background colors (hex)
-   - Text colors (hex)
-   - Padding values
-   - Border radius
-   - Font size and weight
-
-   HERO SECTION:
-   - Background: color or image (describe if image)
-   - Text content (exact text visible, word-for-word)
-   - Text colors and sizes
-   - Text alignment (left/center/right)
-   - Button text and styles
-   - Layout and positioning
-   - CRITICAL: Is this a carousel/slider? (Look for dots, arrows, multiple slides)
-   - If carousel: How many slides/dots visible?
-   - Navigation arrows: Position and style
-
-   FOOTER:
-   - Background color
-   - Layout structure (columns)
-   - Link text and colors
-   - Section headings
-
-   OTHER COMPONENTS:
-   - Cards, forms, icons, etc. with exact styling details
-
-   INTERACTIVE ELEMENTS (CRITICAL):
-   - Carousels/Sliders: Identify any sliding content, dots, arrows
-   - Dropdowns: Which menu items have dropdown indicators (▼)
-   - Accordions: Expandable sections
-   - Tabs: Tab navigation
-   - Modals or popups
-   - Hover states or transitions
-
-5. LAYOUT AND POSITIONING (CRITICAL):
-   - Logo position: LEFT, CENTER, or RIGHT
-   - Navigation links position: LEFT, CENTER, or RIGHT
-   - Buttons position: LEFT, CENTER, or RIGHT
-   - Content alignment in sections
-   - Flexbox/Grid layout details
-
-6. ACTUAL CONTENT:
-   - Extract EXACT text content visible in the design
-   - Brand names, taglines, button labels
-   - Navigation link labels
-   - Heading text
-   - Language used (English, Spanish, etc.)
-
-7. SPACING AND MEASUREMENTS:
-   - Padding values for components (estimate in pixels: 8px, 12px, 16px, 24px, etc.)
-   - Margin values between sections
-   - Gap between navigation items
-   - Component heights and widths
-   - Border radius values
-
-Be EXTREMELY specific and accurate. This analysis will be used directly to create components that must look 90%+ identical to the design."""
-
-            # Make API call with vision
+            # Make API call with vision using Claude Sonnet 4.5
             message = client.messages.create(
-                model="claude-3-5-sonnet-20241022",
-                max_tokens=4096,
+                model=model_name,
+                max_tokens=8192,  # Increased to ensure complete output
                 messages=[
                     {
                         "role": "user",

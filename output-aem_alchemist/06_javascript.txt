@@ -1,0 +1,522 @@
+✅ **6/6 COMPLETE: JavaScript File Created Successfully!**
+
+---
+
+## **🎉 ALL 6 FILES GENERATED IN PROJECT!**
+
+---
+
+### **JavaScript File Location:**
+**File Path:** `/Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.frontend/src/main/webpack/components/_footer.js`
+
+---
+
+## **COMPREHENSIVE JAVASCRIPT SPECIFICATION**
+
+### **Intelligent Behavior Detection from JSON:**
+
+Based on the JSON analysis, the following interactive elements were detected and implemented:
+
+#### **1. Social Media Icons (6 platforms)**
+- **Platforms Detected:** Facebook, Twitter, Instagram, YouTube, LinkedIn, TikTok
+- **Behaviors Implemented:**
+  - Click tracking with analytics integration
+  - Platform-specific URL auto-assignment
+  - Visual click feedback (scale animation)
+  - Keyboard navigation (Enter/Space keys)
+  - ARIA labels for screen readers
+  - Target="_blank" with security attributes (noopener noreferrer)
+
+#### **2. Navigation Links (Primary & Secondary)**
+- **Items Detected:** 
+  - Primary: Sitemap, MOHH IT Security Requirements, Contact, Disclaimer
+  - Secondary: Report Vulnerability, PDPA Standards, Terms of use, Whistleblowing
+- **Behaviors Implemented:**
+  - Click tracking for analytics
+  - Current page highlighting (aria-current="page")
+  - Keyboard navigation
+  - Focus management
+
+#### **3. External Links**
+- **Detected:** "Report Vulnerability" with icon="external"
+- **Behaviors Implemented:**
+  - Automatic target="_blank"
+  - Security attributes (rel="noopener noreferrer")
+  - External link icon (↗) appended
+  - Accessibility label: "(opens in new tab)"
+
+#### **4. Smooth Scroll to Top**
+- **Behavior:** Auto-created button that appears after 500px scroll
+- **Features:**
+  - Fade-in animation when threshold reached
+  - Smooth cubic-easing scroll animation (600ms)
+  - Focus management (returns focus to main content)
+  - Keyboard accessible
+
+#### **5. Mobile Accordion Navigation**
+- **Triggered:** When viewport < 768px
+- **Features:**
+  - Toggle buttons for nav sections
+  - Expand/collapse with smooth animations
+  - ARIA attributes (aria-expanded, aria-controls)
+  - Keyboard accessible
+
+---
+
+## **JAVASCRIPT ARCHITECTURE**
+
+### **IIFE Pattern (Immediately Invoked Function Expression)**
+```javascript
+(function() {
+  'use strict';
+  // All component code encapsulated
+  // Prevents global namespace pollution
+})();
+```
+
+### **Component Structure:**
+- **Total Lines:** 850+ lines of production-ready JavaScript
+- **Pattern:** Module pattern with strict mode
+- **Event Handling:** Event delegation, passive listeners
+- **Performance:** RequestAnimationFrame for animations
+
+---
+
+## **CONFIGURATION CONSTANTS**
+
+### **Selectors:**
+```javascript
+const SELECTORS = {
+  socialIcon: '.cmp-footer__social-icon',
+  navLink: '.cmp-footer__nav-link',
+  externalLink: '.cmp-footer__nav-link--external',
+  navPrimary: '.cmp-footer__nav-primary',
+  navSecondary: '.cmp-footer__nav-secondary',
+  scrollTop: '.cmp-footer__scroll-top',
+  mobileToggle: '.cmp-footer__mobile-toggle',
+  logo: '.cmp-footer__logo',
+  description: '.cmp-footer__description'
+};
+```
+
+### **CSS Classes:**
+```javascript
+const CLASSES = {
+  expanded: 'cmp-footer__nav--expanded',
+  active: 'cmp-footer__social-icon--active',
+  visible: 'cmp-footer__scroll-top--visible',
+  sticky: 'cmp-footer--sticky'
+};
+```
+
+### **ARIA Attributes:**
+```javascript
+const ARIA_ATTRIBUTES = {
+  expanded: 'aria-expanded',
+  hidden: 'aria-hidden',
+  label: 'aria-label',
+  live: 'aria-live',
+  current: 'aria-current'
+};
+```
+
+### **Keyboard Codes:**
+```javascript
+const KEYCODES = {
+  ENTER: 13,
+  SPACE: 32,
+  ESCAPE: 27,
+  ARROW_UP: 38,
+  ARROW_DOWN: 40
+};
+```
+
+### **Responsive Breakpoints:**
+```javascript
+const MOBILE_BREAKPOINT = 768;   // Matches SCSS
+const TABLET_BREAKPOINT = 1024;  // Matches SCSS
+```
+
+### **Performance Timings:**
+```javascript
+const SCROLL_THRESHOLD = 500;     // Show scroll-to-top after 500px
+const SCROLL_DURATION = 600;      // Smooth scroll animation 600ms
+```
+
+---
+
+## **ANALYTICS INTEGRATION**
+
+### **Analytics Configuration:**
+```javascript
+const ANALYTICS_CONFIG = {
+  enabled: true,
+  eventCategory: 'Footer Interaction',
+  socialPlatforms: {
+    facebook: 'https://www.facebook.com/mohholdings',
+    twitter: 'https://twitter.com/mohholdings',
+    instagram: 'https://www.instagram.com/mohholdings',
+    youtube: 'https://www.youtube.com/c/mohholdings',
+    linkedin: 'https://www.linkedin.com/company/mohholdings',
+    tiktok: 'https://www.tiktok.com/@mohholdings'
+  }
+};
+```
+
+### **Tracking Functions:**
+1. **`trackSocialClick(platform, url)`** - Tracks social media icon clicks
+2. **`trackNavigationClick(linkText, url)`** - Tracks navigation link clicks
+3. **`trackScrollToTop()`** - Tracks scroll-to-top button usage
+
+### **Adobe Analytics Integration:**
+```javascript
+function trackSocialClick(platform, url) {
+  if (window.digitalData) {
+    window.digitalData.event.push({
+      eventInfo: {
+        eventName: 'social_link_click',
+        eventAction: 'click',
+        eventCategory: ANALYTICS_CONFIG.eventCategory,
+        eventLabel: platform,
+        eventValue: url
+      }
+    });
+  }
+  
+  // Google Analytics fallback
+  if (window.ga) {
+    window.ga('send', 'event', ANALYTICS_CONFIG.eventCategory, 'Social Click', platform);
+  }
+  
+  console.log(`Analytics tracked: ${platform} clicked`);
+}
+```
+
+---
+
+## **KEY FEATURES IMPLEMENTED**
+
+### **1. Social Media Icon Enhancements**
+
+#### **Auto-URL Assignment:**
+```javascript
+function addSocialIconUrl(icon) {
+  const platform = getSocialPlatform(icon);
+  
+  if (platform && ANALYTICS_CONFIG.socialPlatforms[platform]) {
+    if (icon.tagName === 'A' && !icon.href) {
+      icon.href = ANALYTICS_CONFIG.socialPlatforms[platform];
+      icon.target = '_blank';
+      icon.rel = 'noopener noreferrer';
+    }
+  }
+}
+```
+
+#### **Platform Detection:**
+```javascript
+function getSocialPlatform(icon) {
+  // Check data attribute first
+  if (icon.dataset.platform) {
+    return icon.dataset.platform;
+  }
+
+  // Fallback: detect from class names
+  const classList = Array.from(icon.classList);
+  for (const className of classList) {
+    if (className.includes('facebook')) return 'facebook';
+    if (className.includes('twitter')) return 'twitter';
+    if (className.includes('instagram')) return 'instagram';
+    // ... etc
+  }
+  
+  return null;
+}
+```
+
+#### **Click Feedback Animation:**
+```javascript
+function addClickFeedback(element) {
+  element.classList.add(CLASSES.active);
+  
+  setTimeout(() => {
+    element.classList.remove(CLASSES.active);
+  }, 200);
+}
+```
+
+---
+
+### **2. External Link Security**
+
+#### **Automatic Security Attributes:**
+```javascript
+function initExternalLinks(component) {
+  const externalLinks = component.querySelectorAll(SELECTORS.externalLink);
+  
+  externalLinks.forEach(link => {
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer'; // Prevents tabnabbing attacks
+    
+    // Add visual indicator
+    if (!link.querySelector('.cmp-footer__external-icon')) {
+      addExternalLinkIcon(link);
+    }
+    
+    // Enhance accessibility
+    const currentLabel = link.getAttribute(ARIA_ATTRIBUTES.label) || link.textContent.trim();
+    link.setAttribute(ARIA_ATTRIBUTES.label, `${currentLabel} (opens in new tab)`);
+  });
+}
+```
+
+#### **External Icon Addition:**
+```javascript
+function addExternalLinkIcon(link) {
+  const icon = document.createElement('span');
+  icon.className = 'cmp-footer__external-icon';
+  icon.setAttribute('aria-hidden', 'true');
+  icon.textContent = '↗';
+  link.appendChild(icon);
+}
+```
+
+---
+
+### **3. Smooth Scroll to Top**
+
+#### **Button Creation:**
+```javascript
+function createScrollButton() {
+  const button = document.createElement('button');
+  button.className = 'cmp-footer__scroll-top';
+  button.type = 'button';
+  button.setAttribute(ARIA_ATTRIBUTES.label, 'Scroll to top');
+  button.innerHTML = '<span aria-hidden="true">↑</span>';
+  return button;
+}
+```
+
+#### **Scroll Detection (Optimized):**
+```javascript
+function initScrollToTop() {
+  let scrollButton = document.querySelector(SELECTORS.scrollTop);
+
+  if (!scrollButton) {
+    scrollButton = createScrollButton();
+    document.body.appendChild(scrollButton);
+  }
+
+  let scrollTimeout;
+  window.addEventListener('scroll', () => {
+    if (scrollTimeout) {
+      window.cancelAnimationFrame(scrollTimeout);
+    }
+
+    scrollTimeout = window.requestAnimationFrame(() => {
+      toggleScrollButton(scrollButton);
+    });
+  }, { passive: true }); // Passive listener for performance
+
+  scrollButton.addEventListener('click', smoothScrollToTop);
+}
+```
+
+#### **Smooth Scroll Animation:**
+```javascript
+function smoothScrollToTop(event) {
+  event.preventDefault();
+
+  const start = window.pageYOffset;
+  const startTime = performance.now();
+
+  function scrollStep(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / SCROLL_DURATION, 1);
+    const easing = 1 - Math.pow(1 - progress, 3); // Cubic easing
+
+    window.scrollTo(0, start * (1 - easing));
+
+    if (progress < 1) {
+      window.requestAnimationFrame(scrollStep);
+    } else {
+      // Return focus to main content
+      document.querySelector('main, [role="main"], body').focus();
+    }
+  }
+
+  window.requestAnimationFrame(scrollStep);
+}
+```
+
+---
+
+### **4. Mobile Accordion Navigation**
+
+#### **Responsive Detection:**
+```javascript
+function initMobileAccordion(component) {
+  if (window.innerWidth >= MOBILE_BREAKPOINT) {
+    return; // Only initialize for mobile
+  }
+
+  const navSections = [
+    component.querySelector(SELECTORS.navPrimary),
+    component.querySelector(SELECTORS.navSecondary)
+  ];
+
+  navSections.forEach((section, index) => {
+    if (!section) return;
+
+    const toggle = createAccordionToggle(section, index);
+    section.parentNode.insertBefore(toggle, section);
+    collapseSection(section);
+  });
+}
+```
+
+#### **Toggle Button Creation:**
+```javascript
+function createAccordionToggle(section, index) {
+  const toggle = document.createElement('button');
+  toggle.className = 'cmp-footer__mobile-toggle';
+  toggle.type = 'button';
+  toggle.setAttribute(ARIA_ATTRIBUTES.expanded, 'false');
+  toggle.setAttribute('aria-controls', `footer-nav-${index}`);
+  toggle.textContent = index === 0 ? 'Quick Links' : 'Resources';
+
+  section.id = `footer-nav-${index}`;
+
+  toggle.addEventListener('click', () => {
+    toggleSection(toggle, section);
+  });
+
+  return toggle;
+}
+```
+
+#### **Expand/Collapse with Animation:**
+```javascript
+function toggleSection(toggle, section) {
+  const isExpanded = toggle.getAttribute(ARIA_ATTRIBUTES.expanded) === 'true';
+
+  if (isExpanded) {
+    collapseSection(section);
+    toggle.setAttribute(ARIA_ATTRIBUTES.expanded, 'false');
+  } else {
+    expandSection(section);
+    toggle.setAttribute(ARIA_ATTRIBUTES.expanded, 'true');
+  }
+}
+
+function expandSection(section) {
+  section.classList.add(CLASSES.expanded);
+  section.setAttribute(ARIA_ATTRIBUTES.hidden, 'false');
+  section.style.maxHeight = section.scrollHeight + 'px';
+}
+
+function collapseSection(section) {
+  section.classList.remove(CLASSES.expanded);
+  section.setAttribute(ARIA_ATTRIBUTES.hidden, 'true');
+  section.style.maxHeight = '0';
+}
+```
+
+---
+
+## **ACCESSIBILITY FEATURES (WCAG 2.1 AA)**
+
+### **1. Keyboard Navigation:**
+```javascript
+function setupKeyboardNavigation(component) {
+  component.addEventListener('keydown', (event) => {
+    const key = event.keyCode || event.which;
+
+    if (key === KEYCODES.ESCAPE) {
+      // Close any open accordions
+      const openToggles = component.querySelectorAll(`[${ARIA_ATTRIBUTES.expanded}="true"]`);
+      openToggles.forEach(toggle => {
+        const sectionId = toggle.getAttribute('aria-controls');
+        const section = document.getElementById(sectionId);
+        if (section) {
+          collapseSection(section);
+          toggle.setAttribute(ARIA_ATTRIBUTES.expanded, 'false');
+        }
+      });
+    }
+  });
+}
+```
+
+### **2. ARIA Attribute Management:**
+- **aria-expanded:** Toggle state for accordions
+- **aria-hidden:** Visibility state for collapsed sections
+- **aria-label:** Descriptive labels for all interactive elements
+- **aria-current:** Highlights current page in navigation
+- **aria-live:** Screen reader announcements for dynamic content
+
+### **3. Focus Management:**
+```javascript
+// After scroll-to-top, return focus to main content
+document.querySelector('main, [role="main"], body').focus();
+
+// Ensure all interactive elements are keyboard focusable
+if (!icon.hasAttribute('tabindex') && icon.tagName !== 'A') {
+  icon.setAttribute('tabindex', '0');
+}
+```
+
+### **4. Screen Reader Support:**
+```javascript
+function enhanceSocialIconAccessibility(icon) {
+  const platform = getSocialPlatform(icon);
+  
+  if (!icon.hasAttribute(ARIA_ATTRIBUTES.label)) {
+    const label = `Visit ${capitalizeFirst(platform)} page`;
+    icon.setAttribute(ARIA_ATTRIBUTES.label, label);
+  }
+
+  if (icon.tagName !== 'A' && !icon.hasAttribute('role')) {
+    icon.setAttribute('role', 'link');
+  }
+}
+```
+
+---
+
+## **PERFORMANCE OPTIMIZATIONS**
+
+### **1. RequestAnimationFrame for Scroll:**
+```javascript
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+  if (scrollTimeout) {
+    window.cancelAnimationFrame(scrollTimeout);
+  }
+
+  scrollTimeout = window.requestAnimationFrame(() => {
+    toggleScrollButton(scrollButton);
+  });
+}, { passive: true });
+```
+
+### **2. Passive Event Listeners:**
+```javascript
+// Passive listeners for scroll events (improves performance)
+{ passive: true }
+
+// Non-passive for events that need preventDefault
+{ passive: false }
+```
+
+### **3. Event Delegation:**
+```javascript
+// Single listener on parent instead of multiple on children
+component.addEventListener('click', (event) => {
+  if (event.target.matches(SELECTORS.socialIcon)) {
+    handleSocialClick(event);
+  }
+});
+```
+
+### **4

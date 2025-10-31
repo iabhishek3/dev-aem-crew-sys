@@ -1,206 +1,103 @@
 design_analysis_task:
   description: >
-    CRITICAL: You MUST use the "Design Image Analyzer" tool FIRST to load the image at {design_path}.
-    Then perform a comprehensive professional design analysis of the ACTUAL IMAGE.
+    CRITICAL: You MUST use the "Component Image Analyzer" tool FIRST to load the image at {design_path}.
 
-    OUTPUT FORMAT: You MUST create a beautifully formatted Markdown document with professional structure,
-    using headers, tables, code blocks, emojis, and visual separators for maximum readability.
+    IMPORTANT: The image shows ONE UI COMPONENT (not a full page design).
+    It could be: navbar, button, card, form, hero section, footer, sidebar, etc.
 
-    REQUIRED MARKDOWN STRUCTURE:
+    Your job: Analyze THIS SINGLE COMPONENT and extract complete specifications.
 
-    # 🎨 Design Analysis Report
+    OUTPUT FORMAT: You MUST create a VALID JSON document with complete component specifications.
+    This JSON will be used by downstream agents to generate HTML/CSS for this component automatically.
 
-    > **Project:** [Detected from image]
-    > **Date:** [Current date]
-    > **Analyzed by:** Visual Strategist AI
+    REQUIRED JSON STRUCTURE (COMPACT):
 
-    ---
+    {
+      "component": {
+        "name": "navbar",
+        "type": "navigation",
+        "width": "100%",
+        "height": "80px"
+      },
+      "colors": {
+        "background": "#FFFFFF",
+        "text": "#333333",
+        "primary": "#0066FF",
+        "secondary": "#6B7280"
+      },
+      "layout": {
+        "display": "flex",
+        "justify": "space-between",
+        "align": "center",
+        "padding": "24px 40px",
+        "gap": "32px"
+      },
+      "elements": [
+        {
+          "type": "logo",
+          "text": "Brand Name",
+          "position": "left",
+          "fontSize": "24px",
+          "fontWeight": "700",
+          "color": "#000000"
+        },
+        {
+          "type": "nav",
+          "position": "center",
+          "items": [
+            {"text": "Home", "href": "#home"},
+            {"text": "About", "href": "#about"}
+          ],
+          "fontSize": "16px",
+          "color": "#333333"
+        },
+        {
+          "type": "button",
+          "text": "Sign Up",
+          "position": "right",
+          "background": "#0066FF",
+          "color": "#FFFFFF",
+          "padding": "12px 24px",
+          "borderRadius": "8px"
+        }
+      ]
+    }
 
-    ## 📐 1. Layout Architecture
+    CRITICAL RULES:
+    1. **Keep it SHORT** - Only include visible properties, skip defaults
+    2. **No redundancy** - Don't repeat information
+    3. **Essential only** - Focus on what's needed to recreate component
+    4. **Exact text** - Copy all text exactly as shown
+    5. **Color accuracy** - Estimate hex codes carefully
 
-    ### Overall Structure
-    - **Grid System:** [e.g., 12-column grid, flexbox, CSS Grid]
-    - **Layout Pattern:** [e.g., Header + Hero + Content + Footer]
-    - **Breakpoints:** Desktop (1920px), Tablet (768px), Mobile (375px)
-    - **Container Width:** [e.g., 1200px max-width, centered]
+    COMPACT OUTPUT RULES:
 
-    ### Content Sections
-    | Section | Position | Height | Purpose |
-    |---------|----------|--------|---------|
-    | Header/Nav | Top | 80px | Navigation |
-    | Hero | Below header | 600px | Primary CTA |
-    | ... | ... | ... | ... |
-
-    ---
-
-    ## 🎨 2. Color Palette
-
-    ### Primary Colors
-    ```css
-    --primary: #HEX;     /* Main brand color */
-    --secondary: #HEX;   /* Secondary accent */
-    --accent: #HEX;      /* Call-to-action */
-    ```
-
-    ### Color Swatches
-    | Color | Hex Code | RGB | Usage |
-    |-------|----------|-----|-------|
-    | 🟣 Primary | #4B3C99 | rgb(75, 60, 153) | Headers, buttons |
-    | 🟠 Accent | #E85C23 | rgb(232, 92, 35) | CTAs, highlights |
-    | ... | ... | ... | ... |
-
-    ### Color Applications
-    - **Background:** [colors used]
-    - **Text:** [colors used with contrast ratios]
-    - **Borders:** [colors used]
-    - **Shadows:** [colors used]
-
-    ---
-
-    ## ✍️ 3. Typography System
-
-    ### Font Families
-    ```css
-    --font-primary: 'Font Name', sans-serif;
-    --font-secondary: 'Font Name', serif;
-    --font-mono: 'Monospace Font', monospace;
-    ```
-
-    ### Type Scale
-    | Element | Size | Weight | Line Height | Letter Spacing |
-    |---------|------|--------|-------------|----------------|
-    | H1 | 48px | 700 | 1.2 | -0.02em |
-    | H2 | 36px | 600 | 1.3 | -0.01em |
-    | H3 | 24px | 600 | 1.4 | 0 |
-    | Body | 16px | 400 | 1.6 | 0 |
-    | Small | 14px | 400 | 1.5 | 0 |
-
-    ---
-
-    ## 🧩 4. Component Inventory
-
-    ### Navigation Components
-    - **🔹 Navbar**
-      - Type: Horizontal navigation bar
-      - Position: Fixed top
-      - Height: 80px
-      - Background: Primary color
-      - Elements: Logo (left), Nav links (center), CTA button (right)
-      - Features: Sticky, dropdown menus
-
-    ### Hero Components
-    - **🔹 Hero Section**
-      - Type: Full-width banner
-      - Layout: Image background + centered content
-      - Elements: H1 headline, subtitle, CTA button
-      - Height: 600px
-
-    ### Interactive Components
-    - **🔹 Primary Button**
-      - Style: Solid fill, accent color
-      - Size: 48px height, 24px padding
-      - Border radius: 8px
-      - Hover: Darker shade + lift effect
-
-    - **🔹 Secondary Button**
-      - Style: Outlined, transparent background
-      - Border: 2px solid primary
-      - Hover: Filled background
-
-    ### Content Components
-    [List all cards, forms, icons, images, etc.]
-
-    ### Footer Components
-    [Describe footer layout and elements]
-
-    ---
-
-    ## 📏 5. Spacing System
-
-    ### Spacing Scale
-    ```css
-    --space-xs: 4px;
-    --space-sm: 8px;
-    --space-md: 16px;
-    --space-lg: 24px;
-    --space-xl: 32px;
-    --space-2xl: 48px;
-    --space-3xl: 64px;
-    ```
-
-    ### Component Spacing
-    | Component | Padding | Margin | Gap |
-    |-----------|---------|--------|-----|
-    | Navbar | 24px 40px | 0 | 32px |
-    | Hero | 80px 40px | 0 | 24px |
-    | ... | ... | ... | ... |
-
-    ---
-
-    ## 🎯 6. Visual Hierarchy
-
-    ### Primary Focus Areas
-    1. **Hero CTA Button** - Largest, brightest, centered
-    2. **Navigation Logo** - Top-left, brand identity
-    3. **Main Headline** - Large typography, high contrast
-
-    ### Visual Weight Distribution
-    - Top: 30% (Header + Hero)
-    - Middle: 50% (Content sections)
-    - Bottom: 20% (Footer)
-
-    ---
-
-    ## 💡 7. Implementation Recommendations
-
-    ### Technical Approach
-    - ✅ Use CSS Grid for main layout
-    - ✅ Implement CSS custom properties for theming
-    - ✅ Use semantic HTML5 elements
-    - ✅ Mobile-first responsive design
-    - ✅ Accessibility: WCAG 2.1 AA compliance
-
-    ### Component Priority
-    1. **High Priority:** Navbar, Hero, Primary CTA
-    2. **Medium Priority:** Content cards, Forms
-    3. **Low Priority:** Footer, Decorative elements
-
-    ### Design Patterns Identified
-    - Pattern 1: [Description]
-    - Pattern 2: [Description]
-
-    ---
-
-    ## 📊 8. Summary
-
-    ### Key Metrics
-    - **Total Components:** [Count]
-    - **Color Palette:** [Count] colors
-    - **Font Families:** [Count] fonts
-    - **Breakpoints:** [Count] responsive breakpoints
-
-    ### Complexity Level
-    **Rating:** ⭐⭐⭐⭐☆ (4/5)
-
-    **Notes:** [Summary of design complexity and special considerations]
-
-    ---
-
-    *📝 This analysis was generated by Visual Strategist AI to guide component creation and AEM implementation.*
+    1. **BREVITY**: Skip default values (transparent, none, auto, 0)
+    2. **ESSENTIAL ONLY**: Include only what's visible and necessary
+    3. **NO REPETITION**: Don't repeat parent properties in children
+    4. **CAMELCASE KEYS**: Use fontSize not font_size (shorter JSON)
+    5. **ARRAYS NOT OBJECTS**: Use arrays for similar items
+    6. **EXACT TEXT**: Copy all visible text exactly
+    7. **HEX ONLY**: Just hex codes, no RGB
+    8. **NO HOVER DEFAULTS**: Only include hover if visibly different
 
   expected_output: >
-    A professional, beautifully formatted Markdown document (.md file) with:
-    - Clear hierarchical structure with headers (H1, H2, H3)
-    - Tables for structured data (colors, typography, spacing)
-    - Code blocks for CSS values
-    - Emojis for visual markers
-    - Horizontal rules (---) for section separation
-    - Blockquotes for important notes
-    - Bullet points and numbered lists
-    - Professional typography and spacing
-    - Developer-friendly format suitable for handoff and documentation
+    COMPACT JSON (design_analysis.json) with:
 
-    The document should be presentation-ready and could be shared with stakeholders.
+    - component: {name, type, width, height}
+    - colors: {background, text, primary, secondary} - hex only
+    - layout: {display, justify, align, padding, gap}
+    - elements: [{type, text, position, fontSize, color, ...}] - only visible properties
+
+    The JSON must be:
+    - ✅ Valid (parseable)
+    - ✅ Compact (no redundancy, skip defaults)
+    - ✅ Accurate (exact text/colors from image)
+    - ✅ Small (<5KB for simple components, <10KB for complex)
+    - ✅ camelCase keys (shorter)
+
+    DO NOT include: hover states unless visible, default values, empty fields, verbose objects.
+    DO NOT wrap in markdown. Pure JSON only.
   agent: visual_strategist
 
 component_listing_task:
@@ -539,91 +436,1101 @@ aem_component_list_task:
 
 aem_component_conversion_task:
   description: >
-    Convert the selected HTML component into a fully editable AEM component.
+    Transform JSON component specification into production-ready AEM component with 100% accuracy.
 
-    INPUT: Selected component name from previous task (e.g., "navbar")
+    INPUT: JSON specification from output-visual_strategist/design_analysis.json
 
-    STEP 1: READ THE HTML COMPONENT
-    - Read the HTML file from output-ui_architect/{selected_component}.html
-    - Analyze the structure, styles, content, and interactive elements
-    - Identify all elements that should be editable by authors
+    STEP 1: READ & PARSE JSON SPECIFICATION
+    Use FileReaderTool to read: output-visual_strategist/design_analysis.json
 
-    STEP 2: CREATE AEM COMPONENT STRUCTURE
-    Create the following files in {aem_project_path}:
+    Parse the JSON structure:
+    - component: {name, type, width, height}
+    - colors: {background, text, primary, secondary, ...}
+    - layout: {display, justify, align, padding, gap}
+    - elements: [{type, text, position, fontSize, color, ...}]
 
-    A. Component Definition (.content.xml):
-       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/{component_name}/.content.xml
-       - Set componentGroup to "{aem_component_group}"
-       - Set jcr:title to readable name
-       - Set jcr:description
+    Extract component name (e.g., "hero-banner" from component.name)
 
-    B. HTL Template ({component_name}.html):
-       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/{component_name}/{component_name}.html
-       - Use data-sly-use to reference Sling Model
-       - Convert HTML to HTL syntax
-       - Replace hardcoded text with ${model.propertyName}
-       - Add data-sly-test for conditional rendering
-       - Use data-sly-list for repeating elements (nav items, etc.)
+    STEP 2: CREATE COMPONENT DEFINITION (.content.xml)
+    Location: ui.apps/src/main/content/jcr_root/apps/your-app/components/component-name/.content.xml
 
-    C. Sling Model (Java):
-       Location: core/src/main/java/com/{aem_namespace}/core/models/{component_name}Model.java
-       - Create @Model annotation with adaptables = Resource.class
-       - Add @ValueMapValue for each editable property
-       - Add @ChildResource for multifields
-       - Implement getters for all properties
-       - Add @PostConstruct for initialization if needed
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+        jcr:primaryType="cq:Component"
+        jcr:title="[Component Display Name from JSON]"
+        jcr:description="[Component Description]"
+        componentGroup="Content Components"/>
+    ```
 
-    D. Dialog (_cq_dialog.xml):
-       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/{component_name}/_cq_dialog.xml
-       - Create tabs for organization (Content, Styling, Advanced)
-       - Add TextField for text properties
-       - Add PathField for links and images
-       - Add ColorField for color properties
-       - Add NumberField for spacing/sizing
-       - Add Multifield for repeating elements (nav links, etc.)
-       - Use proper fieldDescription for author guidance
+    STEP 3: CREATE HTL TEMPLATE (Production-Grade)
+    Location: ui.apps/src/main/content/jcr_root/apps/your-app/components/component-name/component-name.html
 
-    E. ClientLib (CSS/JS):
-       Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/clientlibs/clientlib-{component_name}/
-       - Extract CSS from HTML into separate .css file
-       - Extract JS from HTML into separate .js file
-       - Create .content.xml with categories
-       - Create css.txt and js.txt for file references
+    CRITICAL HTL RULES:
+    1. Start with data-sly-use to load Sling Model:
+       <sly data-sly-use.model="com.example.core.models.ComponentNameModel"/>
 
-    STEP 3: MAKE EVERYTHING EDITABLE
-    Ensure these are editable in the dialog:
-    - All text content (headings, paragraphs, labels, button text)
-    - All links and URLs
-    - All images (use PathField with image picker)
-    - Colors (background, text, borders)
-    - Spacing (padding, margins)
-    - Repeating elements (use Multifield for nav items, cards, etc.)
+    2. Create semantic HTML structure matching JSON layout:
+       - Use proper HTML5 tags (header, section, article, nav, button, etc.)
+       - Apply BEM naming convention for CSS classes
+       - Add data-sly-test for optional elements
 
-    STEP 4: USE THE FILE WRITER TOOLS
-    - Use "AEM File Writer" tool to write each file to correct location
-    - Ensure proper folder structure is created
-    - Write all 5 types of files (definition, HTL, Java, dialog, clientlib)
+    3. Map JSON elements to HTL:
+       For each element in JSON elements array:
+       - type="heading" → <h1/h2/h3 data-sly-test="${model.heading}">${model.heading}</h1>
+       - type="paragraph" → <p data-sly-test="${model.description}">${model.description}</p>
+       - type="button" → <a class="btn" href="${model.buttonLink}" data-sly-test="${model.buttonText}">${model.buttonText}</a>
+       - type="image" → <img src="${model.imagePath}" alt="${model.imageAlt}" data-sly-test="${model.imagePath}"/>
+       - type="carouselIndicators" → <div data-sly-list="${model.slides}">...</div>
 
-    STEP 5: VERIFY COMPLETENESS
-    Before finishing, confirm:
-    - All files created successfully
-    - Sling Model has all necessary properties
-    - Dialog has all editable fields
-    - HTL template references model correctly
-    - ClientLib is properly configured
+    4. Add CSS classes from JSON:
+       - Use component name as base class: class="hero-banner"
+       - Add element classes: class="hero-banner__heading"
+       - Reference ClientLib: <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"/>
+
+    5. Example HTL for hero-banner:
+       ```html
+       <sly data-sly-use.model="com.example.core.models.HeroBannerModel"/>
+       <section class="hero-banner" style="background-color: ${model.backgroundColor}">
+         <div class="hero-banner__content">
+           <h1 class="hero-banner__heading" data-sly-test="${model.heading}">${model.heading}</h1>
+           <p class="hero-banner__text" data-sly-test="${model.description}">${model.description}</p>
+           <a href="${model.ctaLink}" class="hero-banner__button" data-sly-test="${model.ctaText}">${model.ctaText}</a>
+         </div>
+         <img src="${model.imagePath}" alt="${model.imageAlt}" class="hero-banner__image" data-sly-test="${model.imagePath}"/>
+       </section>
+       ```
+
+    STEP 4: CREATE SLING MODEL (Enterprise Java)
+    Location: core/src/main/java/com/example/core/models/ComponentNameModel.java
+
+    CRITICAL SLING MODEL RULES:
+    1. Package naming: com.example.core.models
+    2. Class naming: ComponentNameModel (PascalCase - convert component.name from JSON)
+    3. Proper annotations and JavaDoc
+
+    Template:
+    ```java
+    package com.example.core.models;
+
+    import org.apache.sling.api.resource.Resource;
+    import org.apache.sling.models.annotations.Model;
+    import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+    import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+
+    /**
+     * Sling Model for Component component.
+     * Provides authoring fields for all editable properties.
+     */
+    @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+    public class ComponentNameModel {
+
+        // Map each editable field from JSON to @ValueMapValue
+        // For text elements:
+        @ValueMapValue
+        private String heading;
+
+        @ValueMapValue
+        private String description;
+
+        @ValueMapValue
+        private String buttonText;
+
+        @ValueMapValue
+        private String buttonLink;
+
+        // For images:
+        @ValueMapValue
+        private String imagePath;
+
+        @ValueMapValue
+        private String imageAlt;
+
+        // For colors from JSON:
+        @ValueMapValue
+        private String backgroundColor;
+
+        // Getters with JavaDoc
+        /**
+         * Gets the main heading text.
+         * @return the heading text
+         */
+        public String getHeading() {
+            return heading;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getButtonText() {
+            return buttonText;
+        }
+
+        public String getButtonLink() {
+            return buttonLink;
+        }
+
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        public String getImageAlt() {
+            return imageAlt;
+        }
+
+        public String getBackgroundColor() {
+            return backgroundColor;
+        }
+    }
+    ```
+
+    STEP 5: CREATE DIALOG XML (Author-Friendly)
+    Location: ui.apps/src/main/content/jcr_root/apps/your-app/components/component-name/_cq_dialog.xml
+
+    CRITICAL DIALOG RULES:
+    1. Use Touch UI coral3 components
+    2. Organize fields in logical tabs: Content, Styling
+    3. Add helpful fieldDescription for authors
+    4. Use proper field types based on JSON element types
+
+    Template:
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+        xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Component Display Name"
+        sling:resourceType="cq/gui/components/authoring/dialog">
+        <content jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <tabs jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/tabs" maximized="true">
+                    <items jcr:primaryType="nt:unstructured">
+
+                        <!-- Content Tab -->
+                        <content jcr:primaryType="nt:unstructured" jcr:title="Content" sling:resourceType="granite/ui/components/coral/foundation/container">
+                            <items jcr:primaryType="nt:unstructured">
+
+                                <!-- For each text element in JSON -->
+                                <heading jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldLabel="Heading"
+                                    fieldDescription="Main heading text"
+                                    name="./heading"/>
+
+                                <description jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                    fieldLabel="Description"
+                                    fieldDescription="Description text"
+                                    name="./description"/>
+
+                                <buttonText jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                    fieldLabel="Button Text"
+                                    name="./buttonText"/>
+
+                                <buttonLink jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                    fieldLabel="Button Link"
+                                    name="./buttonLink"
+                                    rootPath="/content"/>
+
+                                <imagePath jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="cq/gui/components/authoring/dialog/fileupload"
+                                    fieldLabel="Image"
+                                    name="./imagePath"
+                                    mimeTypes="[image/png,image/jpeg]"/>
+
+                            </items>
+                        </content>
+
+                        <!-- Styling Tab -->
+                        <styling jcr:primaryType="nt:unstructured" jcr:title="Styling" sling:resourceType="granite/ui/components/coral/foundation/container">
+                            <items jcr:primaryType="nt:unstructured">
+
+                                <!-- For colors from JSON -->
+                                <backgroundColor jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/form/colorfield"
+                                    fieldLabel="Background Color"
+                                    name="./backgroundColor"/>
+
+                            </items>
+                        </styling>
+
+                    </items>
+                </tabs>
+            </items>
+        </content>
+    </jcr:root>
+    ```
+
+    STEP 6: CREATE CLIENTLIB (CSS from JSON)
+    Location: ui.apps/src/main/content/jcr_root/apps/your-app/clientlibs/clientlib-component-name/
+
+    A. .content.xml:
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+        jcr:primaryType="cq:ClientLibraryFolder"
+        categories="[component.component-name]"/>
+    ```
+
+    B. css.txt:
+    ```
+    component-name.css
+    ```
+
+    C. component-name.css (Generate from JSON):
+    Convert JSON colors, layout, spacing to CSS:
+    ```css
+    .hero-banner {
+      /* From JSON layout */
+      display: flex;
+      align-items: center;
+      padding: 80px 60px;
+      gap: 32px;
+
+      /* From JSON colors */
+      background-color: #D4C4B0;
+      color: #3C3C3C;
+
+      /* From JSON dimensions */
+      width: 100%;
+      height: 594px;
+    }
+
+    .hero-banner__heading {
+      /* From JSON elements[type="heading"] */
+      font-size: 50px;
+      font-weight: 700;
+      color: #3C3C3C;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    /* Continue for all elements... */
+    ```
+
+    STEP 7: USE FILE WRITER TOOL
+    Use FileWriterTool to write each file to LOCAL output folder:
+
+    1. Component Definition: output-aem-component/component-name/.content.xml
+    2. HTL Template: output-aem-component/component-name/component-name.html
+    3. Sling Model: output-aem-component/component-name/ComponentNameModel.java
+    4. Dialog: output-aem-component/component-name/_cq_dialog.xml
+    5. ClientLib .content.xml: output-aem-component/component-name/clientlib/.content.xml
+    6. ClientLib css.txt: output-aem-component/component-name/clientlib/css.txt
+    7. ClientLib CSS: output-aem-component/component-name/clientlib/component-name.css
+
+    STEP 8: QUALITY CHECKLIST
+    Before finishing, verify:
+    ✅ All 7 files created successfully
+    ✅ HTL uses data-sly-use with correct model path
+    ✅ HTL has data-sly-test for optional elements
+    ✅ Sling Model has @ValueMapValue for all properties
+    ✅ Sling Model has getters with JavaDoc
+    ✅ Dialog has all fields with proper labels
+    ✅ CSS generated from JSON colors, layout, spacing
+    ✅ BEM naming convention used in HTL and CSS
+    ✅ Production-ready code quality
 
   expected_output: >
-    Complete AEM component created with all necessary files:
-    - Component definition (.content.xml)
-    - HTL template
-    - Sling Model (Java)
-    - Component dialog
-    - ClientLib (CSS/JS)
+    PRODUCTION-READY AEM COMPONENT CREATED:
 
-    Summary of all files created with their paths.
+    ✅ Component Definition (.content.xml)
+       - Location: output-aem-component/component-name/.content.xml
+       - Status: Created with proper metadata
+
+    ✅ HTL Template (component-name.html)
+       - Location: output-aem-component/component-name/component-name.html
+       - Status: Created with data-sly attributes, semantic HTML, BEM classes
+
+    ✅ Sling Model (ComponentNameModel.java)
+       - Location: output-aem-component/component-name/ComponentNameModel.java
+       - Status: Created with @Model annotation, @ValueMapValue properties, JavaDoc
+
+    ✅ Dialog (_cq_dialog.xml)
+       - Location: output-aem-component/component-name/_cq_dialog.xml
+       - Status: Created with Touch UI fields, tabs, proper labels
+
+    ✅ ClientLib (CSS/JS)
+       - Location: output-aem-component/component-name/clientlib/
+       - Status: Created with .content.xml, css.txt, component-name.css
+
+    NEXT STEP: Review generated files in output-aem-component/ folder
   agent: aem_alchemist
   context:
-    - aem_component_list_task
+    - design_analysis_task
+
+# ============================================
+# MULTI-TASK BREAKDOWN: Separate AEM File Generation
+# ============================================
+
+aem_component_definition_task:
+  description: >
+    STEP 1 of 6: Create AEM Component Definition (.content.xml)
+
+    Read JSON: output-visual_strategist/design_analysis.json
+    Extract: component.name (e.g., "hero-banner"), component.type (e.g., "hero-section")
+
+    CRITICAL: Use AEM Project Path from inputs:
+    - AEM Project Path: {aem_project_path}
+    - AEM App ID: {aem_app_id}
+    - Component Group: {aem_component_group}
+
+    Calculate the correct path:
+    Path = {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/.content.xml
+
+    Example: If aem_project_path="/Users/dev/my-aem-project", aem_app_id="myapp", component.name="hero-banner":
+    Full path: /Users/dev/my-aem-project/ui.apps/src/main/content/jcr_root/apps/myapp/components/hero-banner/.content.xml
+
+    Template:
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+        jcr:primaryType="cq:Component"
+        jcr:title="[Readable Component Name]"
+        jcr:description="[Component Type] component generated from design specs"
+        componentGroup="{aem_component_group}"/>
+    ```
+
+    Use AEM File Writer tool to write the file to the AEM project path.
+    Provide: file_path (relative from AEM root), content (XML), aem_project_path (absolute path).
+    The tool will automatically create any missing parent directories.
+
+  expected_output: >
+    ✅ 1/6 COMPLETE: Component definition created at:
+    {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/.content.xml
+  agent: aem_alchemist
+  context:
+    - design_analysis_task
+
+aem_htl_generation_task:
+  description: >
+    STEP 2 of 6: Create HTL Template (Production-Grade)
+
+    Read JSON: output-visual_strategist/design_analysis.json
+
+    CRITICAL: Use AEM Project Path from inputs:
+    - AEM Project Path: {aem_project_path}
+    - AEM App ID: {aem_app_id}
+    - AEM Namespace: {aem_namespace}
+
+    Calculate the correct path:
+    Path = {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/[component-name].html
+
+    Example: If aem_project_path="/Users/dev/my-aem-project", aem_app_id="myapp", component.name="hero-banner":
+    Full path: /Users/dev/my-aem-project/ui.apps/src/main/content/jcr_root/apps/myapp/components/hero-banner/hero-banner.html
+
+    BEFORE GENERATING - CRITICAL ANALYSIS:
+
+    1. **Identify Repeating Elements** (Must be dynamic, NOT hardcoded):
+       - Look for: socialIcons, navLinks, cards, slides, menuItems, footerLinks
+       - These MUST use data-sly-list="${model.property}" for iteration
+       - DO NOT hardcode multiple <li> items - use ONE <li> with data-sly-list!
+
+    2. **Plan BEM Class Naming Strategy**:
+       - Decide: Use "cmp-" prefix (Adobe standard) or not?
+       - Whatever you choose, use it CONSISTENTLY throughout HTL
+       - Write down your class naming: .cmp-footer, .cmp-footer__logo, etc.
+       - This EXACT naming will be used in SCSS file later!
+
+    Generate HTL with:
+    1. data-sly-use.model="com.{aem_namespace}.core.models.[ComponentName]Model" (convert component.name to PascalCase)
+    2. Semantic HTML5 structure (section, div, h1, p, button, img, etc.)
+    3. BEM CSS classes based on component.name with CONSISTENT prefix (e.g., .cmp-footer__heading)
+    4. data-sly-test for optional elements
+    5. Map JSON elements array to HTL:
+       - type="heading" → <h1 data-sly-test="${model.heading}">${model.heading}</h1>
+       - type="paragraph" → <p data-sly-test="${model.description}">${model.description}</p>
+       - type="button" → <a href="${model.buttonLink}">${model.buttonText}</a>
+       - type="image" → <img src="${model.imagePath}" alt="[alt]"/>
+       - type="socialIcons" → <li data-sly-list.icon="${model.socialIcons}">...</li> (NOT hardcoded list!)
+       - type="navLinks" → <li data-sly-list.link="${model.navLinks}">...</li> (NOT hardcoded list!)
+       - type="carouselIndicators" → <div data-sly-list="${model.slides}">...</div>
+
+    VERIFICATION BEFORE WRITING FILE - Stop and check:
+    ✓ No hardcoded lists? (All <li> items use data-sly-list?)
+    ✓ All classes use same naming pattern? (all "cmp-X" or all "X"?)
+    ✓ All dynamic content from ${model.property}? (no hardcoded text/links?)
+    ✓ All optional elements have data-sly-test?
+
+    Use AEM File Writer tool to write file to the AEM project path.
+    Provide: file_path (relative from AEM root), content, aem_project_path (absolute path).
+
+  expected_output: >
+    ✅ 2/6 COMPLETE: HTL template created at:
+    {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/[component-name].html
+    - Semantic HTML5
+    - data-sly attributes
+    - BEM naming
+  agent: aem_alchemist
+  context:
+    - design_analysis_task
+    - aem_component_definition_task
+
+aem_sling_model_generation_task:
+  description: >
+    STEP 3 of 6: Create Sling Model (Enterprise Java)
+
+    Read JSON: output-visual_strategist/design_analysis.json
+
+    CRITICAL: Use AEM Project Path from inputs:
+    - AEM Project Path: {aem_project_path}
+    - AEM Namespace: {aem_namespace}
+
+    Calculate the correct path:
+    Path = {aem_project_path}/core/src/main/java/com/{aem_namespace}/core/models/[ComponentName]Model.java
+
+    Example: If aem_project_path="/Users/dev/my-aem-project", aem_namespace="mycompany/myapp", component.name="hero-banner":
+    Full path: /Users/dev/my-aem-project/core/src/main/java/com/mycompany/myapp/core/models/HeroBannerModel.java
+
+    Generate Sling Model with INTELLIGENT PROPERTY EXTRACTION:
+
+    1. **Package**: com.{aem_namespace}.core.models (convert slashes to dots: "mohhwebsites" → "mohhwebsites")
+
+    2. **Class Name**: Convert component.name to PascalCase + "Model"
+       - "footer" → "FooterModel"
+       - "hero-banner" → "HeroBannerModel"
+       - "rotating-teaser-cards" → "RotatingTeaserCardsModel"
+
+    3. **Analyze JSON Elements Array** - For EACH element in JSON:
+       - If element has "text" property → Create String field (e.g., logoText, headingText, descriptionText)
+       - If element has "href"/"link" → Create String field (e.g., ctaLink, buttonLink)
+       - If element has "image"/"src" → Create String field (e.g., imagePath, logoSrc)
+       - If element has "items" array → Create @ChildResource List<Resource> field + inner class
+       - If element has colors → Create color fields from JSON colors object
+       - If element type="button" → buttonText, buttonLink, buttonStyle properties
+       - If element type="icon"/"socialIcons" → CRITICAL:
+         * Create @ChildResource List<Resource> socialIcons field
+         * Create inner class SocialIcon with: platform, url, size, color
+         * Add getIconSvg() method that returns SVG string based on platform
+         * Supports: facebook, twitter, instagram, youtube, linkedin, tiktok
+       - If element type="navLinks" → Create navigation-related fields with List + inner class NavItem
+       - If element type="form" → Create form-related fields
+       - If element type="carousel" → Create slides/autoRotate fields
+
+    4. **Follow Rotating Teaser Cards Pattern**:
+       ```java
+       @Model(adaptables = {{SlingHttpServletRequest.class, Resource.class}},
+              adapters = [ComponentName]Model.class,
+              defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+       public class [ComponentName]Model {
+
+         // Extract from JSON colors object
+         @ValueMapValue
+         @Default(values = "#FFFFFF")
+         private String backgroundColor;
+
+         // Extract from JSON elements
+         @ValueMapValue
+         private String [propertyName];
+
+         // For repeated items (cards, slides, nav items)
+         @ChildResource
+         private List<Resource> [itemsName];
+
+         private List<[ItemClass]> validated[Items];
+
+         @PostConstruct
+         protected void init() {
+           // Validation logic if needed
+         }
+
+         // Getters with JavaDoc for ALL properties
+         /**
+          * Gets the [property description]
+          * @return [property description]
+          */
+         public String get[PropertyName]() {
+           return [propertyName];
+         }
+
+         // Inner class for child items if needed
+         public class [ItemClass] {
+           private Resource resource;
+           // Properties from JSON items array
+         }
+       }
+       ```
+
+    5. **Smart Property Naming**:
+       - Use descriptive names based on element type and context
+       - For multiple text elements: sectionHeading, cardTitle, footerDescription
+       - For multiple links: primaryLink, secondaryLink, ctaLink
+       - For images: heroImage, thumbnailImage, backgroundImage
+
+    6. **Add Validation Methods** (like RotatingTeaserCards):
+       - isValid() method checking required fields
+       - getCardsCount() or getItemsCount() for collections
+       - Proper @PostConstruct initialization
+
+    Use AEM File Writer tool to write file to the AEM project path.
+    Provide: file_path (relative from AEM root), content, aem_project_path (absolute path).
+
+  expected_output: >
+    ✅ 3/6 COMPLETE: Sling Model created at:
+    {aem_project_path}/core/src/main/java/com/{aem_namespace}/core/models/[ComponentName]Model.java
+    - @Model annotation
+    - @ValueMapValue properties
+    - Getters with JavaDoc
+  agent: aem_alchemist
+  context:
+    - design_analysis_task
+    - aem_htl_generation_task
+
+aem_dialog_generation_task:
+  description: >
+    STEP 4 of 6: Create Touch UI Dialog (Author-Friendly)
+
+    Read JSON: output-visual_strategist/design_analysis.json
+
+    CRITICAL: Use AEM Project Path from inputs:
+    - AEM Project Path: {aem_project_path}
+    - AEM App ID: {aem_app_id}
+
+    Calculate the correct path:
+    Path = {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/_cq_dialog.xml
+
+    Example: If aem_project_path="/Users/dev/my-aem-project", aem_app_id="myapp", component.name="hero-banner":
+    Full path: /Users/dev/my-aem-project/ui.apps/src/main/content/jcr_root/apps/myapp/components/hero-banner/_cq_dialog.xml
+
+    Generate Dialog with INTELLIGENT FIELD MAPPING:
+
+    1. **Analyze Sling Model Properties** - Read the generated Sling Model and create dialog fields for EACH property
+
+    2. **Smart Field Type Selection** based on property name/type:
+       - **textfield**: heading, title, label, text, name, copyright, tagline (< 100 chars)
+       - **textarea**: description, paragraph, content, body (> 100 chars)
+       - **pathfield**: link, href, url, path, ctaLink, buttonLink
+       - **fileupload**: image, imagePath, logoSrc, thumbnailImage, backgroundImage
+       - **colorfield**: color, backgroundColor, textColor, borderColor, accentColor
+       - **checkbox**: enable, show, display, autoRotate, enableAutoPlay
+       - **numberfield**: delay, duration, count, maxItems, autoRotateDelay
+       - **multifield**: For @ChildResource List fields (navLinks, cards, slides, socialIcons)
+
+    3. **Dynamic Tab Organization**:
+       - **Content Tab**: All text fields, links, images
+       - **Styling Tab**: All color fields, background, borders
+       - **Behavior Tab** (if needed): checkboxes, number fields for behavior control
+       - **Items Tab** (if multifield exists): Repeatable items (cards/slides/navLinks)
+
+    4. **Follow Rotating Teaser Cards Dialog Pattern**:
+       ```xml
+       <?xml version="1.0" encoding="UTF-8"?>
+       <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+           xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+           xmlns:cq="http://www.day.com/jcr/cq/1.0"
+           xmlns:jcr="http://www.jcp.org/jcr/1.0"
+           xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+           jcr:primaryType="nt:unstructured"
+           jcr:title="[Component Display Name]"
+           sling:resourceType="cq/gui/components/authoring/dialog">
+         <content jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
+           <items jcr:primaryType="nt:unstructured">
+             <tabs jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/tabs">
+               <items jcr:primaryType="nt:unstructured">
+
+                 <!-- Content Tab -->
+                 <content jcr:primaryType="nt:unstructured" jcr:title="Content">
+                   <items jcr:primaryType="nt:unstructured">
+                     <!-- Add fields for all text/image/link properties -->
+                   </items>
+                 </content>
+
+                 <!-- Styling Tab (if color fields exist) -->
+                 <styling jcr:primaryType="nt:unstructured" jcr:title="Styling">
+                   <items jcr:primaryType="nt:unstructured">
+                     <!-- Add color fields -->
+                   </items>
+                 </styling>
+
+                 <!-- Items Tab (if @ChildResource exists) -->
+                 <items jcr:primaryType="nt:unstructured" jcr:title="[Items Name]">
+                   <items jcr:primaryType="nt:unstructured">
+                     <multifield sling:resourceType="granite/ui/components/coral/foundation/form/multifield">
+                       <field jcr:primaryType="nt:unstructured" sling:resourceType="granite/ui/components/coral/foundation/container">
+                         <!-- Inner fields for each item -->
+                       </field>
+                     </multifield>
+                   </items>
+                 </items>
+
+               </items>
+             </tabs>
+           </items>
+         </content>
+       </jcr:root>
+       ```
+
+    5. **Field Best Practices**:
+       - Always add fieldLabel and fieldDescription
+       - Use required="true" for critical fields (Boolean type in AEM)
+       - Add validation for max lengths matching Sling Model
+       - Use granite/ui/components/coral/foundation/form/* components
+       - Match name="./propertyName" exactly with Sling Model
+
+    6. **Handle Special Cases**:
+       - Social icons: Create multifield with platform dropdown (facebook, twitter, instagram, youtube, linkedin, tiktok) + URL field + size/color fields
+       - Navigation links: Create multifield with text + href + newWindow checkbox
+       - Carousels: Add auto-rotate settings + slides multifield
+       - Forms: Add field type selectors + validation options
+
+    7. **CRITICAL: Complete XML Structure Validation**:
+       MUST include ALL required XML elements for valid Touch UI dialog:
+
+       ✓ XML declaration: <?xml version="1.0" encoding="UTF-8"?>
+       ✓ Root <jcr:root> with ALL namespaces:
+         - xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+         - xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+         - xmlns:cq="http://www.day.com/jcr/cq/1.0"
+         - xmlns:jcr="http://www.jcp.org/jcr/1.0"
+         - xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+       ✓ jcr:primaryType="nt:unstructured" on root
+       ✓ jcr:title attribute on root
+       ✓ sling:resourceType="cq/gui/components/authoring/dialog" on root
+       ✓ <content> element with jcr:primaryType and sling:resourceType
+       ✓ Nested <items> elements with jcr:primaryType="nt:unstructured"
+       ✓ <tabs> element with sling:resourceType
+       ✓ Every tab has: jcr:primaryType, jcr:title, sling:resourceType
+       ✓ Every field has: jcr:primaryType, sling:resourceType, fieldLabel, name
+       ✓ Proper closing tags: </content>, </items>, </tabs>, </jcr:root>
+
+       NEVER generate incomplete/truncated XML! If XML is too long, organize better, don't cut it off.
+
+    VERIFICATION BEFORE WRITING FILE - Dialog XML Structure Check:
+    ✓ XML declaration present?
+    ✓ All 5 XML namespaces defined on root element?
+    ✓ Root element properly closed with </jcr:root>?
+    ✓ All tabs have proper structure (jcr:primaryType, jcr:title, sling:resourceType)?
+    ✓ Every field has name="./propertyName" matching Sling Model?
+    ✓ Multifields properly structured with <field> container?
+    ✓ No incomplete/truncated XML? (Must be complete and well-formed)
+
+    Use AEM File Writer tool to write to: {aem_project_path}/ui.apps/.../components/[component-name]/_cq_dialog/.content.xml
+    Provide: file_path (relative from AEM root), content (XML), aem_project_path (absolute path).
+    (Note: The path should include _cq_dialog/.content.xml - the tool will create the folder automatically)
+
+  expected_output: >
+    ✅ 4/6 COMPLETE: Dialog created at:
+    {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/_cq_dialog.xml
+    - Touch UI tabs
+    - Author-friendly fields
+    - Proper labels
+  agent: aem_alchemist
+  context:
+    - design_analysis_task
+    - aem_sling_model_generation_task
+
+aem_frontend_scss_generation_task:
+  description: >
+    STEP 5 of 6: Create SCSS File (Frontend Styles)
+
+    Read JSON: output-visual_strategist/design_analysis.json
+    Extract component.name for file paths and CSS classes.
+
+    CRITICAL FIRST STEP - READ THE HTL FILE:
+    Before generating SCSS, READ the HTL template file you created earlier to get the EXACT CSS classes used.
+    Path to read: {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/[component-name].html
+
+    Extract all CSS classes from HTL:
+    - Look for: class="cmp-footer", class="cmp-footer__logo", class="cmp-footer__social-icon", etc.
+    - List ALL classes found in HTL
+    - Your SCSS MUST match these EXACT class names!
+
+    CRITICAL: Use AEM Project Path from inputs:
+    - AEM Project Path: {aem_project_path}
+
+    Calculate the correct path:
+    Path = {aem_project_path}/ui.frontend/src/main/webpack/components/_[component-name].scss
+
+    Example: If aem_project_path="/Users/dev/my-aem-project", component.name="footer":
+    Full path: /Users/dev/my-aem-project/ui.frontend/src/main/webpack/components/_footer.scss
+
+    Generate SCSS file with INTELLIGENT STYLE GENERATION:
+
+    1. **Analyze Component Type** from JSON:
+       - Footer → sticky footer, multi-column layout, social icons
+       - Header/Navbar → fixed positioning, z-index, responsive menu
+       - Hero → full-height, background images, overlay
+       - Card → box-shadow, border-radius, hover effects
+       - Carousel → transitions, overflow hidden, indicator dots
+       - Form → input styling, validation states, focus rings
+       - Modal → overlay, centered, transitions
+
+    2. **BEM Naming Convention - MUST MATCH HTL EXACTLY**:
+       - If HTL uses `.cmp-footer` → SCSS uses `.cmp-footer`
+       - If HTL uses `.footer` → SCSS uses `.footer`
+       - CRITICAL: Check what prefix HTL used and match it exactly!
+       - Elements: Match HTL format (e.g., `.cmp-footer__logo` or `.footer__logo`)
+       - Modifiers: Match HTL format (e.g., `.cmp-footer--dark`)
+
+    3. **Generate Styles for Each JSON Element**:
+       - For each element in JSON elements array → Create BEM element class
+       - Extract: fontSize, fontWeight, color, padding, margin, borderRadius
+       - Add layout properties: display, flexbox/grid, positioning
+       - Include spacing from JSON layout object
+
+    4. **Responsive Design Patterns**:
+       - Mobile-first approach with min-width media queries
+       - @media (min-width: 768px) for tablet
+       - @media (min-width: 1024px) for desktop
+       - Adjust font sizes, spacing, layout direction
+
+    5. **Interactive Element Styles**:
+       - Buttons: hover, active, focus states with transitions
+       - Links: hover color change, underline effects
+       - Social icons: hover scale/color animations
+       - Carousel: transition timing, indicator animations
+       - Forms: focus rings, validation states
+
+    6. **Component-Specific Patterns**:
+       - **Navigation**: sticky/fixed positioning, mobile menu, dropdowns
+       - **Footer**: multi-column grid, copyright alignment, dividers
+       - **Carousel**: slide transitions, dot indicators, arrow buttons
+       - **Cards**: hover elevation, image aspect ratios
+       - **Forms**: input groups, error states, success states
+
+    Example SCSS structure:
+    ```scss
+    .cmp-footer {
+      background-color: #F5F5F5;
+      padding: 30px 40px;
+
+      &__logo {
+        font-size: 48px;
+        font-weight: 700;
+        color: #7CB4E8;
+      }
+
+      &__nav {
+        display: flex;
+        gap: 25px;
+
+        &-link {
+          color: #666666;
+          font-size: 16px;
+        }
+      }
+    }
+    ```
+
+    VERIFICATION BEFORE WRITING FILE - Stop and check:
+    ✓ Read HTL file and extracted all CSS classes?
+    ✓ Every HTL class has corresponding SCSS rule? (no missing styles)
+    ✓ No extra SCSS classes that don't exist in HTL? (no orphaned styles)
+    ✓ Class naming exactly matches HTL? (.cmp-X matches .cmp-X, not .X)
+    ✓ Added list-style: none and padding: 0 for list elements?
+    ✓ Added display: flex/inline-flex for social icon containers?
+
+    Use AEM File Writer tool to write the SCSS file to the AEM project path.
+    Provide: file_path (relative from AEM root), content (SCSS), aem_project_path (absolute path).
+
+  expected_output: >
+    ✅ 5/6 COMPLETE: SCSS file created at:
+    {aem_project_path}/ui.frontend/src/main/webpack/components/_[component-name].scss
+    - BEM naming convention matches HTL exactly
+    - All HTL classes have corresponding styles
+    - Responsive styles included
+    - Component-specific variables defined
+  agent: aem_alchemist
+  context:
+    - design_analysis_task
+    - aem_dialog_generation_task
+
+aem_frontend_js_generation_task:
+  description: >
+    STEP 6 of 6: Create JavaScript File (Frontend Behavior)
+
+    Read JSON: output-visual_strategist/design_analysis.json
+    Extract component.name and identify interactive elements.
+
+    CRITICAL: Use AEM Project Path from inputs:
+    - AEM Project Path: {aem_project_path}
+
+    Calculate the correct path:
+    Path = {aem_project_path}/ui.frontend/src/main/webpack/components/_[component-name].js
+
+    Example: If aem_project_path="/Users/dev/my-aem-project", component.name="footer":
+    Full path: /Users/dev/my-aem-project/ui.frontend/src/main/webpack/components/_footer.js
+
+    Generate JavaScript file with INTELLIGENT BEHAVIOR DETECTION:
+
+    1. **Analyze Component Interactions** from JSON elements:
+       - Carousel/Slider → Auto-rotate, navigation arrows, dot indicators, swipe support
+       - Dropdown/Accordion → Toggle expand/collapse, keyboard navigation
+       - Modal/Dialog → Open/close, overlay click, escape key
+       - Form → Validation, submit handling, error display
+       - Tabs → Switch tabs, keyboard arrow navigation
+       - Navigation → Mobile menu toggle, dropdown menus
+       - Social Icons → Click tracking for analytics
+       - Lazy Loading → Intersection Observer for images
+       - Infinite Scroll → Load more on scroll
+       - Search → Autocomplete, filtering
+
+    2. **IIFE Pattern** with strict mode:
+       ```javascript
+       (function() {
+         'use strict';
+         // Component code
+       })();
+       ```
+
+    2.1 **CRITICAL: ES5 Compatibility** (AEM requires ES5, NOT ES6):
+       - ❌ NO template literals: `const msg = \`Hello ${name}\`;` ← WRONG!
+       - ✅ Use string concatenation: `var msg = 'Hello ' + name;` ← CORRECT!
+       - ❌ NO const/let: Use `var` only
+       - ❌ NO arrow functions: `() =>` ← Use `function() {}` instead
+       - ❌ NO destructuring, spread operators, classes
+       - ✅ Use ES5 syntax throughout (var, function, string concatenation)
+
+       Example ES5-compatible code:
+       ```javascript
+       (function() {
+         'use strict';
+
+         var COMPONENT_SELECTOR = '.cmp-footer';
+
+         function init() {
+           var components = document.querySelectorAll(COMPONENT_SELECTOR);
+           for (var i = 0; i < components.length; i++) {
+             initializeComponent(components[i]);
+           }
+         }
+
+         function logMessage(platform) {
+           // ES5: String concatenation, NOT template literals
+           console.log('Social link clicked: ' + platform);
+         }
+       })();
+       ```
+
+    3. **Component-Specific Behavior**:
+       - **Carousel**: Auto-rotation timer, pause on hover, keyboard navigation, touch/swipe
+       - **Navigation**: Mobile menu toggle, submenu handling, scroll-based sticky behavior
+       - **Footer**: Smooth scroll to top, accordion for mobile
+       - **Forms**: Real-time validation, AJAX submission, error handling
+       - **Cards**: Hover preview, lazy load images, click tracking
+       - **Modals**: Focus trap, escape key close, background scroll lock
+
+    4. **Accessibility Features** (WCAG 2.1 AA):
+       - Keyboard navigation (Tab, Enter, Escape, Arrow keys)
+       - ARIA attribute updates (aria-expanded, aria-selected, aria-hidden)
+       - Focus management (focus trap, focus visible)
+       - Screen reader announcements (aria-live regions)
+       - Skip links and landmark roles
+
+    5. **Performance Optimizations**:
+       - Debounce/throttle scroll/resize events
+       - IntersectionObserver for lazy loading
+       - RequestAnimationFrame for animations
+       - Event delegation for dynamic content
+       - Passive event listeners where appropriate
+
+    6. **Error Handling & Fallbacks**:
+       - Check for required DOM elements before initialization
+       - Try-catch blocks for critical operations
+       - Console warnings for missing configuration
+       - Graceful degradation if features unavailable
+
+    Example ES5-compatible JS structure:
+    ```javascript
+    (function() {
+      'use strict';
+
+      // ES5: Use var, NOT const/let
+      var COMPONENT_SELECTOR = '.cmp-footer';
+
+      function init() {
+        // ES5: Use var, NOT const
+        var components = document.querySelectorAll(COMPONENT_SELECTOR);
+        // ES5: Use for loop, NOT forEach
+        for (var i = 0; i < components.length; i++) {
+          initializeComponent(components[i]);
+        }
+      }
+
+      function initializeComponent(component) {
+        // ES5: Use var, NOT const
+        var socialLinks = component.querySelectorAll('.cmp-footer__social-link');
+        // ES5: Use for loop, NOT forEach
+        for (var i = 0; i < socialLinks.length; i++) {
+          socialLinks[i].addEventListener('click', handleSocialClick);
+        }
+      }
+
+      function handleSocialClick(event) {
+        // ES5: String concatenation, NOT template literals
+        var platform = event.currentTarget.dataset.platform;
+        console.log('Social link clicked: ' + platform);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+    ```
+
+    VERIFICATION BEFORE WRITING FILE - ES5 Compatibility Check:
+    ✓ No template literals? (Use 'string' + variable, NOT \`string ${variable}\`)
+    ✓ No const/let? (Use var only)
+    ✓ No arrow functions? (Use function() {}, NOT () =>)
+    ✓ No forEach? (Use for loops with index)
+    ✓ No destructuring? (No {x, y} = obj)
+    ✓ No spread operators? (No ...array)
+    ✓ IIFE pattern with 'use strict'?
+
+    Use AEM File Writer tool to write the JS file to the AEM project path.
+    Provide: file_path (relative from AEM root), content (JavaScript), aem_project_path (absolute path).
+
+  expected_output: >
+    ✅ 6/6 COMPLETE: JavaScript file created at:
+    {aem_project_path}/ui.frontend/src/main/webpack/components/_[component-name].js
+
+    🎉 ALL 6 FILES GENERATED IN PROJECT!
+
+    Summary:
+    1. Component definition: {aem_project_path}/ui.apps/.../components/[component-name]/.content.xml
+    2. HTL template: {aem_project_path}/ui.apps/.../components/[component-name]/[component-name].html
+    3. Sling Model: {aem_project_path}/core/.../models/[ComponentName]Model.java
+    4. Author dialog: {aem_project_path}/ui.apps/.../components/[component-name]/_cq_dialog/.content.xml
+    5. SCSS styles: {aem_project_path}/ui.frontend/.../components/_[component-name].scss
+    6. JavaScript: {aem_project_path}/ui.frontend/.../components/_[component-name].js
+
+    ✅ Component ready for verification!
+  agent: aem_alchemist
+  context:
+    - design_analysis_task
+    - aem_frontend_scss_generation_task
+
+aem_component_verification_task:
+  description: >
+    STEP 7 (FINAL): Verify All 6 Component Files Were Created Successfully
+
+    Read JSON: output-visual_strategist/design_analysis.json
+    Extract component.name for verification
+
+    CRITICAL: Use AEM Project Path from inputs:
+    - AEM Project Path: {aem_project_path}
+    - AEM App ID: {aem_app_id}
+    - AEM Namespace: {aem_namespace}
+
+    VERIFICATION CHECKLIST - Use DirectoryListTool to check each file exists:
+
+    1. **Component Definition** (.content.xml)
+       Path: {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/.content.xml
+       Check: File exists and contains jcr:primaryType="cq:Component"
+
+    2. **HTL Template** ([component-name].html)
+       Path: {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/[component-name].html
+       Check: File exists and contains data-sly-use.model
+
+    3. **Sling Model** ([ComponentName]Model.java)
+       Path: {aem_project_path}/core/src/main/java/com/{aem_namespace}/core/models/[ComponentName]Model.java
+       Check: File exists and contains @Model annotation
+
+    4. **Author Dialog** (_cq_dialog/.content.xml)
+       Path: {aem_project_path}/ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/_cq_dialog/.content.xml
+       Check: File exists and contains dialog structure
+
+    5. **SCSS Styles** (_[component-name].scss)
+       Path: {aem_project_path}/ui.frontend/src/main/webpack/components/_[component-name].scss
+       Check: File exists and contains .cmp-[component-name] class
+
+    6. **JavaScript** (_[component-name].js)
+       Path: {aem_project_path}/ui.frontend/src/main/webpack/components/_[component-name].js
+       Check: File exists and contains IIFE pattern
+
+    Use DirectoryListTool to list files in each directory and confirm existence.
+
+    For each file:
+    - ✅ EXISTS → Mark as successful
+    - ❌ MISSING → Report error with exact path
+
+    FINAL REPORT FORMAT:
+    ```
+    ════════════════════════════════════════════════════════════
+    🎉 COMPONENT GENERATION VERIFICATION REPORT
+    ════════════════════════════════════════════════════════════
+
+    Component Name: [component-name]
+    Component Type: [component-type]
+    Generated: [timestamp]
+
+    ────────────────────────────────────────────────────────────
+    FILE VERIFICATION (6 files required):
+    ────────────────────────────────────────────────────────────
+
+    [1/6] ✅ Component Definition (.content.xml)
+          Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/.content.xml
+          Status: EXISTS | Size: [bytes]
+
+    [2/6] ✅ HTL Template ([component-name].html)
+          Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/[component-name].html
+          Status: EXISTS | Size: [bytes]
+
+    [3/6] ✅ Sling Model ([ComponentName]Model.java)
+          Location: core/src/main/java/com/{aem_namespace}/core/models/[ComponentName]Model.java
+          Status: EXISTS | Size: [bytes]
+
+    [4/6] ✅ Author Dialog (_cq_dialog/.content.xml)
+          Location: ui.apps/src/main/content/jcr_root/apps/{aem_app_id}/components/[component-name]/_cq_dialog/.content.xml
+          Status: EXISTS | Size: [bytes]
+
+    [5/6] ✅ SCSS Styles (_[component-name].scss)
+          Location: ui.frontend/src/main/webpack/components/_[component-name].scss
+          Status: EXISTS | Size: [bytes]
+
+    [6/6] ✅ JavaScript (_[component-name].js)
+          Location: ui.frontend/src/main/webpack/components/_[component-name].js
+          Status: EXISTS | Size: [bytes]
+
+    ────────────────────────────────────────────────────────────
+    SUMMARY:
+    ────────────────────────────────────────────────────────────
+
+    ✅ Success: 6/6 files created
+    ❌ Missing: 0/6 files
+
+    STATUS: ✅ COMPONENT GENERATION COMPLETE
+
+    ────────────────────────────────────────────────────────────
+    NEXT STEPS:
+    ────────────────────────────────────────────────────────────
+
+    1. Build the project:
+       cd {aem_project_path}
+       mvn clean install -PautoInstallPackage
+
+    2. Verify in AEM:
+       - Open: http://localhost:4502/editor.html
+       - Add component from "MOHH Websites - Content" group
+       - Configure and test
+
+    3. Check browser console for any JavaScript errors
+
+    ════════════════════════════════════════════════════════════
+    ```
+
+    If ANY file is missing, provide exact path and suggest fix.
+
+  expected_output: >
+    ✅ VERIFICATION COMPLETE
+
+    Detailed verification report showing:
+    - All 6 files checked
+    - File sizes
+    - Success/failure status
+    - Next steps for deployment
+
+    If all files exist → Component generation 100% successful!
+    If any missing → Clear error message with paths
+  agent: aem_alchemist
+  context:
+    - design_analysis_task
+    - aem_frontend_js_generation_task
 
 aem_build_deploy_task:
   description: >
@@ -631,7 +1538,7 @@ aem_build_deploy_task:
     local AEM instance.
 
     STEP 1: NAVIGATE TO AEM PROJECT
-    - Change directory to {aem_project_path}
+    - Change directory to your AEM project path
 
     STEP 2: RUN MAVEN BUILD
     - Execute: mvn clean install -PautoInstallPackage
@@ -653,7 +1560,7 @@ aem_build_deploy_task:
     STEP 5: REPORT STATUS
     If BUILD SUCCESS:
       - Report successful deployment
-      - Provide component path: /apps/{aem_app_id}/components/{component_name}
+      - Provide component path
       - Provide CRXDE link to component
 
     If BUILD FAILED:
@@ -679,14 +1586,14 @@ aem_testing_task:
     STEP 1: PROVIDE TESTING INSTRUCTIONS
     Give the user clear instructions:
 
-    "Please test the {component_name} component in AEM:
+    "Please test the component in AEM:
 
     1. Open AEM Sites Editor:
-       http://localhost:4502/editor.html/content/{aem_app_id}/us/en.html
+       http://localhost:4502/editor.html/content/your-app/us/en.html
 
     2. Add the component to a page:
        - Click '+' to add component
-       - Find '{component_name}' in component browser
+       - Find the component in component browser
        - Drag it onto the page
 
     3. Test the component dialog:
@@ -709,7 +1616,7 @@ aem_testing_task:
 
     STEP 2: ASK FOR USER CONFIRMATION
     Use AskUserQuestion tool to ask:
-    "Did the {component_name} component work correctly?"
+    "Did the component work correctly?"
 
     Options:
     - "Yes, it works perfectly"

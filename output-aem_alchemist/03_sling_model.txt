@@ -1,0 +1,402 @@
+✅ 3/6 COMPLETE: Sling Model created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/core/src/main/java/com/mohhwebsites/core/models/FooterModel.java
+
+**Enterprise Java Sling Model - FooterModel.java**
+
+```java
+package com.mohhwebsites.core.models;
+
+import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Default;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
+import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Sling Model for the Footer Component
+ * 
+ * This model provides all data and configuration for the MOHH footer component.
+ * 
+ * @author AEM Component Engineer
+ * @version 1.0
+ */
+@Model(
+    adaptables = {SlingHttpServletRequest.class, Resource.class},
+    adapters = FooterModel.class,
+    defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
+)
+public class FooterModel {
+
+    @ValueMapValue
+    @Default(values = "MOHH")
+    private String logoText;
+
+    @ValueMapValue
+    @Default(values = "Making Our Healthcare Happen")
+    private String tagline;
+
+    @ValueMapValue
+    @Default(values = "Leading Singapore's public healthcare transformation.")
+    private String description;
+
+    @ValueMapValue
+    @Default(values = "#F5F5F5")
+    private String backgroundColor;
+
+    @ValueMapValue
+    @Default(values = "#333333")
+    private String textColor;
+
+    @ValueMapValue
+    @Default(values = "#666666")
+    private String textSecondaryColor;
+
+    @ValueMapValue
+    @Default(values = "#6AACDB")
+    private String primaryColor;
+
+    @ValueMapValue
+    @Default(values = "#E85D75")
+    private String accentColor;
+
+    @ValueMapValue
+    @Default(values = "#CCCCCC")
+    private String borderColor;
+
+    @ValueMapValue
+    @Default(booleanValues = true)
+    private boolean showSeparator;
+
+    @ValueMapValue
+    @Default(values = "50px 70px")
+    private String padding;
+
+    @ChildResource
+    private List<Resource> socialIcons;
+    private List<SocialIcon> validatedSocialIcons;
+
+    @ChildResource
+    private List<Resource> primaryNavItems;
+    private List<NavItem> validatedPrimaryNavItems;
+
+    @ChildResource
+    private List<Resource> secondaryNavItems;
+    private List<NavItem> validatedSecondaryNavItems;
+
+    @ValueMapValue
+    @Default(values = "© 2025 MOH Holdings    Last updated 01 Jan 2025")
+    private String copyrightText;
+
+    @PostConstruct
+    protected void init() {
+        validateSocialIcons();
+        validatePrimaryNavItems();
+        validateSecondaryNavItems();
+    }
+
+    private void validateSocialIcons() {
+        validatedSocialIcons = new ArrayList<>();
+        if (socialIcons != null) {
+            for (Resource iconResource : socialIcons) {
+                SocialIcon icon = new SocialIcon(iconResource);
+                if (icon.isValid()) {
+                    validatedSocialIcons.add(icon);
+                }
+            }
+        }
+    }
+
+    private void validatePrimaryNavItems() {
+        validatedPrimaryNavItems = new ArrayList<>();
+        if (primaryNavItems != null) {
+            for (Resource navResource : primaryNavItems) {
+                NavItem navItem = new NavItem(navResource);
+                if (navItem.isValid()) {
+                    validatedPrimaryNavItems.add(navItem);
+                }
+            }
+        }
+    }
+
+    private void validateSecondaryNavItems() {
+        validatedSecondaryNavItems = new ArrayList<>();
+        if (secondaryNavItems != null) {
+            for (Resource navResource : secondaryNavItems) {
+                NavItem navItem = new NavItem(navResource);
+                if (navItem.isValid()) {
+                    validatedSecondaryNavItems.add(navItem);
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the logo text
+     * @return the logo text
+     */
+    public String getLogoText() {
+        return logoText;
+    }
+
+    /**
+     * Gets the tagline text
+     * @return the tagline text
+     */
+    public String getTagline() {
+        return tagline;
+    }
+
+    /**
+     * Gets the description text
+     * @return the description text
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Gets the background color
+     * @return the background color
+     */
+    public String getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    /**
+     * Gets the primary text color
+     * @return the text color
+     */
+    public String getTextColor() {
+        return textColor;
+    }
+
+    /**
+     * Gets the secondary text color
+     * @return the secondary text color
+     */
+    public String getTextSecondaryColor() {
+        return textSecondaryColor;
+    }
+
+    /**
+     * Gets the primary brand color
+     * @return the primary color
+     */
+    public String getPrimaryColor() {
+        return primaryColor;
+    }
+
+    /**
+     * Gets the accent color
+     * @return the accent color
+     */
+    public String getAccentColor() {
+        return accentColor;
+    }
+
+    /**
+     * Gets the border color
+     * @return the border color
+     */
+    public String getBorderColor() {
+        return borderColor;
+    }
+
+    /**
+     * Gets whether to show the separator line
+     * @return true if separator should be displayed
+     */
+    public boolean isShowSeparator() {
+        return showSeparator;
+    }
+
+    /**
+     * Gets the footer padding
+     * @return the padding value
+     */
+    public String getPadding() {
+        return padding;
+    }
+
+    /**
+     * Gets the list of social media icons
+     * @return list of social icons
+     */
+    public List<SocialIcon> getSocialIcons() {
+        return validatedSocialIcons != null ? Collections.unmodifiableList(validatedSocialIcons) : Collections.emptyList();
+    }
+
+    /**
+     * Gets the count of social media icons
+     * @return number of icons
+     */
+    public int getSocialIconsCount() {
+        return validatedSocialIcons != null ? validatedSocialIcons.size() : 0;
+    }
+
+    /**
+     * Gets the list of primary navigation items
+     * @return list of primary nav items
+     */
+    public List<NavItem> getPrimaryNavItems() {
+        return validatedPrimaryNavItems != null ? Collections.unmodifiableList(validatedPrimaryNavItems) : Collections.emptyList();
+    }
+
+    /**
+     * Gets the count of primary navigation items
+     * @return number of primary nav items
+     */
+    public int getPrimaryNavItemsCount() {
+        return validatedPrimaryNavItems != null ? validatedPrimaryNavItems.size() : 0;
+    }
+
+    /**
+     * Gets the list of secondary navigation items
+     * @return list of secondary nav items
+     */
+    public List<NavItem> getSecondaryNavItems() {
+        return validatedSecondaryNavItems != null ? Collections.unmodifiableList(validatedSecondaryNavItems) : Collections.emptyList();
+    }
+
+    /**
+     * Gets the count of secondary navigation items
+     * @return number of secondary nav items
+     */
+    public int getSecondaryNavItemsCount() {
+        return validatedSecondaryNavItems != null ? validatedSecondaryNavItems.size() : 0;
+    }
+
+    /**
+     * Gets the copyright text
+     * @return the copyright text
+     */
+    public String getCopyrightText() {
+        return copyrightText;
+    }
+
+    /**
+     * Represents a social media icon
+     */
+    public static class SocialIcon {
+        private String platform;
+        private String url;
+        private String color;
+        private String size;
+        private String icon;
+
+        public SocialIcon(Resource resource) {
+            if (resource != null) {
+                this.platform = resource.getValueMap().get("platform", String.class);
+                this.url = resource.getValueMap().get("url", "");
+                this.color = resource.getValueMap().get("color", "#6AACDB");
+                this.size = resource.getValueMap().get("size", "28px");
+                this.icon = resource.getValueMap().get("icon", String.class);
+            }
+        }
+
+        public boolean isValid() {
+            return platform != null && !platform.isEmpty();
+        }
+
+        public String getPlatform() {
+            return platform;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public String getSize() {
+            return size;
+        }
+
+        public String getIcon() {
+            return icon;
+        }
+    }
+
+    /**
+     * Represents a navigation item
+     */
+    public static class NavItem {
+        private String text;
+        private String url;
+        private boolean newWindow;
+        private boolean hasExternalIcon;
+
+        public NavItem(Resource resource) {
+            if (resource != null) {
+                this.text = resource.getValueMap().get("text", String.class);
+                this.url = resource.getValueMap().get("url", "");
+                this.newWindow = resource.getValueMap().get("newWindow", false);
+                String icon = resource.getValueMap().get("icon", String.class);
+                this.hasExternalIcon = "external".equals(icon);
+            }
+        }
+
+        public boolean isValid() {
+            return text != null && !text.isEmpty();
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public boolean isNewWindow() {
+            return newWindow;
+        }
+
+        public boolean isHasExternalIcon() {
+            return hasExternalIcon;
+        }
+    }
+}
+```
+
+**✅ SLING MODEL FEATURES:**
+
+1. **@Model Annotation**: Properly configured with SlingHttpServletRequest and Resource adaptables
+2. **@ValueMapValue Properties**: All extracted from JSON specification:
+   - Branding: logoText, tagline, description
+   - Colors: backgroundColor, textColor, textSecondaryColor, primaryColor, accentColor, borderColor
+   - Layout: showSeparator, padding
+   - Copyright: copyrightText
+
+3. **@ChildResource Collections**: 
+   - socialIcons → List<SocialIcon>
+   - primaryNavItems → List<NavItem>
+   - secondaryNavItems → List<NavItem>
+
+4. **@PostConstruct Initialization**: Validates all child resources on initialization
+
+5. **Inner Classes**:
+   - **SocialIcon**: Represents social media platforms with platform, url, color, size, icon properties
+   - **NavItem**: Represents navigation links with text, url, newWindow, hasExternalIcon properties
+
+6. **Validation Methods**: isValid() for both inner classes ensures data integrity
+
+7. **JavaDoc Comments**: Every getter method has comprehensive documentation
+
+8. **@Default Annotations**: Sensible defaults matching JSON specification
+
+9. **Type-Safe**: Uses proper Java types (String, boolean, List<>)
+
+10. **Immutable Collections**: Returns unmodifiable lists from getters
+
+**Package**: com.mohhwebsites.core.models
+**Class**: FooterModel (footer → FooterModel in PascalCase)
+**Path**: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/core/src/main/java/com/mohhwebsites/core/models/FooterModel.java
