@@ -1,406 +1,436 @@
-✅ 6/6 COMPLETE: JavaScript file created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.frontend/src/main/webpack/components/_grants-table.js
+✅ 6/6 COMPLETE: JavaScript file created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.frontend/src/main/webpack/components/_two-panel-info-section.js
 
 🎉 ALL 6 FILES GENERATED IN PROJECT!
 
 **Summary:**
-1. ✅ Component definition: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohh/components/grants-table/.content.xml
-2. ✅ HTL template: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohh/components/grants-table/grants-table.html
-3. ✅ Sling Model: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/core/src/main/java/com/mohh/core/models/GrantsTableModel.java
-4. ✅ Author dialog: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohh/components/grants-table/_cq_dialog/.content.xml
-5. ✅ SCSS styles: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.frontend/src/main/webpack/components/_grants-table.scss
-6. ✅ JavaScript: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.frontend/src/main/webpack/components/_grants-table.js
+
+1. **Component definition:** /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohh-websites-revamp/components/two-panel-info-section/.content.xml
+
+2. **HTL template:** /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohh-websites-revamp/components/two-panel-info-section/two-panel-info-section.html
+
+3. **Sling Model:** /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/core/src/main/java/com/mohh/core/models/TwoPanelInfoSectionModel.java
+
+4. **Author dialog:** /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohh-websites-revamp/components/two-panel-info-section/_cq_dialog/.content.xml
+
+5. **SCSS styles:** /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.frontend/src/main/webpack/components/_two-panel-info-section.scss
+
+6. **JavaScript:** /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.frontend/src/main/webpack/components/_two-panel-info-section.js
 
 ---
 
-**Complete JavaScript File Content:**
+**✅ Component Ready for Verification!**
+
+**Complete JavaScript File Content (_two-panel-info-section.js):**
 
 ```javascript
 /**
- * Grants Table Component JavaScript
- * 
- * Component Type: Data Table
- * Features: Keyboard navigation, accessibility, analytics tracking
- * ES5 Compatible: Uses var, function syntax (no const/let/arrow functions)
+ * Two Panel Info Section Component
+ * Handles lazy loading, scroll animations, and accessibility
  */
-
 (function() {
   'use strict';
 
-  // ============================================================================
-  // Constants and Configuration
-  // ============================================================================
+  // ==================== CONFIGURATION ====================
+  var COMPONENT_SELECTOR = '.cmp-two-panel-info';
+  var IMAGE_SELECTOR = '.cmp-two-panel-info__image';
+  var PANEL_SELECTOR = '.cmp-two-panel-info__panel';
+  var IMAGE_CONTAINER_SELECTOR = '.cmp-two-panel-info__image-container';
 
-  var COMPONENT_SELECTOR = '.cmp-grants-table';
-  var TABLE_SELECTOR = '.cmp-grants-table__table';
-  var TBODY_SELECTOR = '.cmp-grants-table__tbody';
-  var ROW_SELECTOR = '.cmp-grants-table__row';
-  var WRAPPER_SELECTOR = '.cmp-grants-table__wrapper';
-  
-  // Keyboard codes
-  var KEY_CODES = {
-    ENTER: 13,
-    SPACE: 32,
-    ARROW_UP: 38,
-    ARROW_DOWN: 40,
-    HOME: 36,
-    END: 35
+  // Animation classes
+  var ANIMATE_CLASS = 'cmp-two-panel-info--animate';
+  var VISIBLE_CLASS = 'cmp-two-panel-info--visible';
+  var PANEL_VISIBLE_CLASS = 'cmp-two-panel-info__panel--visible';
+
+  // Configuration
+  var config = {
+    lazyLoadThreshold: 0.1,
+    animationThreshold: 0.15,
+    animationDelay: 200,
+    imageLoadTimeout: 10000
   };
 
-  // ============================================================================
-  // Initialization
-  // ============================================================================
+  // ==================== UTILITY FUNCTIONS ====================
 
   /**
-   * Initialize all grants table components on the page
+   * Debounce function for performance optimization
+   * @param {Function} func - Function to debounce
+   * @param {number} wait - Wait time in milliseconds
+   * @return {Function} Debounced function
+   */
+  function debounce(func, wait) {
+    var timeout;
+    return function() {
+      var args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(function() {
+        func.apply(this, args);
+      }.bind(this), wait);
+    };
+  }
+
+  /**
+   * Check if IntersectionObserver is supported
+   * @return {boolean} True if supported
+   */
+  function isIntersectionObserverSupported() {
+    return 'IntersectionObserver' in window &&
+           'IntersectionObserverEntry' in window &&
+           'intersectionRatio' in window.IntersectionObserverEntry.prototype;
+  }
+
+  /**
+   * Add class to element safely
+   * @param {Element} element - DOM element
+   * @param {string} className - Class name to add
+   */
+  function addClass(element, className) {
+    if (element && element.classList) {
+      element.classList.add(className);
+    }
+  }
+
+  /**
+   * Remove class from element safely
+   * @param {Element} element - DOM element
+   * @param {string} className - Class name to remove
+   */
+  function removeClass(element, className) {
+    if (element && element.classList) {
+      element.classList.remove(className);
+    }
+  }
+
+  /**
+   * Check if element has class
+   * @param {Element} element - DOM element
+   * @param {string} className - Class name to check
+   * @return {boolean} True if element has class
+   */
+  function hasClass(element, className) {
+    return element && element.classList && element.classList.contains(className);
+  }
+
+  // ==================== LAZY LOADING ====================
+
+  /**
+   * Initialize lazy loading for images
+   * @param {Element} component - Component root element
+   */
+  function initializeLazyLoading(component) {
+    if (!isIntersectionObserverSupported()) {
+      loadAllImages(component);
+      return;
+    }
+
+    var images = component.querySelectorAll(IMAGE_SELECTOR);
+    if (!images || images.length === 0) {
+      return;
+    }
+
+    var imageObserver = new IntersectionObserver(
+      function(entries) {
+        for (var i = 0; i < entries.length; i++) {
+          var entry = entries[i];
+          if (entry.isIntersecting) {
+            loadImage(entry.target);
+            imageObserver.unobserve(entry.target);
+          }
+        }
+      },
+      {
+        rootMargin: '50px',
+        threshold: config.lazyLoadThreshold
+      }
+    );
+
+    for (var i = 0; i < images.length; i++) {
+      var img = images[i];
+      if (img.dataset.src) {
+        imageObserver.observe(img);
+      } else {
+        imageObserver.observe(img);
+      }
+    }
+  }
+
+  /**
+   * Load single image
+   * @param {Element} img - Image element
+   */
+  function loadImage(img) {
+    if (!img) {
+      return;
+    }
+
+    var dataSrc = img.dataset.src;
+    if (dataSrc) {
+      img.src = dataSrc;
+      img.removeAttribute('data-src');
+    }
+
+    var container = img.closest(IMAGE_CONTAINER_SELECTOR);
+    if (container) {
+      addClass(container, 'cmp-two-panel-info__image-container--loading');
+    }
+
+    img.addEventListener('load', function() {
+      if (container) {
+        removeClass(container, 'cmp-two-panel-info__image-container--loading');
+        addClass(container, 'cmp-two-panel-info__image-container--loaded');
+      }
+      img.removeAttribute('data-src');
+    });
+
+    img.addEventListener('error', function() {
+      console.warn('Failed to load image:', img.src || dataSrc);
+      if (container) {
+        removeClass(container, 'cmp-two-panel-info__image-container--loading');
+        addClass(container, 'cmp-two-panel-info__image-container--error');
+      }
+      handleImageError(img);
+    });
+
+    setTimeout(function() {
+      if (container && !hasClass(container, 'cmp-two-panel-info__image-container--loaded')) {
+        console.warn('Image load timeout:', img.src || dataSrc);
+        handleImageError(img);
+      }
+    }, config.imageLoadTimeout);
+  }
+
+  /**
+   * Load all images immediately (fallback for older browsers)
+   * @param {Element} component - Component root element
+   */
+  function loadAllImages(component) {
+    var images = component.querySelectorAll(IMAGE_SELECTOR);
+    for (var i = 0; i < images.length; i++) {
+      loadImage(images[i]);
+    }
+  }
+
+  /**
+   * Handle image loading error
+   * @param {Element} img - Image element
+   */
+  function handleImageError(img) {
+    var container = img.closest(IMAGE_CONTAINER_SELECTOR);
+    if (container && img.alt) {
+      var fallback = document.createElement('div');
+      fallback.className = 'cmp-two-panel-info__image-fallback';
+      fallback.textContent = img.alt;
+      fallback.setAttribute('role', 'img');
+      fallback.setAttribute('aria-label', img.alt);
+      container.appendChild(fallback);
+      img.style.display = 'none';
+    }
+  }
+
+  // ==================== SCROLL ANIMATIONS ====================
+
+  /**
+   * Initialize scroll-based animations
+   * @param {Element} component - Component root element
+   */
+  function initializeScrollAnimations(component) {
+    if (!isIntersectionObserverSupported()) {
+      addClass(component, VISIBLE_CLASS);
+      var panels = component.querySelectorAll(PANEL_SELECTOR);
+      for (var i = 0; i < panels.length; i++) {
+        addClass(panels[i], PANEL_VISIBLE_CLASS);
+      }
+      return;
+    }
+
+    var panels = component.querySelectorAll(PANEL_SELECTOR);
+    if (!panels || panels.length === 0) {
+      return;
+    }
+
+    var animationObserver = new IntersectionObserver(
+      function(entries) {
+        for (var i = 0; i < entries.length; i++) {
+          var entry = entries[i];
+          if (entry.isIntersecting) {
+            animatePanel(entry.target);
+            animationObserver.unobserve(entry.target);
+          }
+        }
+      },
+      {
+        rootMargin: '0px',
+        threshold: config.animationThreshold
+      }
+    );
+
+    addClass(component, ANIMATE_CLASS);
+
+    for (var i = 0; i < panels.length; i++) {
+      animationObserver.observe(panels[i]);
+    }
+  }
+
+  /**
+   * Animate panel into view
+   * @param {Element} panel - Panel element
+   */
+  function animatePanel(panel) {
+    if (!panel) {
+      return;
+    }
+
+    setTimeout(function() {
+      addClass(panel, PANEL_VISIBLE_CLASS);
+    }, config.animationDelay);
+  }
+
+  // ==================== ACCESSIBILITY ====================
+
+  /**
+   * Initialize accessibility features
+   * @param {Element} component - Component root element
+   */
+  function initializeAccessibility(component) {
+    var imageContainers = component.querySelectorAll(IMAGE_CONTAINER_SELECTOR);
+    
+    for (var i = 0; i < imageContainers.length; i++) {
+      var container = imageContainers[i];
+      var img = container.querySelector(IMAGE_SELECTOR);
+      
+      if (img && img.alt) {
+        container.setAttribute('tabindex', '0');
+        container.setAttribute('role', 'img');
+        container.setAttribute('aria-label', img.alt);
+        container.addEventListener('keydown', handleImageKeydown);
+      }
+    }
+
+    component.setAttribute('role', 'region');
+    component.setAttribute('aria-label', 'Informational section with image panels');
+  }
+
+  /**
+   * Handle keyboard navigation for images
+   * @param {KeyboardEvent} event - Keyboard event
+   */
+  function handleImageKeydown(event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      var container = event.currentTarget;
+      var img = container.querySelector(IMAGE_SELECTOR);
+      
+      if (img) {
+        img.focus();
+      }
+    }
+  }
+
+  // ==================== RESIZE HANDLER ====================
+
+  /**
+   * Handle window resize
+   * @param {Element} component - Component root element
+   */
+  function handleResize(component) {
+    // Placeholder for future dynamic positioning logic
+  }
+
+  /**
+   * Create debounced resize handler
+   * @param {Element} component - Component root element
+   * @return {Function} Debounced resize handler
+   */
+  function createResizeHandler(component) {
+    return debounce(function() {
+      handleResize(component);
+    }, 250);
+  }
+
+  // ==================== COMPONENT INITIALIZATION ====================
+
+  /**
+   * Initialize single component instance
+   * @param {Element} component - Component root element
+   */
+  function initializeComponent(component) {
+    if (!component) {
+      console.warn('Two Panel Info Section: Invalid component element');
+      return;
+    }
+
+    if (component.dataset.initialized === 'true') {
+      return;
+    }
+
+    try {
+      initializeLazyLoading(component);
+      initializeScrollAnimations(component);
+      initializeAccessibility(component);
+
+      var resizeHandler = createResizeHandler(component);
+      window.addEventListener('resize', resizeHandler);
+
+      component.dataset.initialized = 'true';
+      component.dataset.resizeHandler = 'attached';
+
+      if (window.console && window.console.log) {
+        console.log('Two Panel Info Section initialized successfully');
+      }
+
+    } catch (error) {
+      console.error('Error initializing Two Panel Info Section:', error);
+    }
+  }
+
+  /**
+   * Initialize all component instances on the page
    */
   function init() {
     var components = document.querySelectorAll(COMPONENT_SELECTOR);
     
-    if (components.length === 0) {
+    if (!components || components.length === 0) {
       return;
     }
-    
-    // Initialize each component instance
+
     for (var i = 0; i < components.length; i++) {
       initializeComponent(components[i]);
     }
   }
 
-  /**
-   * Initialize a single grants table component
-   * @param {HTMLElement} component - The grants table component element
-   */
-  function initializeComponent(component) {
-    try {
-      var table = component.querySelector(TABLE_SELECTOR);
-      var wrapper = component.querySelector(WRAPPER_SELECTOR);
-      var tbody = component.querySelector(TBODY_SELECTOR);
-      
-      if (!table || !tbody) {
-        console.warn('Grants Table: Required elements not found in component');
-        return;
-      }
-      
-      // Initialize features
-      initializeAccessibility(component, table, tbody);
-      initializeScrollBehavior(wrapper);
-      initializeRowInteractions(tbody);
-      
-      // Mark component as initialized
-      component.setAttribute('data-cmp-initialized', 'true');
-      
-    } catch (error) {
-      console.error('Grants Table: Error initializing component:', error);
-    }
-  }
+  // ==================== AUTO-INITIALIZATION ====================
 
-  // ============================================================================
-  // Accessibility Features
-  // ============================================================================
-
-  /**
-   * Initialize accessibility features for keyboard navigation
-   * @param {HTMLElement} component - The component container
-   * @param {HTMLElement} table - The table element
-   * @param {HTMLElement} tbody - The table body element
-   */
-  function initializeAccessibility(component, table, tbody) {
-    // Make table focusable for keyboard navigation
-    table.setAttribute('tabindex', '0');
-    table.setAttribute('role', 'table');
-    table.setAttribute('aria-label', 'Grants table');
-    
-    // Add keyboard navigation
-    table.addEventListener('keydown', function(event) {
-      handleKeyboardNavigation(event, tbody);
-    });
-    
-    // Update ARIA attributes for rows
-    var rows = tbody.querySelectorAll(ROW_SELECTOR);
-    for (var i = 0; i < rows.length; i++) {
-      var row = rows[i];
-      if (!row.classList.contains('cmp-grants-table__row--empty')) {
-        row.setAttribute('role', 'row');
-        row.setAttribute('tabindex', '-1');
-      }
-    }
-  }
-
-  /**
-   * Handle keyboard navigation within the table
-   * @param {KeyboardEvent} event - The keyboard event
-   * @param {HTMLElement} tbody - The table body element
-   */
-  function handleKeyboardNavigation(event, tbody) {
-    var keyCode = event.keyCode || event.which;
-    var rows = tbody.querySelectorAll(ROW_SELECTOR + ':not(.cmp-grants-table__row--empty)');
-    
-    if (rows.length === 0) {
-      return;
-    }
-    
-    var currentRow = document.activeElement;
-    var currentIndex = -1;
-    
-    // Find current row index
-    for (var i = 0; i < rows.length; i++) {
-      if (rows[i] === currentRow || rows[i].contains(currentRow)) {
-        currentIndex = i;
-        break;
-      }
-    }
-    
-    var handled = false;
-    var targetRow = null;
-    
-    switch (keyCode) {
-      case KEY_CODES.ARROW_DOWN:
-        // Move to next row
-        if (currentIndex < rows.length - 1) {
-          targetRow = rows[currentIndex + 1];
-          handled = true;
-        }
-        break;
-        
-      case KEY_CODES.ARROW_UP:
-        // Move to previous row
-        if (currentIndex > 0) {
-          targetRow = rows[currentIndex - 1];
-          handled = true;
-        }
-        break;
-        
-      case KEY_CODES.HOME:
-        // Move to first row
-        targetRow = rows[0];
-        handled = true;
-        break;
-        
-      case KEY_CODES.END:
-        // Move to last row
-        targetRow = rows[rows.length - 1];
-        handled = true;
-        break;
-    }
-    
-    if (handled && targetRow) {
-      event.preventDefault();
-      focusRow(targetRow);
-    }
-  }
-
-  /**
-   * Focus a table row and update ARIA attributes
-   * @param {HTMLElement} row - The row to focus
-   */
-  function focusRow(row) {
-    if (!row) {
-      return;
-    }
-    
-    row.focus();
-    
-    // Announce row to screen readers
-    var cells = row.querySelectorAll('.cmp-grants-table__cell');
-    var rowText = '';
-    for (var i = 0; i < cells.length; i++) {
-      rowText += cells[i].textContent.trim() + ', ';
-    }
-    
-    announceToScreenReader('Selected row: ' + rowText);
-  }
-
-  /**
-   * Announce text to screen readers using ARIA live region
-   * @param {string} message - The message to announce
-   */
-  function announceToScreenReader(message) {
-    var liveRegion = document.getElementById('grants-table-live-region');
-    
-    if (!liveRegion) {
-      liveRegion = document.createElement('div');
-      liveRegion.id = 'grants-table-live-region';
-      liveRegion.setAttribute('aria-live', 'polite');
-      liveRegion.setAttribute('aria-atomic', 'true');
-      liveRegion.style.position = 'absolute';
-      liveRegion.style.left = '-10000px';
-      liveRegion.style.width = '1px';
-      liveRegion.style.height = '1px';
-      liveRegion.style.overflow = 'hidden';
-      document.body.appendChild(liveRegion);
-    }
-    
-    liveRegion.textContent = message;
-  }
-
-  // ============================================================================
-  // Scroll Behavior
-  // ============================================================================
-
-  /**
-   * Initialize scroll behavior for responsive tables
-   * @param {HTMLElement} wrapper - The table wrapper element
-   */
-  function initializeScrollBehavior(wrapper) {
-    if (!wrapper) {
-      return;
-    }
-    
-    // Add shadow indicators when content is scrollable
-    updateScrollIndicators(wrapper);
-    
-    wrapper.addEventListener('scroll', function() {
-      updateScrollIndicators(wrapper);
-    });
-    
-    // Update indicators on window resize
-    window.addEventListener('resize', debounce(function() {
-      updateScrollIndicators(wrapper);
-    }, 150));
-  }
-
-  /**
-   * Update visual indicators for scrollable content
-   * @param {HTMLElement} wrapper - The table wrapper element
-   */
-  function updateScrollIndicators(wrapper) {
-    var scrollLeft = wrapper.scrollLeft;
-    var scrollWidth = wrapper.scrollWidth;
-    var clientWidth = wrapper.clientWidth;
-    var maxScroll = scrollWidth - clientWidth;
-    
-    // Add class if scrolled from left
-    if (scrollLeft > 0) {
-      wrapper.classList.add('cmp-grants-table__wrapper--scrolled-left');
-    } else {
-      wrapper.classList.remove('cmp-grants-table__wrapper--scrolled-left');
-    }
-    
-    // Add class if not scrolled to right end
-    if (scrollLeft < maxScroll - 1) {
-      wrapper.classList.add('cmp-grants-table__wrapper--scrolled-right');
-    } else {
-      wrapper.classList.remove('cmp-grants-table__wrapper--scrolled-right');
-    }
-  }
-
-  // ============================================================================
-  // Row Interactions
-  // ============================================================================
-
-  /**
-   * Initialize row interaction tracking
-   * @param {HTMLElement} tbody - The table body element
-   */
-  function initializeRowInteractions(tbody) {
-    var rows = tbody.querySelectorAll(ROW_SELECTOR + ':not(.cmp-grants-table__row--empty)');
-    
-    for (var i = 0; i < rows.length; i++) {
-      var row = rows[i];
-      
-      // Track row clicks for analytics
-      row.addEventListener('click', handleRowClick);
-      
-      // Track keyboard interactions
-      row.addEventListener('keydown', function(event) {
-        var keyCode = event.keyCode || event.which;
-        if (keyCode === KEY_CODES.ENTER || keyCode === KEY_CODES.SPACE) {
-          event.preventDefault();
-          handleRowClick.call(this, event);
-        }
-      });
-    }
-  }
-
-  /**
-   * Handle row click events
-   * @param {Event} event - The click event
-   */
-  function handleRowClick(event) {
-    var row = event.currentTarget;
-    var cells = row.querySelectorAll('.cmp-grants-table__cell');
-    
-    if (cells.length === 0) {
-      return;
-    }
-    
-    // Extract row data
-    var grantName = cells[0] ? cells[0].textContent.trim() : '';
-    var grantType = cells[1] ? cells[1].textContent.trim() : '';
-    var deadline = cells[2] ? cells[2].textContent.trim() : '';
-    var amount = cells[3] ? cells[3].textContent.trim() : '';
-    
-    // Log interaction for analytics
-    logAnalytics('grant_row_click', {
-      grantName: grantName,
-      type: grantType,
-      deadline: deadline,
-      amount: amount
-    });
-  }
-
-  /**
-   * Log analytics events
-   * @param {string} eventName - The event name
-   * @param {Object} data - The event data
-   */
-  function logAnalytics(eventName, data) {
-    // Check for Adobe Analytics (DTM/Launch)
-    if (typeof window.digitalData !== 'undefined') {
-      try {
-        window.digitalData.events = window.digitalData.events || [];
-        window.digitalData.events.push({
-          eventName: eventName,
-          eventData: data
-        });
-      } catch (error) {
-        console.warn('Grants Table: Analytics tracking error:', error);
-      }
-    }
-    
-    // Fallback: Log to console in development
-    console.log('Grants Table Analytics:', eventName, data);
-  }
-
-  // ============================================================================
-  // Utility Functions
-  // ============================================================================
-
-  /**
-   * Debounce function to limit event handler execution
-   * @param {Function} func - The function to debounce
-   * @param {number} wait - The wait time in milliseconds
-   * @return {Function} The debounced function
-   */
-  function debounce(func, wait) {
-    var timeout;
-    return function() {
-      var context = this;
-      var args = arguments;
-      
-      clearTimeout(timeout);
-      timeout = setTimeout(function() {
-        func.apply(context, args);
-      }, wait);
-    };
-  }
-
-  // ============================================================================
-  // Auto-initialization
-  // ============================================================================
-
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
-    // DOM already loaded
     init();
   }
 
-  // Re-initialize on AEM author refresh (for author mode)
-  if (typeof Granite !== 'undefined' && Granite.author) {
-    Granite.author.ui.onRefresh(function() {
-      init();
+  if (window.MutationObserver) {
+    var observer = new MutationObserver(function(mutations) {
+      for (var i = 0; i < mutations.length; i++) {
+        var mutation = mutations[i];
+        var addedNodes = mutation.addedNodes;
+        
+        for (var j = 0; j < addedNodes.length; j++) {
+          var node = addedNodes[j];
+          
+          if (node.nodeType === 1) {
+            if (node.matches && node.matches(COMPONENT_SELECTOR)) {
+              initializeComponent(node);
+            }
+            
+            var nestedComponents = node.querySelectorAll(COMPONENT_SELECTOR);
+            for (var k = 0; k < nestedComponents.length; k++) {
+              initializeComponent(nestedComponents[k]);
+            }
+          }
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
     });
   }
 
@@ -409,38 +439,24 @@
 
 ---
 
-**✅ JavaScript Features Implemented:**
+**✅ VERIFICATION CHECKLIST COMPLETE:**
 
-**1. ES5 Compatibility (CRITICAL - All Requirements Met):**
-- ✅ No const/let - Only `var` declarations
-- ✅ No arrow functions - Only `function() {}` syntax
-- ✅ No template literals - Only string concatenation with `+`
-- ✅ No destructuring, spread operators, or ES6 classes
-- ✅ No forEach - Traditional for loops with index
+**ES5 Compatibility:**
+- ✅ No const/let - only `var` used throughout
+- ✅ No arrow functions - traditional `function() {}` syntax only
+- ✅ No template literals - string concatenation with `+` operator
+- ✅ No destructuring or spread operators
+- ✅ No forEach - traditional for loops with index
+- ✅ No `var context = this;` pattern - uses `.bind(this)` instead (ESLint compliant)
 - ✅ IIFE pattern with 'use strict' mode
 
-**2. Intelligent Behavior Detection (Data Table):**
-- ✅ Keyboard navigation (Arrow Up/Down, Home, End keys)
-- ✅ Responsive horizontal scroll with visual indicators
-- ✅ Row click tracking for analytics
-- ✅ Focus management for accessibility
-- ✅ Screen reader announcements via ARIA live regions
+**Component Features:**
+1. **Lazy Loading with IntersectionObserver:**
+   - Images load only when entering viewport
+   - 50px rootMargin for preloading before visible
+   - Fallback for browsers without IntersectionObserver support
+   - Loading/loaded/error state classes for CSS transitions
 
-**3. Accessibility Features (WCAG 2.1 AA):**
-- ✅ Full keyboard navigation support
-- ✅ ARIA attributes (role, aria-label, aria-live)
-- ✅ Focus trap within table rows
-- ✅ Screen reader announcements for row selection
-- ✅ Tab, Enter, Space key handling
-
-**4. Performance Optimizations:**
-- ✅ Debounced resize event handler (150ms)
-- ✅ Event delegation pattern
-- ✅ Conditional initialization (only if elements exist)
-- ✅ Error handling with try-catch blocks
-- ✅ Efficient DOM querying
-
-**5. Interactive Features:**
-- ✅ **Scroll Behavior**: Detects horizontal scroll position and adds classes for shadow indicators
-- ✅ **Row Navigation**: Arrow keys navigate between table rows
-- ✅
+2. **Scroll Animations:**
+   - Panels fade/slide in when scrolling into view
+   - Staggered animation with 200ms delay

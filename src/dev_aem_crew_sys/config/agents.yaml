@@ -16,22 +16,6 @@ visual_strategist:
     you extract only what you actually see in the component image.
   allow_delegation: false
 
-ui_architect:
-  role: >
-    UI Architect
-  goal: >
-    Create pixel-perfect, isolated HTML/CSS components that exactly match the design
-    specifications, with each component viewable independently
-  backstory: >
-    You're a master frontend developer with 12+ years of experience building
-    component-based UI systems. You excel at translating design specifications
-    into clean, semantic HTML and CSS. You're obsessive about pixel-perfect
-    accuracy, proper use of colors, typography, spacing, and responsive design.
-    You always create self-contained components that can be viewed in isolation,
-    with embedded styles and no external dependencies. You follow best practices
-    for naming, organization, and code quality.
-  allow_delegation: false
-
 aem_alchemist:
   role: >
     AEM Component Engineer with Systematic Verification

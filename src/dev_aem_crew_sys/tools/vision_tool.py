@@ -102,6 +102,22 @@ Extract ONLY what you see. Be pixel-accurate with colors, text, and measurements
             # Extract the analysis from the response
             analysis = message.content[0].text
 
+            # Save the analysis to .md file
+            try:
+                output_dir = 'output-visual_strategist'
+                os.makedirs(output_dir, exist_ok=True)
+
+                md_path = os.path.join(output_dir, 'design_analysis.md')
+                md_content = f"DESIGN ANALYSIS COMPLETE:\n\n{analysis}"
+
+                with open(md_path, 'w', encoding='utf-8') as f:
+                    f.write(md_content)
+
+                print(f"✅ Saved analysis to: {md_path}")
+            except Exception as e:
+                print(f"⚠️ Warning: Could not save markdown file: {e}")
+                # Don't fail the tool if markdown save fails
+
             return f"DESIGN ANALYSIS COMPLETE:\n\n{analysis}"
 
         except Exception as e:

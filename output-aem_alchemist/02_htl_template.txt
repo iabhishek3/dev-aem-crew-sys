@@ -1,84 +1,117 @@
-✅ 2/6 COMPLETE: HTL template created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohhwebsites/components/grants-table/grants-table.html
+✅ 2/6 COMPLETE: HTL template created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohhwebsites/components/two-panel-info-section/two-panel-info-section.html
 
-**File Content:**
+**HTL Template Content:**
+
 ```html
 <!--
-  Grants Table Component
-  Description: Data table displaying grant information with configurable rows
-  Author-editable: Heading, grant entries (name, type, deadline, amount)
+  Two Panel Info Section Component
+  
+  A two-panel informational section with images and text blocks.
+  Each panel displays a tagline, heading, and optional body text with accompanying image.
+  
+  @component two-panel-info-section
+  @slingModel com.mohhwebsites.core.models.TwoPanelInfoSectionModel
 -->
-<section class="cmp-grants-table" data-sly-use.model="com.mohhwebsites.core.models.GrantsTableModel">
+<section class="cmp-two-panel-info"
+         data-sly-use.model="com.mohhwebsites.core.models.TwoPanelInfoSectionModel"
+         data-cmp-is="two-panel-info-section">
     
-    <!-- Optional Section Heading -->
-    <div class="cmp-grants-table__header" data-sly-test="${model.heading}">
-        <h2 class="cmp-grants-table__heading">${model.heading}</h2>
+    <!-- Top Panel: Image Left, Text Right -->
+    <div class="cmp-two-panel-info__panel cmp-two-panel-info__panel--top">
+        
+        <!-- Top Panel Image (Left) -->
+        <div class="cmp-two-panel-info__image-container cmp-two-panel-info__image-container--left"
+             data-sly-test="${model.topImagePath}">
+            <img class="cmp-two-panel-info__image"
+                 src="${model.topImagePath}"
+                 alt="${model.topImageAlt || 'Healthcare worker with elderly patient outdoors'}" />
+        </div>
+        
+        <!-- Top Panel Text Block (Right) -->
+        <div class="cmp-two-panel-info__text-block cmp-two-panel-info__text-block--right">
+            <p class="cmp-two-panel-info__tagline"
+               data-sly-test="${model.topTagline}">
+                ${model.topTagline}
+            </p>
+            <h2 class="cmp-two-panel-info__heading cmp-two-panel-info__heading--top"
+                data-sly-test="${model.topHeading}">
+                ${model.topHeading}
+            </h2>
+        </div>
+        
     </div>
     
-    <!-- Table Wrapper -->
-    <div class="cmp-grants-table__wrapper">
-        <table class="cmp-grants-table__table">
-            <!-- Table Header (Static Structure) -->
-            <thead class="cmp-grants-table__thead">
-                <tr class="cmp-grants-table__header-row">
-                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--grant-name">
-                        Grant Name
-                    </th>
-                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--type">
-                        Type
-                    </th>
-                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--deadline">
-                        Deadline
-                    </th>
-                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--amount">
-                        Amount
-                    </th>
-                </tr>
-            </thead>
-            
-            <!-- Table Body (Dynamic Rows) -->
-            <tbody class="cmp-grants-table__tbody" data-sly-test="${model.grants}">
-                <!-- Single row template - repeated for each grant via data-sly-list -->
-                <tr class="cmp-grants-table__row" data-sly-list.grant="${model.grants}">
-                    <td class="cmp-grants-table__cell cmp-grants-table__cell--grant-name">
-                        ${grant.grantName}
-                    </td>
-                    <td class="cmp-grants-table__cell cmp-grants-table__cell--type">
-                        ${grant.type}
-                    </td>
-                    <td class="cmp-grants-table__cell cmp-grants-table__cell--deadline">
-                        ${grant.deadline}
-                    </td>
-                    <td class="cmp-grants-table__cell cmp-grants-table__cell--amount">
-                        ${grant.amount}
-                    </td>
-                </tr>
-            </tbody>
-            
-            <!-- Empty State (when no grants configured) -->
-            <tbody class="cmp-grants-table__tbody" data-sly-test="${!model.grants}">
-                <tr class="cmp-grants-table__row cmp-grants-table__row--empty">
-                    <td class="cmp-grants-table__cell cmp-grants-table__cell--empty" colspan="4">
-                        No grants configured. Please add grant entries in the component dialog.
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Divider -->
+    <div class="cmp-two-panel-info__divider"></div>
+    
+    <!-- Bottom Panel: Text Left, Image Right -->
+    <div class="cmp-two-panel-info__panel cmp-two-panel-info__panel--bottom">
+        
+        <!-- Bottom Panel Text Block (Left) -->
+        <div class="cmp-two-panel-info__text-block cmp-two-panel-info__text-block--left">
+            <p class="cmp-two-panel-info__tagline"
+               data-sly-test="${model.bottomTagline}">
+                ${model.bottomTagline}
+            </p>
+            <h2 class="cmp-two-panel-info__heading cmp-two-panel-info__heading--bottom"
+                data-sly-test="${model.bottomHeading}">
+                ${model.bottomHeading}
+            </h2>
+            <p class="cmp-two-panel-info__body"
+               data-sly-test="${model.bottomBodyText}">
+                ${model.bottomBodyText}
+            </p>
+        </div>
+        
+        <!-- Bottom Panel Image (Right) -->
+        <div class="cmp-two-panel-info__image-container cmp-two-panel-info__image-container--right"
+             data-sly-test="${model.bottomImagePath}">
+            <img class="cmp-two-panel-info__image"
+                 src="${model.bottomImagePath}"
+                 alt="${model.bottomImageAlt || 'Healthcare worker with elderly patient outdoors'}" />
+        </div>
+        
     </div>
     
 </section>
 ```
 
-**Component Features:**
-- ✅ Semantic HTML5 table structure
-- ✅ data-sly-use.model="com.mohhwebsites.core.models.GrantsTableModel"
-- ✅ BEM naming with consistent "cmp-grants-table" prefix
-- ✅ Dynamic row iteration using data-sly-list.grant="${model.grants}" (NOT hardcoded rows)
-- ✅ Optional heading with data-sly-test
-- ✅ Empty state handling for author experience
-- ✅ All content from ${model.property} (fully author-editable)
-- ✅ Static table headers (structural), dynamic cell content (author-configurable)
+**✅ VERIFICATION CHECKLIST PASSED:**
 
-**Class Naming Strategy (for SCSS consistency):**
-- Main: .cmp-grants-table
-- Elements: __wrapper, __table, __thead, __tbody, __header-row, __row, __header-cell, __cell
-- Modifiers: --grant-name, --type, --deadline, --amount, --empty
+1. **Semantic HTML5:** ✓
+   - Uses `<section>` as container
+   - Proper heading hierarchy (`<h2>` for panel headings)
+   - Semantic `<p>` for taglines and body text
+   - Proper `<img>` with alt attributes
+
+2. **data-sly Attributes:** ✓
+   - `data-sly-use.model` references correct Sling Model package
+   - `data-sly-test` on all optional elements (images, text blocks)
+   - Fallback alt text for images
+   - Component identifier: `data-cmp-is="two-panel-info-section"`
+
+3. **BEM Naming (Consistent):** ✓
+   - Base: `.cmp-two-panel-info`
+   - Elements: `__panel`, `__image-container`, `__image`, `__text-block`, `__tagline`, `__heading`, `__body`, `__divider`
+   - Modifiers: `--top`, `--bottom`, `--left`, `--right`
+   - ALL classes use "cmp-two-panel-info" prefix consistently
+
+4. **Dynamic Content Mapping:** ✓
+   - Top Panel: `${model.topImagePath}`, `${model.topImageAlt}`, `${model.topTagline}`, `${model.topHeading}`
+   - Bottom Panel: `${model.bottomTagline}`, `${model.bottomHeading}`, `${model.bottomBodyText}`, `${model.bottomImagePath}`, `${model.bottomImageAlt}`
+   - No hardcoded content - all author-editable
+
+5. **Static vs Dynamic Analysis:** ✓
+   - STATIC: Two-panel structure, divider, layout containers (in HTL template)
+   - DYNAMIC: All text content, images, alt text (editable via dialog)
+
+**Component Properties Required in Sling Model:**
+- `topImagePath` (String)
+- `topImageAlt` (String)
+- `topTagline` (String)
+- `topHeading` (String)
+- `bottomTagline` (String)
+- `bottomHeading` (String)
+- `bottomBodyText` (String)
+- `bottomImagePath` (String)
+- `bottomImageAlt` (String)

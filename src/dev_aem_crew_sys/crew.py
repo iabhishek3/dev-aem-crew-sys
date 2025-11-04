@@ -87,26 +87,6 @@ class DevAemCrewSys():
             llm=llm
         )
 
-    @agent
-    def ui_architect(self) -> Agent:
-        # Create LLM instance for Claude with retry settings
-        model_name = os.getenv("MODEL", "anthropic/claude-sonnet-4-5-20250929")
-        if not model_name.startswith("anthropic/"):
-            model_name = f"anthropic/{model_name}"
-
-        llm = LLM(
-            model=model_name,
-            api_key=os.getenv("ANTHROPIC_API_KEY"),
-            timeout=120,  # 2 minute timeout
-            max_retries=5  # Retry up to 5 times on failure
-        )
-
-        return Agent(
-            config=self.agents_config['ui_architect'], # type: ignore[index]
-            verbose=True,
-            tools=[FileWriterTool()],
-            llm=llm
-        )
 
     @agent
     def aem_alchemist(self) -> Agent:
@@ -142,35 +122,6 @@ class DevAemCrewSys():
             config=self.tasks_config['design_analysis_task'], # type: ignore[index]
             output_file='output-visual_strategist/design_analysis.json',
             callback=task_delay_callback  # Add delay after task
-        )
-
-    @task
-    def component_listing_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['component_listing_task'], # type: ignore[index]
-            output_file='output-ui_architect/component_list.md'
-        )
-
-    @task
-    def component_creation_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['component_creation_task'], # type: ignore[index]
-            output_file='output-ui_architect/component_summary.txt'
-        )
-
-    @task
-    def aem_component_list_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['aem_component_list_task'], # type: ignore[index]
-            output_file='output-aem_alchemist/aem_component_selection.txt'
-        )
-
-    @task
-    def aem_component_conversion_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['aem_component_conversion_task'], # type: ignore[index]
-            output_file='output-aem_alchemist/aem_component_files.txt',
-            context=[self.design_analysis_task()]  # Pass JSON from Visual Strategist
         )
 
     # Multi-task breakdown for AEM component generation
@@ -236,20 +187,6 @@ class DevAemCrewSys():
             context=[self.design_analysis_task(), self.aem_frontend_js_generation_task()]
         )
 
-    @task
-    def aem_build_deploy_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['aem_build_deploy_task'], # type: ignore[index]
-            output_file='output-aem_alchemist/aem_build_log.txt'
-        )
-
-    @task
-    def aem_testing_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['aem_testing_task'], # type: ignore[index]
-            output_file='output-aem_alchemist/aem_testing_report.txt'
-        )
-
     @crew
     def crew(self) -> Crew:
         """Creates the DevAemCrewSys crew for HTML component creation and AEM conversion"""
@@ -278,10 +215,6 @@ class DevAemCrewSys():
 
                 # Phase 3: Verification - Confirm all files created
                 self.aem_component_verification_task(),  # 7: Verify 6 files exist
-
-                # Phase 4: Build and deploy (optional)
-                # self.aem_build_deploy_task(),
-                # self.aem_testing_task()
             ],
             process=Process.sequential,
             verbose=True,

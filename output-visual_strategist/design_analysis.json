@@ -1,81 +1,116 @@
+```json
 {
   "component": {
-    "name": "grants-table",
-    "type": "data-table",
+    "name": "two-panel-info-section",
+    "type": "informational-section",
     "width": "100%"
   },
   "colors": {
-    "headerBg": "#F3F4F6",
-    "rowBg": "#FFFFFF",
-    "text": "#000000",
-    "secondary": "#6B7280"
+    "background": "#FFFFFF",
+    "heading": "#1A1A1A",
+    "tagline": "#E91E63",
+    "bodyText": "#666666",
+    "divider": "#E0E0E0"
   },
   "layout": {
-    "display": "table",
-    "borderRadius": "8px"
+    "display": "flex",
+    "flexDirection": "column",
+    "padding": "50px 50px",
+    "gap": "70px"
   },
-  "columns": [
+  "elements": [
     {
-      "key": "grantName",
-      "header": "Grant Name",
-      "width": "40%",
-      "align": "left"
+      "type": "row",
+      "display": "flex",
+      "justify": "space-between",
+      "align": "center",
+      "gap": "70px",
+      "children": [
+        {
+          "type": "image",
+          "position": "left",
+          "width": "225px",
+          "height": "127px",
+          "borderRadius": "5px",
+          "alt": "Healthcare worker with elderly patient outdoors"
+        },
+        {
+          "type": "textBlock",
+          "position": "right",
+          "children": [
+            {
+              "type": "tagline",
+              "text": "Our Tagline",
+              "fontSize": "13px",
+              "fontWeight": "400",
+              "color": "#E91E63",
+              "marginBottom": "10px"
+            },
+            {
+              "type": "heading",
+              "text": "Making Our Healthcare Happen",
+              "fontSize": "26px",
+              "fontWeight": "600",
+              "color": "#1A1A1A"
+            }
+          ]
+        }
+      ]
     },
     {
-      "key": "type",
-      "header": "Type",
-      "width": "20%",
-      "align": "left"
+      "type": "divider",
+      "height": "1px",
+      "background": "#E0E0E0",
+      "margin": "35px 0"
     },
     {
-      "key": "deadline",
-      "header": "Deadline",
-      "width": "20%",
-      "align": "left"
-    },
-    {
-      "key": "amount",
-      "header": "Amount",
-      "width": "20%",
-      "align": "left"
+      "type": "row",
+      "display": "flex",
+      "justify": "space-between",
+      "align": "center",
+      "gap": "70px",
+      "children": [
+        {
+          "type": "textBlock",
+          "position": "left",
+          "maxWidth": "55%",
+          "children": [
+            {
+              "type": "tagline",
+              "text": "Our Purpose",
+              "fontSize": "13px",
+              "fontWeight": "400",
+              "color": "#E91E63",
+              "marginBottom": "10px"
+            },
+            {
+              "type": "heading",
+              "text": "A Singapore where everyone is assured of value-based healthcare.",
+              "fontSize": "24px",
+              "fontWeight": "600",
+              "color": "#1A1A1A",
+              "marginBottom": "18px"
+            },
+            {
+              "type": "bodyText",
+              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+              "fontSize": "15px",
+              "fontWeight": "400",
+              "color": "#666666",
+              "lineHeight": "1.6"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "position": "right",
+          "width": "225px",
+          "height": "127px",
+          "borderRadius": "5px",
+          "alt": "Healthcare worker with elderly patient outdoors"
+        }
+      ]
     }
-  ],
-  "header": {
-    "background": "#F3F4F6",
-    "fontSize": "16px",
-    "fontWeight": "600",
-    "padding": "20px 24px",
-    "height": "60px"
-  },
-  "rows": [
-    {
-      "grantName": "Healthcare Innovation Grant",
-      "type": "Competitive",
-      "deadline": "Dec 31, 2025",
-      "amount": "$500,000"
-    },
-    {
-      "grantName": "Cancer Research Advancement Grant",
-      "type": "Competitive",
-      "deadline": "Dec 31, 2024",
-      "amount": "$900,000"
-    },
-    {
-      "grantName": "Global Health Partnership Award",
-      "type": "Partnership",
-      "deadline": "Nov 30, 2024",
-      "amount": "$1,500,000"
-    }
-  ],
-  "cell": {
-    "padding": "20px 24px",
-    "fontSize": "16px",
-    "fontWeight": "400",
-    "height": "80px"
-  },
-  "styling": {
-    "typeColor": "#6B7280",
-    "amountWeight": "600",
-    "borderBottom": "1px solid #E5E7EB"
-  }
+  ]
 }
+```
