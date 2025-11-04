@@ -39,6 +39,14 @@ This command initializes the dev-aem-crew-sys Crew, assembling the agents and as
 
 This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
 
+## Running the Project With UI
+
+To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+
+```bash
+$ python -m streamlit run app.py
+```
+
 ## Understanding Your Crew
 
 The dev-aem-crew-sys Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
