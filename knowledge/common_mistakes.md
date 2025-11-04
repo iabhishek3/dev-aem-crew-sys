@@ -504,7 +504,70 @@ public String getImageAlt() {
 
 ---
 
-## 15. Missing Module Export for JS
+## 15. Using `var context = this;` (ESLint Violation)
+
+### ❌ WRONG: Aliasing `this` to Local Variable
+```javascript
+function debounce(func, wait) {
+    var timeout;
+    return function() {
+        var context = this;  // ← ESLint no-this-alias violation!
+        var args = arguments;
+
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            func.apply(context, args);
+        }, wait);
+    };
+}
+```
+
+**Problems:**
+- Violates ESLint rule `no-this-alias`
+- Discouraged pattern in modern JavaScript
+- Can be confusing for maintainers
+- Unnecessary variable assignment
+
+### ✅ CORRECT: Use `.bind(this)` Instead
+```javascript
+function debounce(func, wait) {
+    var timeout;
+    return function() {
+        var args = arguments;
+
+        clearTimeout(timeout);
+        // ✅ Use .bind(this) to preserve context
+        timeout = setTimeout(function() {
+            func.apply(this, args);
+        }.bind(this), wait);
+    };
+}
+```
+
+**Benefits:**
+- ESLint compliant
+- More explicit about intent
+- Standard ES5 pattern
+- No extra variable needed
+
+**Alternative Pattern (if appropriate):**
+```javascript
+// If you don't need to preserve `this` context:
+function debounce(func, wait) {
+    var timeout;
+    return function() {
+        var args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            func.apply(null, args);  // or use func(...args) if not ES5
+        }, wait);
+    };
+}
+```
+
+---
+
+## 16. Missing Module Export for JS
 
 ### ❌ WRONG: No Export
 ```javascript
@@ -567,4 +630,5 @@ Before completing a component:
 - [ ] prefers-reduced-motion support
 - [ ] All 5 XML namespaces in dialog
 - [ ] Image alt text with fallback
+- [ ] No `var context = this;` pattern (use .bind(this))
 - [ ] JavaScript module export

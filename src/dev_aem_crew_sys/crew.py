@@ -287,4 +287,35 @@ class DevAemCrewSys():
             verbose=True,
         )
 
+    def aem_only_crew(self) -> Crew:
+        """
+        Creates a crew with ONLY the AEM Alchemist agent.
+        Use this for testing when you already have design_analysis.json from a previous run.
+
+        This skips the Visual Strategist and starts directly with AEM component generation.
+        Requires: output-visual_strategist/design_analysis.json to exist
+
+        NOTE: This is NOT decorated with @crew since CrewAI only supports one @crew per class.
+        It's called directly as a regular method.
+        """
+        return Crew(
+            agents=[
+                self.aem_alchemist()
+            ],
+            tasks=[
+                # Phase 2: AEM component generation (6 files following MOHH standard)
+                self.aem_component_definition_task(),    # 1/6: .content.xml (ui.apps)
+                self.aem_htl_generation_task(),          # 2/6: HTL template (ui.apps)
+                self.aem_sling_model_generation_task(),  # 3/6: Java Sling Model (core)
+                self.aem_dialog_generation_task(),       # 4/6: Dialog XML (ui.apps)
+                self.aem_frontend_scss_generation_task(), # 5/6: SCSS (ui.frontend)
+                self.aem_frontend_js_generation_task(),  # 6/6: JavaScript (ui.frontend)
+
+                # Phase 3: Verification - Confirm all files created
+                self.aem_component_verification_task(),  # 7: Verify 6 files exist
+            ],
+            process=Process.sequential,
+            verbose=True,
+        )
+
     

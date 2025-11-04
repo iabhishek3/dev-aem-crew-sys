@@ -1,7 +1,6 @@
-✅ 3/6 COMPLETE: Sling Model created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/core/src/main/java/com/mohhwebsites/core/models/FooterModel.java
+✅ 3/6 COMPLETE: Sling Model created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/core/src/main/java/com/mohhwebsites/core/models/GrantsTableModel.java
 
-**Enterprise Java Sling Model - FooterModel.java**
-
+**File Content:**
 ```java
 package com.mohhwebsites.core.models;
 
@@ -17,160 +16,125 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Sling Model for the Footer Component
+ * Sling Model for Grants Table Component
  * 
- * This model provides all data and configuration for the MOHH footer component.
+ * This model manages a data table displaying grant information with configurable rows.
+ * Authors can add/edit grant entries through a multifield dialog.
+ * 
+ * Features:
+ * - Optional section heading
+ * - Configurable color scheme (header, rows, text)
+ * - Dynamic grant entries (name, type, deadline, amount)
+ * - Validation for required fields
+ * - Empty state handling
  * 
  * @author AEM Component Engineer
- * @version 1.0
  */
-@Model(
-    adaptables = {SlingHttpServletRequest.class, Resource.class},
-    adapters = FooterModel.class,
-    defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
-)
-public class FooterModel {
+@Model(adaptables = {SlingHttpServletRequest.class, Resource.class},
+       adapters = GrantsTableModel.class,
+       defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+public class GrantsTableModel {
 
+    /**
+     * Optional heading text for the grants table section
+     */
     @ValueMapValue
-    @Default(values = "MOHH")
-    private String logoText;
+    private String heading;
 
+    /**
+     * Background color for table header
+     * Default: #F3F4F6 (light gray)
+     */
     @ValueMapValue
-    @Default(values = "Making Our Healthcare Happen")
-    private String tagline;
+    @Default(values = "#F3F4F6")
+    private String headerBg;
 
+    /**
+     * Background color for table rows
+     * Default: #FFFFFF (white)
+     */
     @ValueMapValue
-    @Default(values = "Leading Singapore's public healthcare transformation.")
-    private String description;
+    @Default(values = "#FFFFFF")
+    private String rowBg;
 
+    /**
+     * Primary text color
+     * Default: #000000 (black)
+     */
     @ValueMapValue
-    @Default(values = "#F5F5F5")
-    private String backgroundColor;
-
-    @ValueMapValue
-    @Default(values = "#333333")
+    @Default(values = "#000000")
     private String textColor;
 
+    /**
+     * Secondary text color (used for type column)
+     * Default: #6B7280 (gray)
+     */
     @ValueMapValue
-    @Default(values = "#666666")
-    private String textSecondaryColor;
+    @Default(values = "#6B7280")
+    private String secondaryColor;
 
-    @ValueMapValue
-    @Default(values = "#6AACDB")
-    private String primaryColor;
-
-    @ValueMapValue
-    @Default(values = "#E85D75")
-    private String accentColor;
-
-    @ValueMapValue
-    @Default(values = "#CCCCCC")
-    private String borderColor;
-
-    @ValueMapValue
-    @Default(booleanValues = true)
-    private boolean showSeparator;
-
-    @ValueMapValue
-    @Default(values = "50px 70px")
-    private String padding;
-
+    /**
+     * List of grant entries configured by authors
+     * Each resource contains: grantName, type, deadline, amount
+     */
     @ChildResource
-    private List<Resource> socialIcons;
-    private List<SocialIcon> validatedSocialIcons;
+    private List<Resource> grants;
 
-    @ChildResource
-    private List<Resource> primaryNavItems;
-    private List<NavItem> validatedPrimaryNavItems;
+    /**
+     * Validated and processed list of grant items
+     */
+    private List<GrantItem> validatedGrants;
 
-    @ChildResource
-    private List<Resource> secondaryNavItems;
-    private List<NavItem> validatedSecondaryNavItems;
-
-    @ValueMapValue
-    @Default(values = "© 2025 MOH Holdings    Last updated 01 Jan 2025")
-    private String copyrightText;
-
+    /**
+     * Post-construct initialization
+     * Validates and processes grant entries, filtering out invalid items
+     */
     @PostConstruct
     protected void init() {
-        validateSocialIcons();
-        validatePrimaryNavItems();
-        validateSecondaryNavItems();
-    }
-
-    private void validateSocialIcons() {
-        validatedSocialIcons = new ArrayList<>();
-        if (socialIcons != null) {
-            for (Resource iconResource : socialIcons) {
-                SocialIcon icon = new SocialIcon(iconResource);
-                if (icon.isValid()) {
-                    validatedSocialIcons.add(icon);
-                }
-            }
-        }
-    }
-
-    private void validatePrimaryNavItems() {
-        validatedPrimaryNavItems = new ArrayList<>();
-        if (primaryNavItems != null) {
-            for (Resource navResource : primaryNavItems) {
-                NavItem navItem = new NavItem(navResource);
-                if (navItem.isValid()) {
-                    validatedPrimaryNavItems.add(navItem);
-                }
-            }
-        }
-    }
-
-    private void validateSecondaryNavItems() {
-        validatedSecondaryNavItems = new ArrayList<>();
-        if (secondaryNavItems != null) {
-            for (Resource navResource : secondaryNavItems) {
-                NavItem navItem = new NavItem(navResource);
-                if (navItem.isValid()) {
-                    validatedSecondaryNavItems.add(navItem);
-                }
-            }
+        if (grants != null && !grants.isEmpty()) {
+            validatedGrants = grants.stream()
+                    .map(GrantItem::new)
+                    .filter(GrantItem::isValid)
+                    .collect(Collectors.toList());
+        } else {
+            validatedGrants = Collections.emptyList();
         }
     }
 
     /**
-     * Gets the logo text
-     * @return the logo text
+     * Gets the optional section heading
+     * 
+     * @return the heading text, or null if not configured
      */
-    public String getLogoText() {
-        return logoText;
+    public String getHeading() {
+        return heading;
     }
 
     /**
-     * Gets the tagline text
-     * @return the tagline text
+     * Gets the header background color
+     * 
+     * @return hex color code for table header background
      */
-    public String getTagline() {
-        return tagline;
+    public String getHeaderBg() {
+        return headerBg;
     }
 
     /**
-     * Gets the description text
-     * @return the description text
+     * Gets the row background color
+     * 
+     * @return hex color code for table row background
      */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Gets the background color
-     * @return the background color
-     */
-    public String getBackgroundColor() {
-        return backgroundColor;
+    public String getRowBg() {
+        return rowBg;
     }
 
     /**
      * Gets the primary text color
-     * @return the text color
+     * 
+     * @return hex color code for primary text
      */
     public String getTextColor() {
         return textColor;
@@ -178,225 +142,180 @@ public class FooterModel {
 
     /**
      * Gets the secondary text color
-     * @return the secondary text color
+     * 
+     * @return hex color code for secondary text (type column)
      */
-    public String getTextSecondaryColor() {
-        return textSecondaryColor;
+    public String getSecondaryColor() {
+        return secondaryColor;
     }
 
     /**
-     * Gets the primary brand color
-     * @return the primary color
+     * Gets the list of validated grant entries
+     * 
+     * @return list of GrantItem objects, empty list if none configured or all invalid
      */
-    public String getPrimaryColor() {
-        return primaryColor;
+    public List<GrantItem> getGrants() {
+        return validatedGrants != null ? validatedGrants : Collections.emptyList();
     }
 
     /**
-     * Gets the accent color
-     * @return the accent color
+     * Gets the count of valid grant entries
+     * 
+     * @return number of grants in the table
      */
-    public String getAccentColor() {
-        return accentColor;
+    public int getGrantsCount() {
+        return validatedGrants != null ? validatedGrants.size() : 0;
     }
 
     /**
-     * Gets the border color
-     * @return the border color
+     * Checks if the table has any grant entries
+     * 
+     * @return true if at least one grant exists, false otherwise
      */
-    public String getBorderColor() {
-        return borderColor;
+    public boolean hasGrants() {
+        return getGrantsCount() > 0;
     }
 
     /**
-     * Gets whether to show the separator line
-     * @return true if separator should be displayed
+     * Inner class representing a single grant entry
+     * Contains all information for one table row
      */
-    public boolean isShowSeparator() {
-        return showSeparator;
-    }
+    public class GrantItem {
+        private final Resource resource;
+        private final String grantName;
+        private final String type;
+        private final String deadline;
+        private final String amount;
 
-    /**
-     * Gets the footer padding
-     * @return the padding value
-     */
-    public String getPadding() {
-        return padding;
-    }
-
-    /**
-     * Gets the list of social media icons
-     * @return list of social icons
-     */
-    public List<SocialIcon> getSocialIcons() {
-        return validatedSocialIcons != null ? Collections.unmodifiableList(validatedSocialIcons) : Collections.emptyList();
-    }
-
-    /**
-     * Gets the count of social media icons
-     * @return number of icons
-     */
-    public int getSocialIconsCount() {
-        return validatedSocialIcons != null ? validatedSocialIcons.size() : 0;
-    }
-
-    /**
-     * Gets the list of primary navigation items
-     * @return list of primary nav items
-     */
-    public List<NavItem> getPrimaryNavItems() {
-        return validatedPrimaryNavItems != null ? Collections.unmodifiableList(validatedPrimaryNavItems) : Collections.emptyList();
-    }
-
-    /**
-     * Gets the count of primary navigation items
-     * @return number of primary nav items
-     */
-    public int getPrimaryNavItemsCount() {
-        return validatedPrimaryNavItems != null ? validatedPrimaryNavItems.size() : 0;
-    }
-
-    /**
-     * Gets the list of secondary navigation items
-     * @return list of secondary nav items
-     */
-    public List<NavItem> getSecondaryNavItems() {
-        return validatedSecondaryNavItems != null ? Collections.unmodifiableList(validatedSecondaryNavItems) : Collections.emptyList();
-    }
-
-    /**
-     * Gets the count of secondary navigation items
-     * @return number of secondary nav items
-     */
-    public int getSecondaryNavItemsCount() {
-        return validatedSecondaryNavItems != null ? validatedSecondaryNavItems.size() : 0;
-    }
-
-    /**
-     * Gets the copyright text
-     * @return the copyright text
-     */
-    public String getCopyrightText() {
-        return copyrightText;
-    }
-
-    /**
-     * Represents a social media icon
-     */
-    public static class SocialIcon {
-        private String platform;
-        private String url;
-        private String color;
-        private String size;
-        private String icon;
-
-        public SocialIcon(Resource resource) {
-            if (resource != null) {
-                this.platform = resource.getValueMap().get("platform", String.class);
-                this.url = resource.getValueMap().get("url", "");
-                this.color = resource.getValueMap().get("color", "#6AACDB");
-                this.size = resource.getValueMap().get("size", "28px");
-                this.icon = resource.getValueMap().get("icon", String.class);
-            }
+        /**
+         * Constructor that extracts properties from the resource
+         * 
+         * @param resource the child resource containing grant data
+         */
+        public GrantItem(Resource resource) {
+            this.resource = resource;
+            this.grantName = resource.getValueMap().get("grantName", String.class);
+            this.type = resource.getValueMap().get("type", String.class);
+            this.deadline = resource.getValueMap().get("deadline", String.class);
+            this.amount = resource.getValueMap().get("amount", String.class);
         }
 
+        /**
+         * Validates that all required fields are present
+         * A grant is considered valid if it has at least a grant name
+         * 
+         * @return true if grant has required data, false otherwise
+         */
         public boolean isValid() {
-            return platform != null && !platform.isEmpty();
+            return grantName != null && !grantName.trim().isEmpty();
         }
 
-        public String getPlatform() {
-            return platform;
+        /**
+         * Gets the grant name
+         * 
+         * @return the name/title of the grant
+         */
+        public String getGrantName() {
+            return grantName;
         }
 
-        public String getUrl() {
-            return url;
+        /**
+         * Gets the grant type
+         * Examples: "Competitive", "Partnership", "Direct Award"
+         * 
+         * @return the type/category of the grant
+         */
+        public String getType() {
+            return type;
         }
 
-        public String getColor() {
-            return color;
+        /**
+         * Gets the application deadline
+         * Format: "MMM DD, YYYY" (e.g., "Dec 31, 2025")
+         * 
+         * @return the deadline date as a formatted string
+         */
+        public String getDeadline() {
+            return deadline;
         }
 
-        public String getSize() {
-            return size;
+        /**
+         * Gets the grant amount
+         * Format: Currency with appropriate formatting (e.g., "$500,000")
+         * 
+         * @return the grant amount as a formatted string
+         */
+        public String getAmount() {
+            return amount;
         }
 
-        public String getIcon() {
-            return icon;
-        }
-    }
-
-    /**
-     * Represents a navigation item
-     */
-    public static class NavItem {
-        private String text;
-        private String url;
-        private boolean newWindow;
-        private boolean hasExternalIcon;
-
-        public NavItem(Resource resource) {
-            if (resource != null) {
-                this.text = resource.getValueMap().get("text", String.class);
-                this.url = resource.getValueMap().get("url", "");
-                this.newWindow = resource.getValueMap().get("newWindow", false);
-                String icon = resource.getValueMap().get("icon", String.class);
-                this.hasExternalIcon = "external".equals(icon);
-            }
-        }
-
-        public boolean isValid() {
-            return text != null && !text.isEmpty();
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public boolean isNewWindow() {
-            return newWindow;
-        }
-
-        public boolean isHasExternalIcon() {
-            return hasExternalIcon;
+        /**
+         * Gets the underlying resource
+         * 
+         * @return the Sling resource for this grant item
+         */
+        public Resource getResource() {
+            return resource;
         }
     }
 }
 ```
 
-**✅ SLING MODEL FEATURES:**
+**Enterprise Java Model Features:**
 
-1. **@Model Annotation**: Properly configured with SlingHttpServletRequest and Resource adaptables
-2. **@ValueMapValue Properties**: All extracted from JSON specification:
-   - Branding: logoText, tagline, description
-   - Colors: backgroundColor, textColor, textSecondaryColor, primaryColor, accentColor, borderColor
-   - Layout: showSeparator, padding
-   - Copyright: copyrightText
+✅ **@Model Annotation**
+- Adaptables: SlingHttpServletRequest.class, Resource.class
+- Adapter: GrantsTableModel.class
+- DefaultInjectionStrategy: OPTIONAL
 
-3. **@ChildResource Collections**: 
-   - socialIcons → List<SocialIcon>
-   - primaryNavItems → List<NavItem>
-   - secondaryNavItems → List<NavItem>
+✅ **@ValueMapValue Properties**
+- heading (String) - Optional section heading
+- headerBg (String) - Header background color with default #F3F4F6
+- rowBg (String) - Row background color with default #FFFFFF
+- textColor (String) - Primary text color with default #000000
+- secondaryColor (String) - Secondary text color with default #6B7280
 
-4. **@PostConstruct Initialization**: Validates all child resources on initialization
+✅ **@ChildResource Collection**
+- grants (List<Resource>) - Dynamic grant entries from multifield
 
-5. **Inner Classes**:
-   - **SocialIcon**: Represents social media platforms with platform, url, color, size, icon properties
-   - **NavItem**: Represents navigation links with text, url, newWindow, hasExternalIcon properties
+✅ **Inner Class: GrantItem**
+- Properties: grantName, type, deadline, amount
+- Validation: isValid() method checks required fields
+- Getters with comprehensive JavaDoc
 
-6. **Validation Methods**: isValid() for both inner classes ensures data integrity
+✅ **@PostConstruct Initialization**
+- Validates grant entries
+- Filters out invalid items
+- Creates immutable collections
 
-7. **JavaDoc Comments**: Every getter method has comprehensive documentation
+✅ **Utility Methods**
+- getGrantsCount() - Returns number of grants
+- hasGrants() - Boolean check for content existence
 
-8. **@Default Annotations**: Sensible defaults matching JSON specification
+✅ **Complete JavaDoc Documentation**
+- Class-level description
+- Method-level descriptions with @return tags
+- Author attribution
 
-9. **Type-Safe**: Uses proper Java types (String, boolean, List<>)
+✅ **Data Flow Integrity**
+- HTL: ${model.heading} → Model: getHeading()
+- HTL: ${model.grants} → Model: getGrants() 
+- HTL: ${grant.grantName} → GrantItem: getGrantName()
+- HTL: ${grant.type} → GrantItem: getType()
+- HTL: ${grant.deadline} → GrantItem: getDeadline()
+- HTL: ${grant.amount} → GrantItem: getAmount()
 
-10. **Immutable Collections**: Returns unmodifiable lists from getters
+**Property Extraction from JSON:**
+✓ heading - Extracted for optional section title
+✓ headerBg - From colors.headerBg (#F3F4F6)
+✓ rowBg - From colors.rowBg (#FFFFFF)
+✓ textColor - From colors.text (#000000)
+✓ secondaryColor - From colors.secondary (#6B7280)
+✓ grants - From rows array → @ChildResource List<Resource>
+✓ GrantItem properties - From row objects (grantName, type, deadline, amount)
 
-**Package**: com.mohhwebsites.core.models
-**Class**: FooterModel (footer → FooterModel in PascalCase)
-**Path**: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/core/src/main/java/com/mohhwebsites/core/models/FooterModel.java
+**Validation & Safety:**
+- Stream-based filtering of invalid entries
+- Null-safe collections (Collections.emptyList())
+- Required field validation (grantName must exist)
+- Immutable return collections

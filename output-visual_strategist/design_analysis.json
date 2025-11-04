@@ -1,102 +1,81 @@
-```json
 {
   "component": {
-    "name": "footer",
-    "type": "footer",
-    "width": "100%",
-    "height": "450px"
+    "name": "grants-table",
+    "type": "data-table",
+    "width": "100%"
   },
   "colors": {
-    "background": "#F5F5F5",
-    "text": "#333333",
-    "textSecondary": "#666666",
-    "primary": "#6AACDB",
-    "accent": "#E85D75",
-    "border": "#CCCCCC"
+    "headerBg": "#F3F4F6",
+    "rowBg": "#FFFFFF",
+    "text": "#000000",
+    "secondary": "#6B7280"
   },
   "layout": {
-    "display": "block",
-    "padding": "50px 70px",
-    "gap": "30px"
+    "display": "table",
+    "borderRadius": "8px"
   },
-  "elements": [
+  "columns": [
     {
-      "type": "logo",
-      "text": "MOHH",
-      "fontSize": "65px",
-      "fontWeight": "700",
-      "color": "#6AACDB"
+      "key": "grantName",
+      "header": "Grant Name",
+      "width": "40%",
+      "align": "left"
     },
     {
-      "type": "tagline",
-      "text": "Making Our Healthcare Happen",
-      "fontSize": "14px",
-      "fontWeight": "700",
-      "color": "#E85D75"
+      "key": "type",
+      "header": "Type",
+      "width": "20%",
+      "align": "left"
     },
     {
-      "type": "description",
-      "text": "Leading Singapore's public healthcare transformation through strategic investments, talent development, and innovative partnerships.",
-      "fontSize": "16px",
-      "fontWeight": "400",
-      "color": "#666666",
-      "marginTop": "20px"
+      "key": "deadline",
+      "header": "Deadline",
+      "width": "20%",
+      "align": "left"
     },
     {
-      "type": "socialIcons",
-      "marginTop": "30px",
-      "gap": "18px",
-      "items": [
-        {"platform": "facebook", "color": "#6AACDB", "size": "28px"},
-        {"platform": "twitter", "color": "#6AACDB", "size": "28px"},
-        {"platform": "instagram", "color": "#6AACDB", "size": "28px"},
-        {"platform": "youtube", "color": "#6AACDB", "size": "28px"},
-        {"platform": "linkedin", "color": "#6AACDB", "size": "28px"},
-        {"platform": "tiktok", "color": "#6AACDB", "size": "28px"}
-      ]
-    },
-    {
-      "type": "separator",
-      "marginTop": "35px",
-      "marginBottom": "35px",
-      "height": "1px",
-      "background": "#CCCCCC"
-    },
-    {
-      "type": "navPrimary",
-      "display": "flex",
-      "gap": "35px",
-      "fontSize": "16px",
-      "color": "#333333",
-      "items": [
-        {"text": "Sitemap"},
-        {"text": "MOHH IT Security Requirements"},
-        {"text": "Contact"},
-        {"text": "Disclaimer"}
-      ]
-    },
-    {
-      "type": "navSecondary",
-      "display": "flex",
-      "gap": "35px",
-      "fontSize": "16px",
-      "color": "#333333",
-      "marginTop": "22px",
-      "items": [
-        {"text": "Report Vulnerability", "icon": "external"},
-        {"text": "PDPA Standards"},
-        {"text": "Terms of use"},
-        {"text": "Whistleblowing"}
-      ]
-    },
-    {
-      "type": "copyright",
-      "text": "© 2025 MOH Holdings    Last updated 01 Jan 2025",
-      "fontSize": "14px",
-      "color": "#666666",
-      "textAlign": "right",
-      "marginTop": "30px"
+      "key": "amount",
+      "header": "Amount",
+      "width": "20%",
+      "align": "left"
     }
-  ]
+  ],
+  "header": {
+    "background": "#F3F4F6",
+    "fontSize": "16px",
+    "fontWeight": "600",
+    "padding": "20px 24px",
+    "height": "60px"
+  },
+  "rows": [
+    {
+      "grantName": "Healthcare Innovation Grant",
+      "type": "Competitive",
+      "deadline": "Dec 31, 2025",
+      "amount": "$500,000"
+    },
+    {
+      "grantName": "Cancer Research Advancement Grant",
+      "type": "Competitive",
+      "deadline": "Dec 31, 2024",
+      "amount": "$900,000"
+    },
+    {
+      "grantName": "Global Health Partnership Award",
+      "type": "Partnership",
+      "deadline": "Nov 30, 2024",
+      "amount": "$1,500,000"
+    }
+  ],
+  "cell": {
+    "padding": "20px 24px",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "80px"
+  },
+  "styling": {
+    "typeColor": "#6B7280",
+    "amountWeight": "600",
+    "borderBottom": "1px solid #E5E7EB"
+  }
 }
-```

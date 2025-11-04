@@ -37,7 +37,7 @@ def run():
     """
     inputs = {
         # Design image path (relative or absolute)
-        'design_path': './footer.png',
+        'design_path': './table.png',
 
         # Output folder for logs (visual_strategist, ui_architect, aem_alchemist)
         'output_folder': './output',
@@ -88,6 +88,63 @@ def run():
         raise Exception(f"An error occurred while running the crew: {e}")
 
 # Removed run_aem as it's now integrated into the main run function
+
+
+def run_aem_only():
+    """
+    Run ONLY the AEM Alchemist agent (skips Visual Strategist).
+
+    Use this for testing when you already have design_analysis.json from a previous run.
+    This will skip the design analysis phase and directly generate AEM component files.
+
+    PREREQUISITES:
+    - output-visual_strategist/design_analysis.json must exist
+    - Update the AEM project configuration below
+
+    This runs all 7 AEM tasks:
+    1. Component Definition (.content.xml)
+    2. HTL Template (.html)
+    3. Sling Model (.java)
+    4. Dialog (_cq_dialog/.content.xml)
+    5. SCSS (_component.scss)
+    6. JavaScript (_component.js)
+    7. Verification Report
+    """
+    import os
+
+    # Check if design_analysis.json exists
+    if not os.path.exists('output-visual_strategist/design_analysis.json'):
+        print("❌ ERROR: design_analysis.json not found!")
+        print("   Please run the full crew first with: run_crew run")
+        print("   Or ensure output-visual_strategist/design_analysis.json exists")
+        return
+
+    print("✓ Found design_analysis.json")
+    print("🚀 Starting AEM Alchemist (skipping Visual Strategist)...\n")
+
+    inputs = {
+        # Design image path (not used but required for task interpolation)
+        'design_path': './table.png',
+
+        # Output folder for logs
+        'output_folder': './output',
+
+        # AEM PROJECT CONFIGURATION - MOHH Websites Project
+        'aem_project_path': '/Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp',
+        'aem_app_id': 'mohhwebsites',
+        'aem_component_group': 'MOHH Websites - Content',
+        'aem_namespace': 'mohhwebsites',
+
+        # Component selection (leave empty - agent will use design analysis)
+        'selected_component': '',
+        'component_name': ''
+    }
+
+    try:
+        # Use the aem_only_crew instead of the full crew
+        DevAemCrewSys().aem_only_crew().kickoff(inputs=inputs)
+    except Exception as e:
+        raise Exception(f"An error occurred while running the AEM-only crew: {e}")
 
 
 def train():

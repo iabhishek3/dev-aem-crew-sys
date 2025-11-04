@@ -1,113 +1,84 @@
-✅ 2/6 COMPLETE: HTL template created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohhwebsites/components/footer/footer.html - Semantic HTML5 - data-sly attributes - BEM naming
+✅ 2/6 COMPLETE: HTL template created at: /Users/abhishekkumar/Temus-space/aem-projects/mohh-websites-revamp/ui.apps/src/main/content/jcr_root/apps/mohhwebsites/components/grants-table/grants-table.html
 
 **File Content:**
 ```html
 <!--
-  Footer Component
-  Description: A comprehensive footer component with branding, navigation, social media links, and copyright information
-  @author AEM Component Engineer
-  @version 1.0
+  Grants Table Component
+  Description: Data table displaying grant information with configurable rows
+  Author-editable: Heading, grant entries (name, type, deadline, amount)
 -->
-<footer class="footer" data-sly-use.model="com.mohhwebsites.core.models.FooterModel">
-    <div class="footer__container">
-        
-        <!-- Logo and Branding Section -->
-        <div class="footer__branding">
-            <div class="footer__logo" data-sly-test="${model.logoText}">
-                ${model.logoText}
-            </div>
-            
-            <div class="footer__tagline" data-sly-test="${model.tagline}">
-                ${model.tagline}
-            </div>
-            
-            <p class="footer__description" data-sly-test="${model.description}">
-                ${model.description}
-            </p>
-            
-            <!-- Social Media Icons -->
-            <div class="footer__social" data-sly-test="${model.socialIcons}">
-                <ul class="footer__social-list" data-sly-list.social="${model.socialIcons}">
-                    <li class="footer__social-item">
-                        <a href="${social.url}" 
-                           class="footer__social-link footer__social-link--${social.platform}"
-                           aria-label="${social.platform}"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            <span class="footer__social-icon footer__social-icon--${social.platform}" 
-                                  data-sly-test="${social.icon}"
-                                  aria-hidden="true">
-                                ${social.icon @ context='html'}
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
-        <!-- Separator -->
-        <div class="footer__separator" data-sly-test="${model.showSeparator}"></div>
-        
-        <!-- Navigation Section -->
-        <nav class="footer__navigation">
-            <!-- Primary Navigation -->
-            <ul class="footer__nav-primary" data-sly-test="${model.primaryNavItems}" data-sly-list.navItem="${model.primaryNavItems}">
-                <li class="footer__nav-item">
-                    <a href="${navItem.url}" 
-                       class="footer__nav-link"
-                       data-sly-attribute.target="${navItem.newWindow ? '_blank' : '_self'}">
-                        ${navItem.text}
-                    </a>
-                </li>
-            </ul>
-            
-            <!-- Secondary Navigation -->
-            <ul class="footer__nav-secondary" data-sly-test="${model.secondaryNavItems}" data-sly-list.navItem="${model.secondaryNavItems}">
-                <li class="footer__nav-item">
-                    <a href="${navItem.url}" 
-                       class="footer__nav-link"
-                       data-sly-attribute.target="${navItem.newWindow ? '_blank' : '_self'}">
-                        ${navItem.text}
-                        <span class="footer__nav-icon" 
-                              data-sly-test="${navItem.hasExternalIcon}"
-                              aria-hidden="true">
-                            <svg class="footer__external-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                                <path d="M12 3H9V1h6v6h-2V4.5l-5.5 5.5-1.4-1.4L11.5 3H12z"/>
-                                <path d="M13 13H3V3h4V1H2v14h13V8h-2v5z"/>
-                            </svg>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        
-        <!-- Copyright Section -->
-        <div class="footer__copyright" data-sly-test="${model.copyrightText}">
-            <p class="footer__copyright-text">
-                ${model.copyrightText}
-            </p>
-        </div>
-        
+<section class="cmp-grants-table" data-sly-use.model="com.mohhwebsites.core.models.GrantsTableModel">
+    
+    <!-- Optional Section Heading -->
+    <div class="cmp-grants-table__header" data-sly-test="${model.heading}">
+        <h2 class="cmp-grants-table__heading">${model.heading}</h2>
     </div>
-</footer>
+    
+    <!-- Table Wrapper -->
+    <div class="cmp-grants-table__wrapper">
+        <table class="cmp-grants-table__table">
+            <!-- Table Header (Static Structure) -->
+            <thead class="cmp-grants-table__thead">
+                <tr class="cmp-grants-table__header-row">
+                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--grant-name">
+                        Grant Name
+                    </th>
+                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--type">
+                        Type
+                    </th>
+                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--deadline">
+                        Deadline
+                    </th>
+                    <th class="cmp-grants-table__header-cell cmp-grants-table__header-cell--amount">
+                        Amount
+                    </th>
+                </tr>
+            </thead>
+            
+            <!-- Table Body (Dynamic Rows) -->
+            <tbody class="cmp-grants-table__tbody" data-sly-test="${model.grants}">
+                <!-- Single row template - repeated for each grant via data-sly-list -->
+                <tr class="cmp-grants-table__row" data-sly-list.grant="${model.grants}">
+                    <td class="cmp-grants-table__cell cmp-grants-table__cell--grant-name">
+                        ${grant.grantName}
+                    </td>
+                    <td class="cmp-grants-table__cell cmp-grants-table__cell--type">
+                        ${grant.type}
+                    </td>
+                    <td class="cmp-grants-table__cell cmp-grants-table__cell--deadline">
+                        ${grant.deadline}
+                    </td>
+                    <td class="cmp-grants-table__cell cmp-grants-table__cell--amount">
+                        ${grant.amount}
+                    </td>
+                </tr>
+            </tbody>
+            
+            <!-- Empty State (when no grants configured) -->
+            <tbody class="cmp-grants-table__tbody" data-sly-test="${!model.grants}">
+                <tr class="cmp-grants-table__row cmp-grants-table__row--empty">
+                    <td class="cmp-grants-table__cell cmp-grants-table__cell--empty" colspan="4">
+                        No grants configured. Please add grant entries in the component dialog.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</section>
 ```
 
-**HTL Template Features:**
-✅ **Semantic HTML5**: Uses `<footer>`, `<nav>`, `<ul>`, `<li>`, `<p>` elements appropriately
-✅ **data-sly-use**: Connects to Sling Model `com.mohhwebsites.core.models.FooterModel`
-✅ **BEM Naming**: Consistent `.footer__*` class structure (e.g., `.footer__branding`, `.footer__logo`, `.footer__tagline`)
-✅ **data-sly-test**: Conditional rendering for all optional elements
-✅ **data-sly-list**: Iterates over social icons and navigation items
-✅ **Accessibility**: Includes `aria-label`, `aria-hidden`, and `rel="noopener noreferrer"`
-✅ **XSS Protection**: Uses proper HTL context (e.g., `@ context='html'` for icons)
-✅ **Component Documentation**: Includes header comments with description and author information
+**Component Features:**
+- ✅ Semantic HTML5 table structure
+- ✅ data-sly-use.model="com.mohhwebsites.core.models.GrantsTableModel"
+- ✅ BEM naming with consistent "cmp-grants-table" prefix
+- ✅ Dynamic row iteration using data-sly-list.grant="${model.grants}" (NOT hardcoded rows)
+- ✅ Optional heading with data-sly-test
+- ✅ Empty state handling for author experience
+- ✅ All content from ${model.property} (fully author-editable)
+- ✅ Static table headers (structural), dynamic cell content (author-configurable)
 
-**Element Mappings from JSON:**
-- `type: "logo"` → `<div class="footer__logo">`
-- `type: "tagline"` → `<div class="footer__tagline">`
-- `type: "description"` → `<p class="footer__description">`
-- `type: "socialIcons"` → `<div class="footer__social">` with iterable list
-- `type: "separator"` → `<div class="footer__separator">`
-- `type: "navPrimary"` → `<ul class="footer__nav-primary">`
-- `type: "navSecondary"` → `<ul class="footer__nav-secondary">` with external icon support
-- `type: "copyright"` → `<div class="footer__copyright">`
+**Class Naming Strategy (for SCSS consistency):**
+- Main: .cmp-grants-table
+- Elements: __wrapper, __table, __thead, __tbody, __header-row, __row, __header-cell, __cell
+- Modifiers: --grant-name, --type, --deadline, --amount, --empty

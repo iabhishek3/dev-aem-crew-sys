@@ -1282,6 +1282,8 @@ aem_frontend_js_generation_task:
        - ❌ NO arrow functions: `() =>` ← Use `function() {}` instead
        - ❌ NO destructuring, spread operators, classes
        - ✅ Use ES5 syntax throughout (var, function, string concatenation)
+       - ❌ NO `var context = this;` pattern ← ESLint no-this-alias violation
+       - ✅ Use `.bind(this)` instead to preserve context
 
        Example ES5-compatible code:
        ```javascript
@@ -1364,6 +1366,20 @@ aem_frontend_js_generation_task:
         console.log('Social link clicked: ' + platform);
       }
 
+      // Example: Debounce function (CORRECT - uses .bind(this))
+      function debounce(func, wait) {
+        var timeout;
+        return function() {
+          var args = arguments;
+          clearTimeout(timeout);
+          // ✅ CORRECT: Use .bind(this) - ESLint compliant
+          timeout = setTimeout(function() {
+            func.apply(this, args);
+          }.bind(this), wait);
+          // ❌ WRONG: var context = this; - ESLint violation!
+        };
+      }
+
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
       } else {
@@ -1379,6 +1395,7 @@ aem_frontend_js_generation_task:
     ✓ No forEach? (Use for loops with index)
     ✓ No destructuring? (No {x, y} = obj)
     ✓ No spread operators? (No ...array)
+    ✓ No `var context = this;` pattern? (Use .bind(this) instead - ESLint compliant)
     ✓ IIFE pattern with 'use strict'?
 
     Use AEM File Writer tool to write the JS file to the AEM project path.
