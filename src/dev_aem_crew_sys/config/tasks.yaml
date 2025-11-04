@@ -1277,7 +1277,6 @@ aem_frontend_js_generation_task:
        ```
 
     2.1 **CRITICAL: ES5 Compatibility** (AEM requires ES5, NOT ES6):
-       - ❌ NO template literals: `const msg = \`Hello ${name}\`;` ← WRONG!
        - ✅ Use string concatenation: `var msg = 'Hello ' + name;` ← CORRECT!
        - ❌ NO const/let: Use `var` only
        - ❌ NO arrow functions: `() =>` ← Use `function() {}` instead
@@ -1374,7 +1373,7 @@ aem_frontend_js_generation_task:
     ```
 
     VERIFICATION BEFORE WRITING FILE - ES5 Compatibility Check:
-    ✓ No template literals? (Use 'string' + variable, NOT \`string ${variable}\`)
+    ✓ No template literals? (Use 'string' + variable, NOT backtick template strings)
     ✓ No const/let? (Use var only)
     ✓ No arrow functions? (Use function() {}, NOT () =>)
     ✓ No forEach? (Use for loops with index)
