@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "description": "Hackathon Demo - Component data for HeroCarousel and TeaserGridCardFour",
+    "targetPage": "/content/mohhwebsites/us/hackathon-demo-page",
+    "createdDate": "2025-11-04",
+    "version": "1.0"
+  },
+  "components": [
+    {
+      "componentType": "herocarousel",
+      "componentName": "hero_carousel",
+      "resourceType": "mohhwebsites/components/hero-carousel",
+      "settings": {
+        "autoPlay": true,
+        "autoPlayDelay": 7,
+        "backgroundColor": "#F5F0E8",
+        "textColor": "#2D3748",
+        "buttonColor": "#7BA7E9",
+        "buttonTextColor": "#FFFFFF",
+        "showArrow": true
+      },
+      "slides": [
+        {
+          "slideHeading": "Excellence in Healthcare",
+          "slideDescription": "Experience world-class medical care with our team of expert physicians and cutting-edge technology dedicated to your health and well-being.",
+          "slideImagePath": "/content/dam/mohhwebsites/mohh-hero-carousel-desktop.jpg",
+          "slideCtaText": "Our Services",
+          "slideCtaLink": "/content/mohhwebsites"
+        },
+        {
+          "slideHeading": "Join Our Team",
+          "slideDescription": "Build a rewarding career with MOHH. We offer competitive benefits, professional development, and a culture where you can grow while making an impact.",
+          "slideImagePath": "/content/dam/mohhwebsites/mohh-hero-career.jpg",
+          "slideCtaText": "View Careers",
+          "slideCtaLink": "/content/mohhwebsites"
+        }
+      ]
+    },
+    {
+      "componentType": "teasergridcardfour",
+      "componentName": "four_card_carousel",
+      "resourceType": "mohhwebsites/components/teasergridcardfour",
+      "header": {
+        "title": "Our Healthcare",
+        "subtitle": "Services",
+        "description": "Comprehensive medical services delivered with compassion and expertise",
+        "titleColor": "#2c3e50",
+        "subtitleColor": "#3498db"
+      },
+      "settings": {
+        "autoRotateEnabled": true,
+        "autoRotateInterval": 6
+      },
+      "cards": [
+        {
+          "image": "/content/dam/mohhwebsites/mohh-hero-carousel-desktop.jpg",
+          "imageAlt": "Advanced cardiac care facility with modern equipment",
+          "title": "Cardiac Care",
+          "description": "Comprehensive heart health services with state-of-the-art technology and experienced cardiologists dedicated to your cardiovascular wellness.",
+          "links": [
+            {
+              "text": "Cardiology Services",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Schedule Consultation",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "image": "/content/dam/mohhwebsites/mohh-hero-career.jpg",
+          "imageAlt": "Emergency department with 24/7 medical team ready to help",
+          "title": "Emergency Care",
+          "description": "24/7 emergency services with board-certified emergency physicians providing immediate, life-saving care when you need it most.",
+          "links": [
+            {
+              "text": "Emergency Services",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Get Directions",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "What to Expect",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "image": "/content/dam/mohhwebsites/mohh-hero-carousel-desktop.jpg",
+          "imageAlt": "Modern surgical suite with advanced medical technology",
+          "title": "Surgical Services",
+          "description": "Advanced surgical procedures performed by skilled surgeons using minimally invasive techniques and the latest medical innovations.",
+          "links": [
+            {
+              "text": "Surgery Overview",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Our Surgeons",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Pre-Op Information",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "image": "/content/dam/mohhwebsites/mohh-hero-career.jpg",
+          "imageAlt": "Patient receiving compassionate care from healthcare professionals",
+          "title": "Patient Care",
+          "description": "Patient-centered care focused on your comfort, recovery, and overall well-being with personalized treatment plans and compassionate support.",
+          "links": [
+            {
+              "text": "Patient Resources",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Visitor Information",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

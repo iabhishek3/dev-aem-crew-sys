@@ -314,6 +314,53 @@ st.markdown("""
         opacity: 0.95;
     }
 
+    /* Header with integrated button layout */
+    .main-header-left {
+        background: linear-gradient(135deg, #4B3C99 0%, #E85C23 100%);
+        padding: 2rem;
+        border-radius: 10px 0 0 10px;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        height: 100%;
+    }
+
+    .main-header-left h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .main-header-left p {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+        opacity: 0.95;
+    }
+
+    /* Header button container */
+    .header-button-container {
+        background: linear-gradient(135deg, #4B3C99 0%, #E85C23 100%);
+        padding: 2rem 1.5rem;
+        border-radius: 0 10px 10px 0;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Adjust column spacing for header */
+    div[data-testid="column"]:has(.header-button-container) {
+        padding-left: 0 !important;
+    }
+
+    div[data-testid="column"]:has(.main-header-left) {
+        padding-right: 0 !important;
+    }
+
     /* Log container */
     .log-container {
         background: #1e1e1e;
@@ -386,6 +433,72 @@ st.markdown("""
         padding: 1rem;
     }
 
+    /* Data Migration button specific styling */
+    div[data-testid="column"]:has(button[data-testid*="data_migration"]) {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+    }
+
+    /* Make Data Migration button stand out - white/light style for header */
+    .header-button-container button {
+        background: white !important;
+        color: #4B3C99 !important;
+        border: 2px solid white !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        padding: 0.75rem 1.5rem !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .header-button-container button:hover {
+        background: rgba(255, 255, 255, 0.9) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Cool drag-and-drop styling */
+    [data-testid="stFileUploader"] {
+        border: 2px dashed #4B3C99 !important;
+        border-radius: 10px !important;
+        padding: 1.5rem !important;
+        background: linear-gradient(135deg, rgba(75, 60, 153, 0.05) 0%, rgba(232, 92, 35, 0.05) 100%) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    [data-testid="stFileUploader"]:hover {
+        border-color: #E85C23 !important;
+        background: linear-gradient(135deg, rgba(75, 60, 153, 0.1) 0%, rgba(232, 92, 35, 0.1) 100%) !important;
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(75, 60, 153, 0.2);
+    }
+
+    [data-testid="stFileUploader"] section {
+        border: none !important;
+    }
+
+    [data-testid="stFileUploader"] button {
+        background: linear-gradient(135deg, #4B3C99 0%, #E85C23 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 6px !important;
+        padding: 0.5rem 1rem !important;
+        font-weight: 600 !important;
+    }
+
+    /* Quick select radio buttons styling */
+    [data-testid="stRadio"] {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+    }
+
+    [data-testid="stRadio"] label {
+        font-weight: 500;
+    }
+
     /* Simplified Professional Timeline */
     .timeline-section {
         margin: 1.5rem 0;
@@ -409,8 +522,8 @@ st.markdown("""
         content: '';
         position: absolute;
         top: 30px;
-        left: 20%;
-        right: 20%;
+        left: 30%;
+        right: 30%;
         height: 2px;
         background: #dee2e6;
         z-index: 0;
@@ -671,9 +784,17 @@ if 'aem_settings_detected' not in st.session_state:
     st.session_state.aem_settings_detected = False
 if 'selected_agents' not in st.session_state:
     st.session_state.selected_agents = ['visual_strategist', 'aem_alchemist']  # Both by default
+if 'show_data_migration' not in st.session_state:
+    st.session_state.show_data_migration = False
 
 # Sidebar - Configuration
 with st.sidebar:
+    # Data Migration button at the top
+    if st.button("📊 Data Migration", key="data_migration_btn", use_container_width=True, type="primary"):
+        st.session_state.show_data_migration = True
+
+    st.markdown("---")  # Separator line
+
     st.markdown("### ⚙️ Configuration")
 
     # Set default output folder (not shown in UI)
@@ -845,6 +966,153 @@ with st.sidebar:
 
     # Use the session state values for the rest of the app
     aem_project_path = st.session_state.aem_project_path
+
+# ========================================
+# DATA MIGRATION DIALOG
+# ========================================
+if st.session_state.show_data_migration:
+    # Create a modal-like dialog using st.dialog (Streamlit 1.31+)
+    @st.dialog("📊 Data Migration", width="large")
+    def data_migration_dialog():
+        st.markdown("### Data Migration Tool")
+        st.markdown("Migrate website components directly to AEM using the migration script.")
+
+        # Migration Configuration
+        st.markdown("#### 🔧 Migration Configuration")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            # AEM Page Path
+            page_path = st.text_input(
+                "AEM Page Path",
+                value="/content/mohhwebsites/us/hackathon-demo-page",
+                help="Target page path in AEM where components will be created",
+                key="migration_page_path"
+            )
+
+            # AEM Host
+            aem_host = st.text_input(
+                "AEM Host",
+                value="http://localhost:4502",
+                help="AEM server URL",
+                key="migration_aem_host"
+            )
+
+        with col2:
+            # Container Path (advanced)
+            container_path = st.text_input(
+                "Container Path",
+                value="/jcr:content/root/container/container",
+                help="Container path within the page",
+                key="migration_container_path"
+            )
+
+        st.markdown("---")
+
+        # JSON File Upload Section - Full Width Drag and Drop
+        st.markdown("#### 📁 Upload JSON File")
+
+        # Drag and drop uploader - full width
+        uploaded_file = st.file_uploader(
+            "Drag and drop your JSON file here or click to browse",
+            type=['json'],
+            help="Upload a JSON file in AEM component format (demo-components.json, physician_mohh_aem.json, or custom)",
+            key="migration_custom_upload"
+        )
+
+        # Determine which JSON file to use
+        json_file_path = None
+        json_file_name = None
+
+        if uploaded_file:
+            # Save uploaded file temporarily
+            import tempfile
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as f:
+                json_content = uploaded_file.read().decode('utf-8')
+                f.write(json_content)
+                json_file_path = f.name
+                json_file_name = uploaded_file.name
+            st.success(f"✅ Ready to migrate: **{uploaded_file.name}**")
+        else:
+            st.info("📤 Please upload a JSON file to continue (e.g., demo-components.json, physician_mohh_aem.json)")
+
+        st.markdown("---")
+
+        # Action Buttons
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            dry_run = st.button("🧪 Dry Run (Test)", use_container_width=True, help="Test migration without making changes")
+
+        with col2:
+            migrate = st.button("🚀 Migrate to AEM", use_container_width=True, type="primary", help="Execute migration")
+
+        with col3:
+            close_btn = st.button("❌ Close", use_container_width=True)
+
+        if close_btn:
+            st.session_state.show_data_migration = False
+            st.rerun()
+
+        # Execute migration
+        if (dry_run or migrate) and json_file_path:
+            import subprocess
+
+            # Build command
+            cmd = [
+                "python",
+                "hackathon-demo-script/migrate.py",
+                "--page", page_path,
+                "--json", json_file_path,
+                "--host", aem_host,
+                "--container", container_path
+            ]
+
+            if dry_run:
+                cmd.append("--dry-run")
+
+            st.markdown("---")
+
+            with st.spinner("🔄 Running migration..." if not dry_run else "🧪 Running dry run..."):
+                try:
+                    # Execute command
+                    result = subprocess.run(
+                        cmd,
+                        capture_output=True,
+                        text=True,
+                        timeout=60
+                    )
+
+                    # Show status - simplified
+                    if result.returncode == 0:
+                        st.success("✅ Migration completed successfully!")
+                        if not dry_run:
+                            page_url = f"{aem_host}{page_path}.html?wcmmode=disabled"
+                            st.markdown(f"**🔗 Access page:** [{page_url}]({page_url})")
+                        else:
+                            st.info("✓ Dry run completed - No changes were made")
+                    else:
+                        st.error(f"❌ Migration failed")
+                        # Show errors only on failure
+                        with st.expander("View Error Details"):
+                            if result.stderr:
+                                st.code(result.stderr)
+                            if result.stdout:
+                                st.code(result.stdout)
+
+                except subprocess.TimeoutExpired:
+                    st.error("⏱️ Migration timed out after 60 seconds")
+                except FileNotFoundError:
+                    st.error("❌ Migration script not found. Ensure 'hackathon-demo-script/migrate.py' exists.")
+                except Exception as e:
+                    st.error(f"❌ Error executing migration: {str(e)}")
+
+        elif (dry_run or migrate) and not json_file_path:
+            st.warning("⚠️ Please select or upload a JSON file first!")
+
+    # Show the dialog
+    data_migration_dialog()
 
 # Main content
 col1, col2 = st.columns([1, 1])

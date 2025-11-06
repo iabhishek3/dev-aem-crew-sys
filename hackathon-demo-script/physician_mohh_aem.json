@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "description": "Physician MOHH website - AEM Component data for HeroCarousel and TeaserGridCardFour",
+    "targetPage": "/content/mohhwebsites/us/hackathon-demo-page",
+    "sourceFile": "www_physician_mohh_com_sg.json",
+    "createdDate": "2025-11-04",
+    "version": "1.0"
+  },
+  "components": [
+    {
+      "componentType": "herocarousel",
+      "componentName": "hero_carousel",
+      "resourceType": "mohhwebsites/components/hero-carousel",
+      "settings": {
+        "autoPlay": true,
+        "autoPlayDelay": 7,
+        "backgroundColor": "#F5F0E8",
+        "textColor": "#2D3748",
+        "buttonColor": "#7BA7E9",
+        "buttonTextColor": "#FFFFFF",
+        "showArrow": true
+      },
+      "slides": [
+        {
+          "slideHeading": "The heart of public healthcare",
+          "slideDescription": "Embark on a medical career in Singapore's public healthcare system.",
+          "slideImagePath": "/content/dam/mohhwebsites/physician/images/main-physician-banner.jpg",
+          "slideCtaText": "Learn More",
+          "slideCtaLink": "/content/mohhwebsites"
+        }
+      ]
+    },
+    {
+      "componentType": "teasergridcardfour",
+      "componentName": "four_card_carousel",
+      "resourceType": "mohhwebsites/components/teasergridcardfour",
+      "header": {
+        "title": "Our",
+        "subtitle": "Programs",
+        "description": "Discover career opportunities and development programs in Singapore's public healthcare sector",
+        "titleColor": "#2c3e50",
+        "subtitleColor": "#3498db"
+      },
+      "settings": {
+        "autoRotateEnabled": true,
+        "autoRotateInterval": 6
+      },
+      "cards": [
+        {
+          "image": "/content/dam/mohhwebsites/physician/images/medicine-icon-gray.png",
+          "imageAlt": "Medicine - Be a junior doctor in the public healthcare sector.",
+          "title": "Medicine",
+          "description": "Be a junior doctor in the public healthcare sector.",
+          "links": [
+            {
+              "text": "Medical Service Career Path",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Application",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "image": "/content/dam/mohhwebsites/physician/images/residency-icon-gray.png",
+          "imageAlt": "Residency - Learn more about post-graduate medical education.",
+          "title": "Residency",
+          "description": "Learn more about post-graduate medical education.",
+          "links": [
+            {
+              "text": "About residency",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Sponsoring institutions",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "image": "/content/dam/mohhwebsites/physician/images/grants-icon-gray.png",
+          "imageAlt": "Grants - Find out more about the Pre-Employment Grant.",
+          "title": "Grants",
+          "description": "Find out more about the Pre-Employment Grant.",
+          "links": [
+            {
+              "text": "About Pre-Employment Grant",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Application",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "image": "/content/dam/mohhwebsites/physician/images/dentistry-icon-gray.png",
+          "imageAlt": "Dentistry - Learn more about dentistry in the public healthcare sector.",
+          "title": "Dentistry",
+          "description": "Learn more about dentistry in the public healthcare sector.",
+          "links": [
+            {
+              "text": "About dentistry",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            },
+            {
+              "text": "Training opportunities",
+              "url": "/content/mohhwebsites",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "page": {
+    "metadata": {
+      "sourceUrl": "https://www.physician.mohh.com.sg/",
+      "title": "Physician",
+      "fileName": "www_physician_mohh_com_sg.html",
+      "lastModified": "2025-10-30",
+      "migrationDate": "2025-10-30T19:37:28.156707Z",
+      "extractionMethod": "Smart AI Enhancement (base + AI)"
+    },
+    "aem": {
+      "path": "/content/mohh/physician/",
+      "template": "/apps/mohh/templates/content-page"
+    },
+    "seo": {
+      "title": "Physician",
+      "description": "",
+      "keywords": [],
+      "canonicalUrl": "/"
+    },
+    "navigation": {
+      "breadcrumbs": [
+        {
+          "label": "Home",
+          "url": "/"
+        }
+      ]
+    },
+    "content": {
+      "components": [
+        {
+          "componentType": "herobanner",
+          "properties": {
+            "slides": [
+              {
+                "image": {
+                  "sourceUrl": "/PublishingImages/main-physician-banner.jpg",
+                  "alt": "",
+                  "damPath": "/content/dam/mohh/physician/images/main-physician-banner.jpg"
+                },
+                "heading": "The heart of public healthcare",
+                "description": "Embark on a medical career in Singapore's public healthcare system.",
+                "ctaText": "",
+                "ctaUrl": ""
+              }
+            ]
+          },
+          "order": 1
+        },
+        {
+          "componentType": "teaser",
+          "properties": {
+            "cards": [
+              {
+                "title": "Medicine",
+                "description": "Be a junior doctor in the public healthcare sector.",
+                "icon": {
+                  "sourceUrl": "/PublishingImages/medicine-icon-gray.png",
+                  "damPath": "/content/dam/mohh/physician/images/medicine-icon-gray.png"
+                },
+                "links": [
+                  {
+                    "text": "Medical Service Career Path",
+                    "url": "/medicine/medical-service-career-path"
+                  },
+                  {
+                    "text": "Application",
+                    "url": "/medicine/medical-service-career-path#application"
+                  }
+                ],
+                "category": "medicine"
+              },
+              {
+                "title": "Residency",
+                "description": "Learn more about post-graduate medical education.",
+                "icon": {
+                  "sourceUrl": "/PublishingImages/residency-icon-gray.png",
+                  "damPath": "/content/dam/mohh/physician/images/residency-icon-gray.png"
+                },
+                "links": [
+                  {
+                    "text": "About residency",
+                    "url": "/medicine/residency/about-residency"
+                  },
+                  {
+                    "text": "Sponsoring institutions",
+                    "url": "/medicine/residency/about-residency#si"
+                  }
+                ],
+                "category": "residency"
+              },
+              {
+                "title": "Grants",
+                "description": "Find out more about the Pre-Employment Grant.",
+                "icon": {
+                  "sourceUrl": "/PublishingImages/grants-icon-gray.png",
+                  "damPath": "/content/dam/mohh/physician/images/grants-icon-gray.png"
+                },
+                "links": [
+                  {
+                    "text": "About Pre-Employment Grant",
+                    "url": "/grant/about-pre-employment-grant"
+                  },
+                  {
+                    "text": "Application",
+                    "url": "/grant/application"
+                  }
+                ],
+                "category": "dentistry"
+              },
+              {
+                "title": "Dentistry",
+                "description": "Learn more about dentistry in the public healthcare sector.",
+                "icon": {
+                  "sourceUrl": "/PublishingImages/dentistry-icon-gray.png",
+                  "damPath": "/content/dam/mohh/physician/images/dentistry-icon-gray.png"
+                },
+                "links": [
+                  {
+                    "text": "About dentistry",
+                    "url": "/dentistry/about-dentistry"
+                  },
+                  {
+                    "text": "Training opportunities",
+                    "url": "/dentistry/training-opportunities"
+                  }
+                ],
+                "category": "grants"
+              }
+            ]
+          },
+          "order": 2
+        },
+        {
+          "componentType": "heading",
+          "properties": {
+            "level": "h2",
+            "text": "Announcements",
+            "id": ""
+          },
+          "order": 3
+        },
+        {
+          "componentType": "richtext",
+          "properties": {
+            "content": "<p><b> Match Results: </b> - <a href=\"/Documents/July2025-Senior-Residency-Match-List.pdf\">July 2025 Senior Residency Match Results</a> - <a href=\"/Documents/Junior_Residency_July_2025_Intake-Match%20Results.pdf\">July 2025 Junior Residency Match Results</a> <b> Applications: </b> - <a href=\"/Documents/full-application-guide-july-2026.pdf\">July 2026 Junior Residency Application Guide</a> - <a href=\"/Documents/JCSTNL001-2025-january-2026-traineeship-intake.zip\">January 2026 Traineeship Intake</a> - <a href=\"/Documents/january-2026-sip-intake-application-guide.pdf\">January 2026 Integrated Programme for Microbiology Application Guide</a> - <a href=\"/Documents/July%202025%20SR%20Application%20Guide.pdf\">July 2025 Senior Residency Application Guide</a></p>"
+          },
+          "order": 4
+        },
+        {
+          "componentType": "heading",
+          "properties": {
+            "level": "h2",
+            "text": "Quick links",
+            "id": ""
+          },
+          "order": 5
+        },
+        {
+          "componentType": "richtext",
+          "properties": {
+            "content": "<p><a href=\"https://mohh.workforceoptimizer.com/wfop/web/#/\">eResidency|PGY1|eMOPEX|eDOPEX</a></p>"
+          },
+          "order": 6
+        },
+        {
+          "componentType": "heading",
+          "properties": {
+            "level": "h2",
+            "text": "Resources",
+            "id": ""
+          },
+          "order": 7
+        },
+        {
+          "componentType": "richtext",
+          "properties": {
+            "content": "<ul>\n<li><a href=\"https://www.mohh.com.sg/mmi\">MOHH Medical Malpractice Insurance Programme</a></li>\n<li>Postgraduate Exams Sponsorships - <a href=\"/Documents/Policy-and-Application-Intermediate-Exam-Sponsorship.pdf\">Intermediate Exam Sponsorship for Residents</a> - <a href=\"/Documents/Policy-and-Application-Exit-Exam-Sponsorship-for-Senior-Residents.pdf\">Exit Exam Sponsorship for Senior Residents</a></li>\n<li>Overseas Sponsorship - <a href=\"/Documents/Policy%20and%20Application%20for%20Overseas%20Conference%20Sponsorship.pdf\">Overseas Conference Sponsorship</a></li>\n<li>Miscellaneous Forms - <a href=\"/Documents/WICA-form-06032018.xlsx\">WICA Claim Form</a></li>\n</ul>"
+          },
+          "order": 8
+        },
+        {
+          "componentType": "heading",
+          "properties": {
+            "level": "h2",
+            "text": "Our partners",
+            "id": ""
+          },
+          "order": 9
+        },
+        {
+          "componentType": "logostrip",
+          "properties": {
+            "logos": [
+              {
+                "imageURL": "/PublishingImages/client-55.jpg",
+                "linkURL": "https://corp.nhg.com.sg/Pages/default.aspx",
+                "alt": ""
+              },
+              {
+                "imageURL": "/PublishingImages/client-66.png",
+                "linkURL": "http://www.nuhs.edu.sg/",
+                "alt": ""
+              },
+              {
+                "imageURL": "/PublishingImages/client-44.jpg",
+                "linkURL": "https://www.singhealth.com.sg/",
+                "alt": ""
+              }
+            ]
+          },
+          "order": 10
+        }
+      ]
+    },
+    "assets": {
+      "images": [
+        {
+          "sourceUrl": "/PublishingImages/main-physician-banner.jpg",
+          "alt": "",
+          "damPath": "/content/dam/mohh/physician/images/main-physician-banner.jpg"
+        },
+        {
+          "sourceUrl": "/PublishingImages/medicine-icon-gray.png",
+          "damPath": "/content/dam/mohh/physician/images/medicine-icon-gray.png"
+        },
+        {
+          "sourceUrl": "/PublishingImages/residency-icon-gray.png",
+          "damPath": "/content/dam/mohh/physician/images/residency-icon-gray.png"
+        },
+        {
+          "sourceUrl": "/PublishingImages/grants-icon-gray.png",
+          "damPath": "/content/dam/mohh/physician/images/grants-icon-gray.png"
+        },
+        {
+          "sourceUrl": "/PublishingImages/dentistry-icon-gray.png",
+          "damPath": "/content/dam/mohh/physician/images/dentistry-icon-gray.png"
+        },
+        {
+          "sourceUrl": "/PublishingImages/client-55.jpg",
+          "alt": "",
+          "damPath": "/content/dam/mohh/physician/images/client-55.jpg",
+          "linkUrl": "https://corp.nhg.com.sg/Pages/default.aspx"
+        },
+        {
+          "sourceUrl": "/PublishingImages/client-66.png",
+          "alt": "",
+          "damPath": "/content/dam/mohh/physician/images/client-66.png",
+          "linkUrl": "http://www.nuhs.edu.sg/"
+        },
+        {
+          "sourceUrl": "/PublishingImages/client-44.jpg",
+          "alt": "",
+          "damPath": "/content/dam/mohh/physician/images/client-44.jpg",
+          "linkUrl": "https://www.singhealth.com.sg/"
+        }
+      ],
+      "documents": [
+        {
+          "fileName": "July2025-Senior-Residency-Match-List.pdf",
+          "sourceSharePointPath": "/Documents/July2025-Senior-Residency-Match-List.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/july2025-senior-residency-match-list.pdf"
+        },
+        {
+          "fileName": "Junior_Residency_July_2025_Intake-Match%20Results.pdf",
+          "sourceSharePointPath": "/Documents/Junior_Residency_July_2025_Intake-Match%20Results.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/junior-residency-july-2025-intake-match%20results.pdf"
+        },
+        {
+          "fileName": "full-application-guide-july-2026.pdf",
+          "sourceSharePointPath": "/Documents/full-application-guide-july-2026.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/full-application-guide-july-2026.pdf"
+        },
+        {
+          "fileName": "JCSTNL001-2025-january-2026-traineeship-intake.zip",
+          "sourceSharePointPath": "/Documents/JCSTNL001-2025-january-2026-traineeship-intake.zip",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/jcstnl001-2025-january-2026-traineeship-intake.zip"
+        },
+        {
+          "fileName": "january-2026-sip-intake-application-guide.pdf",
+          "sourceSharePointPath": "/Documents/january-2026-sip-intake-application-guide.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/january-2026-sip-intake-application-guide.pdf"
+        },
+        {
+          "fileName": "July%202025%20SR%20Application%20Guide.pdf",
+          "sourceSharePointPath": "/Documents/July%202025%20SR%20Application%20Guide.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/july%202025%20sr%20application%20guide.pdf"
+        },
+        {
+          "fileName": "Policy-and-Application-Intermediate-Exam-Sponsorship.pdf",
+          "sourceSharePointPath": "/Documents/Policy-and-Application-Intermediate-Exam-Sponsorship.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/policy-and-application-intermediate-exam-sponsorship.pdf"
+        },
+        {
+          "fileName": "Policy-and-Application-Exit-Exam-Sponsorship-for-Senior-Residents.pdf",
+          "sourceSharePointPath": "/Documents/Policy-and-Application-Exit-Exam-Sponsorship-for-Senior-Residents.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/policy-and-application-exit-exam-sponsorship-for-senior-residents.pdf"
+        },
+        {
+          "fileName": "Policy%20and%20Application%20for%20Overseas%20Conference%20Sponsorship.pdf",
+          "sourceSharePointPath": "/Documents/Policy%20and%20Application%20for%20Overseas%20Conference%20Sponsorship.pdf",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/policy%20and%20application%20for%20overseas%20conference%20sponsorship.pdf"
+        },
+        {
+          "fileName": "WICA-form-06032018.xlsx",
+          "sourceSharePointPath": "/Documents/WICA-form-06032018.xlsx",
+          "targetAemDamPath": "/content/dam/mohh/physician/documents/wica-form-06032018.xlsx"
+        }
+      ],
+      "externalLinks": [
+        {
+          "text": "eResidency|PGY1|eMOPEX|eDOPEX",
+          "url": "https://mohh.workforceoptimizer.com/wfop/web/#/",
+          "type": "external"
+        },
+        {
+          "text": "MOHH Medical Malpractice Insurance Programme",
+          "url": "https://www.mohh.com.sg/mmi",
+          "type": "external"
+        }
+      ]
+    }
+  }
+}
